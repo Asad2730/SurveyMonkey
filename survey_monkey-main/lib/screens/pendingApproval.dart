@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:survey_monkey/constants.dart';
+import 'package:survey_monkey/http/db.dart';
 
 import '../widgets/appbars.dart';
 import '../widgets/spacers.dart';
@@ -13,8 +14,12 @@ class PendingApproval extends StatefulWidget {
 }
 
 class _PendingApprovalState extends State<PendingApproval> {
+
+  late Future _future;
+
   @override
   Widget build(BuildContext context) {
+    _future = Db().surveyByApproved(ap: 0);
     return Scaffold(
       appBar: simpleAppBar(),
       body: Container(
@@ -29,39 +34,67 @@ class _PendingApprovalState extends State<PendingApproval> {
             ),
             gap20(),
             Expanded(
-              child: ListView.builder(
-                  itemCount: 5,
-                  itemBuilder: (BuildContext context, int index) {
-                    return Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text("Survey ${index + 1}"),
-                            Row(
-                              children: [
-                                IconButton(
-                                  onPressed: () {},
-                                  color: ck.x,
-                                  icon: const Icon(Icons.check),
-                                ),
-                                IconButton(
-                                  onPressed: () {},
-                                  color: Colors.red,
-                                  icon: const Icon(Icons.close),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                        gap20(),
-                      ],
-                    );
-                  }),
+              child:_futureBuild(),
             ),
           ],
         ),
       ),
     );
+  }
+
+
+  Widget _futureBuild(){
+    return Expanded(
+      child: FutureBuilder(
+          future: _future,
+          builder:(context,AsyncSnapshot snapshot) {
+            if(snapshot.hasData){
+              return _list(snapshot);
+            }else{
+              return const Center(child: CircularProgressIndicator(),);
+            }
+          }),
+    );
+  }
+
+  Widget _list(AsyncSnapshot snapshot){
+
+    return ListView.builder(
+        shrinkWrap: true,
+        itemCount:snapshot.data.length,
+        itemBuilder: (context,i){
+          Map data = snapshot.data[i];
+          return Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text("${data['name']}"),
+                  Row(
+                    children: [
+                      IconButton(
+                        onPressed: () {
+                          Db().acceptRejectSurvey(id: data['id'], approved: 1);
+                          setState(() {});
+                        },
+                        color: ck.x,
+                        icon: const Icon(Icons.check),
+                      ),
+                      IconButton(
+                        onPressed: () {
+                          Db().acceptRejectSurvey(id: data['id'], approved: 2);
+                          setState(() {});
+                        },
+                        color: Colors.red,
+                        icon: const Icon(Icons.close),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              gap20(),
+            ],
+          );
+        }) ;
   }
 }

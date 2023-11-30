@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:survey_monkey/constants.dart';
-import 'package:survey_monkey/screens/adminHome.dart';
-import 'package:survey_monkey/screens/userHome.dart';
+import 'package:survey_monkey/http/db.dart';
+
 import 'package:survey_monkey/widgets/spacers.dart';
 import 'package:survey_monkey/widgets/textfields.dart';
 
@@ -56,7 +56,8 @@ class _LoginState extends State<Login> {
               gap20(),
               ElevatedButton(
                 onPressed: () {
-                  Get.offAll(() => const AdminHome());
+
+                  Db().login(id: username.text, password: password.text);
                 },
                 child: const Text("LOGIN"),
               ),

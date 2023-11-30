@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:survey_monkey/http/db.dart';
 import 'package:survey_monkey/screens/userHome.dart';
 
 import '../../widgets/appbars.dart';
 import '../../widgets/spacers.dart';
 
 class AddQuestionMcqs extends StatefulWidget {
-  const AddQuestionMcqs({super.key});
+  final int id;
+  const AddQuestionMcqs({super.key, required this.id});
 
   @override
   State<AddQuestionMcqs> createState() => _AddQuestionMcqsState();
@@ -20,6 +22,16 @@ class _AddQuestionMcqsState extends State<AddQuestionMcqs> {
   TextEditingController o3 = TextEditingController();
   TextEditingController o4 = TextEditingController();
 
+  @override
+  void dispose() {
+    super.dispose();
+     q.text = '';
+     o1.text = '';
+    o2.text = '';
+    o3.text = '';
+    o4.text = '';
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -71,12 +83,18 @@ class _AddQuestionMcqsState extends State<AddQuestionMcqs> {
                   ElevatedButton(
                     onPressed: () {
 
+                      Db().addMcq(title: q.text, id: widget.id,
+                          op1: o1.text, op2: o2.text, op3: o3.text ,op4: o4.text,
+                          isMore: true);
+                      dispose();
                     },
                     child: const Text("Add More"),
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      Get.offAll(()=>const UserHome());
+                      Db().addMcq(title: q.text, id: widget.id,
+                          op1: o1.text, op2: o2.text, op3: o3.text ,op4: o4.text,
+                          isMore: false);
                     },
                     child: const Text("Done"),
                   ),
