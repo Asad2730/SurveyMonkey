@@ -1,18 +1,15 @@
-
-
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import 'package:survey_monkey/Helper/User.dart';
 import 'package:survey_monkey/screens/adminHome.dart';
 import 'package:survey_monkey/screens/userHome.dart';
-
 import '../screens/survey/addQuestionMcqs.dart';
 import '../screens/survey/addQuestionYesNo.dart';
 
 class Db{
 
     final _dio = Dio();
-    final _ip = '192.168.0.28';
+    final _ip = '192.168.10.11';
 
     Db(){
       _dio.options.baseUrl = 'http://$_ip/API/api/Survey/';
@@ -21,20 +18,16 @@ class Db{
 
     Future login({required id,required password}) async {
       try{
-
-
         var res = await _dio.get('login?id=$id&password=$password');
         if(res.data['UserType'] == 'Student'){
 
           User.id = res?.data['Data']['Reg_No'];
-          User.firstName = res?.data['Data']['St_firstname'];
-          User.lastName = res?.data['Data']['St_lastname'];
+          User.name = res?.data['Data']['St_firstname'];
           Get.to(()=>const UserHome());
         }else
         {
           User.id = res?.data['Data']['Emp_no'];
-          User.firstName = res?.data['Data']['Emp_firstname'];
-          User.lastName = res?.data['Data']['Emp_lastname'];
+          User.name = res?.data['Data']['Emp_firstname'];
           Get.to(()=>const AdminHome());
         }
       }catch(ex){
@@ -45,9 +38,7 @@ class Db{
 
 
     Future createSurvey({required name,required type})async {
-          
       try{
-
         var res = await _dio.post('createSurvey',data: {
           'name':name,
           'type':type,
@@ -67,9 +58,7 @@ class Db{
     }
 
     Future addQuestion({required q,required id,required bool isMore})async {
-
       try{
-
         await _dio.post('addQuestion',data: {
           'title':q,
           'option1':'yes',
@@ -92,7 +81,6 @@ class Db{
     })async {
 
       try{
-
         await _dio.post('addQuestion',data: {
           'title':title,
           'option1':op1,
@@ -124,6 +112,16 @@ class Db{
     Future acceptRejectSurvey({required id,required approved})async {
       try{
         await _dio.post('acceptRejectSurvey?id=$id&approved=$approved');
+      }catch(ex){
+        print('error:$ex');
+      }
+    }
+
+
+    Future surveyQuestion({required id})async {
+      try{
+        var rs = await _dio.get('surveyQuestion?id=$id');
+        return rs.data as List;
       }catch(ex){
         print('error:$ex');
       }

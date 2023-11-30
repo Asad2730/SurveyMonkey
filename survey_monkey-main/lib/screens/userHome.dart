@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:survey_monkey/Helper/User.dart';
 import 'package:survey_monkey/constants.dart';
 import 'package:survey_monkey/screens/participate.dart';
 import 'package:survey_monkey/screens/previousSurvey.dart';
@@ -33,9 +34,9 @@ class _UserHomeState extends State<UserHome> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const Text(
-              "Hello!! Ahsan",
-              style: TextStyle(fontSize: 20),
+             Text(
+              "Hello!! ${User.name}",
+              style: const TextStyle(fontSize: 20),
             ),
             const Text(
               "STUDENT DASHBOARD",

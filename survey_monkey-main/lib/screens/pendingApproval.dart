@@ -18,8 +18,14 @@ class _PendingApprovalState extends State<PendingApproval> {
   late Future _future;
 
   @override
-  Widget build(BuildContext context) {
+  void initState() {
+    super.initState();
     _future = Db().surveyByApproved(ap: 0);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: simpleAppBar(),
       body: Container(
@@ -73,16 +79,16 @@ class _PendingApprovalState extends State<PendingApproval> {
                   Row(
                     children: [
                       IconButton(
-                        onPressed: () {
-                          Db().acceptRejectSurvey(id: data['id'], approved: 1);
+                        onPressed: () async{
+                          await Db().acceptRejectSurvey(id: data['id'], approved: 1);
                           setState(() {});
                         },
                         color: ck.x,
                         icon: const Icon(Icons.check),
                       ),
                       IconButton(
-                        onPressed: () {
-                          Db().acceptRejectSurvey(id: data['id'], approved: 2);
+                        onPressed: () async{
+                          await Db().acceptRejectSurvey(id: data['id'], approved: 2);
                           setState(() {});
                         },
                         color: Colors.red,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:survey_monkey/constants.dart';
+import 'package:survey_monkey/screens/approvedApporoval.dart';
 import 'package:survey_monkey/screens/pendingApproval.dart';
 import 'package:survey_monkey/screens/survey/addName.dart';
 import 'package:survey_monkey/widgets/spacers.dart';
@@ -64,10 +65,7 @@ class _AdminHomeState extends State<AdminHome> {
                   ),
                 ),
                 GestureDetector(
-                  onTap: (){
-                    print('Aproved');
-                   // Get.to(AddName());
-                  },
+                  onTap: () => Get.to(()=>const ApprovedApproval()),
                   child:   Container(
                     width: Get.width / 2.5,
                     height: 125,

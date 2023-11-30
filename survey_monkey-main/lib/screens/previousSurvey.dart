@@ -56,7 +56,7 @@ class _PreviousSurveyState extends State<PreviousSurvey> {
                               context: context,
                               builder: (BuildContext context) {
                                 return AlertDialog(
-                                  content: Container(
+                                  content: SizedBox(
                                     width: Get.width,
                                     height: 200,
                                     child: Column(

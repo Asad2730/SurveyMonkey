@@ -1,22 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:survey_monkey/constants.dart';
-import 'package:survey_monkey/screens/participateMcqs.dart';
-import 'package:survey_monkey/screens/participateYesNo.dart';
+import 'package:survey_monkey/http/db.dart';
 
-import '../Helper/User.dart';
-import '../http/db.dart';
 import '../widgets/appbars.dart';
 import '../widgets/spacers.dart';
 
-class Participate extends StatefulWidget {
-  const Participate({super.key});
+class ApprovedApproval extends StatefulWidget {
+  const ApprovedApproval({super.key});
 
   @override
-  State<Participate> createState() => _ParticipateState();
+  State<ApprovedApproval> createState() => _ApprovedApprovalState();
 }
 
-class _ParticipateState extends State<Participate> {
+class _ApprovedApprovalState extends State<ApprovedApproval> {
 
   late Future _future;
 
@@ -26,7 +23,6 @@ class _ParticipateState extends State<Participate> {
     super.initState();
     _future = Db().surveyByApproved(ap: 1);
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +35,7 @@ class _ParticipateState extends State<Participate> {
         child: Column(
           children: [
             Text(
-              "Participate",
+              "Approved Approval",
               style: TextStyle(fontSize: 20, color: ck.x),
             ),
             gap20(),
@@ -51,7 +47,6 @@ class _ParticipateState extends State<Participate> {
       ),
     );
   }
-
 
 
   Widget _futureBuild(){
@@ -81,20 +76,7 @@ class _ParticipateState extends State<Participate> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text("${data['name']}"),
-                  ElevatedButton(
-                    onPressed: () {
-                      User.tempSurveyId = data['id'];
 
-                      if(data['type'] == 'MCQS'){
-                        Get.to(()=>const ParticipateMCQs());
-                      }else
-                      {
-
-                        Get.to(()=> const ParticipateYesNo());
-                      }
-                    },
-                    child: const Text("Attempt"),
-                  )
                 ],
               ),
               gap20(),
@@ -102,6 +84,4 @@ class _ParticipateState extends State<Participate> {
           );
         }) ;
   }
-
-
 }

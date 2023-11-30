@@ -118,11 +118,9 @@ namespace API.Controllers
             try
             {
                 var q = db.surveys.FirstOrDefault(i => i.id == id);
-
                  q.approved = approved;
                  db.SaveChanges();
-               
-
+                
                 return Request.CreateResponse(HttpStatusCode.OK,q);
 
             }
@@ -131,6 +129,23 @@ namespace API.Controllers
                 return Request.CreateResponse(HttpStatusCode.InternalServerError, ex);
             }
         }
+
+        [HttpGet]
+        public HttpResponseMessage surveyQuestion(int id)
+        {
+            try
+            {
+                var q = db.surveyquestions.Where(i => i.surveyid == id).ToList();
+                return Request.CreateResponse(HttpStatusCode.OK, q);
+
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, ex);
+            }
+        }
+
+
     }
 
 
