@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
+import 'package:survey_monkey/Helper/Graph.dart';
 import 'package:survey_monkey/Helper/User.dart';
 import 'package:survey_monkey/screens/adminHome.dart';
 import 'package:survey_monkey/screens/userHome.dart';
@@ -119,6 +120,16 @@ class Db{
     }
 
 
+    Future results()async {
+      try{
+        var rs = await _dio.get('results');
+        return rs.data as List;
+      }catch(ex){
+        print('error:$ex');
+      }
+    }
+
+
     Future acceptRejectSurvey({required id,required approved})async {
       try{
         await _dio.post('acceptRejectSurvey?id=$id&approved=$approved');
@@ -155,6 +166,20 @@ class Db{
           }
 
           Get.back();
+      }catch(ex){
+        print('error:$ex');
+      }
+    }
+
+
+    Future calculateGraph({required sid})async {
+      try{
+        var rs = await _dio.get('calculateGraph?sid=$sid');
+         Graph.v1 = rs.data[0];
+         Graph.v2 = rs.data[1];
+         Graph.v3 = rs.data[2];
+         Graph.v4 = rs.data[3];
+
       }catch(ex){
         print('error:$ex');
       }

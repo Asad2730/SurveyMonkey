@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:survey_monkey/constants.dart';
+import 'package:survey_monkey/http/db.dart';
 import 'package:survey_monkey/screens/graphs/barChart.dart';
 import 'package:survey_monkey/screens/graphs/pieChart.dart';
 
@@ -15,6 +16,15 @@ class Results extends StatefulWidget {
 }
 
 class _ResultsState extends State<Results> {
+
+  late Future _future;
+
+  @override
+  void initState() {
+    super.initState();
+    _future = Db().results();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,44 +41,67 @@ class _ResultsState extends State<Results> {
             ),
             gap20(),
             Expanded(
-              child: ListView.builder(
-                itemCount: 5,
-                itemBuilder: (BuildContext context, int index) {
-                  return Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text("Survey ${index + 1}"),
-                          Row(
-                            children: [
-                              IconButton(
-                                onPressed: () {
-                                  Get.to(const BarChart());
-                                },
-                                color: ck.x,
-                                icon: const Icon(Icons.bar_chart),
-                              ),
-                              IconButton(
-                                onPressed: () {
-                                  Get.to(const PieChart());
-                                },
-                                color: ck.x,
-                                icon: const Icon(Icons.pie_chart),
-                              ),
-                            ],
-                          )
-                        ],
-                      ),
-                      gap20(),
-                    ],
-                  );
-                },
-              ),
+              child:_futureBuild(),
             ),
           ],
         ),
       ),
     );
   }
+
+
+  Widget _futureBuild() {
+    return FutureBuilder(
+      future: _future,
+      builder: (context, AsyncSnapshot snapshot) {
+        if (snapshot.hasData) {
+          return _list(snapshot);
+        } else {
+          return const Center(child: CircularProgressIndicator());
+        }
+      },
+    );
+  }
+
+  Widget _list(AsyncSnapshot snapshot) {
+    return ListView.builder(
+      shrinkWrap: true,
+      itemCount: snapshot.data.length,
+      itemBuilder: (context, i) {
+        Map data = snapshot.data[i];
+        return Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(data['name']),
+                Row(
+                  children: [
+                    IconButton(
+                      onPressed: () {
+                        Get.to( BarChart(id:data['id'],data:data));
+                      },
+                      color: ck.x,
+                      icon: const Icon(Icons.bar_chart),
+                    ),
+                    IconButton(
+                      onPressed: () {
+                        Get.to(PieChart(id:data['id'],data:data));
+                      },
+                      color: ck.x,
+                      icon: const Icon(Icons.pie_chart),
+                    ),
+                  ],
+                )
+              ],
+            ),
+            gap20(),
+          ],
+        );
+      },
+    );
+  }
+
+
+
 }

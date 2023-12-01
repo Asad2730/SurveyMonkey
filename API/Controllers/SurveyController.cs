@@ -13,8 +13,8 @@ namespace API.Controllers
 {
     public class SurveyController : ApiController
     {
-       
-       public survey_monkey_databaseEntities  db = new survey_monkey_databaseEntities();
+
+        public survey_monkey_databaseEntities db = new survey_monkey_databaseEntities();
 
 
         [HttpGet]
@@ -57,7 +57,7 @@ namespace API.Controllers
             }
             catch (Exception ex)
             {
-               
+
                 return Request.CreateResponse(HttpStatusCode.InternalServerError, ex);
             }
         }
@@ -69,11 +69,12 @@ namespace API.Controllers
         {
             try
             {
-              db.surveys.Add(s);
-              db.SaveChanges();
-              return Request.CreateResponse(HttpStatusCode.OK,s.id);
+                db.surveys.Add(s);
+                db.SaveChanges();
+                return Request.CreateResponse(HttpStatusCode.OK, s.id);
 
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 return Request.CreateResponse(HttpStatusCode.InternalServerError, ex);
             }
@@ -103,7 +104,7 @@ namespace API.Controllers
             try
             {
                 var q = db.surveys.Where(i => i.approved == ap && i.status == "public").ToList();
-                return Request.CreateResponse(HttpStatusCode.OK,q);
+                return Request.CreateResponse(HttpStatusCode.OK, q);
 
             }
             catch (Exception ex)
@@ -129,15 +130,15 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        public HttpResponseMessage acceptRejectSurvey(int id,int approved )
+        public HttpResponseMessage acceptRejectSurvey(int id, int approved)
         {
             try
             {
                 var q = db.surveys.FirstOrDefault(i => i.id == id);
-                 q.approved = approved;
-                 db.SaveChanges();
-                
-                return Request.CreateResponse(HttpStatusCode.OK,q);
+                q.approved = approved;
+                db.SaveChanges();
+
+                return Request.CreateResponse(HttpStatusCode.OK, q);
 
             }
             catch (Exception ex)
@@ -150,10 +151,10 @@ namespace API.Controllers
         public HttpResponseMessage surveyQuestion(int id)
         {
             try
-            {        
+            {
                 var q = db.surveyquestions.Where(i => i.surveyid == id).ToList();
                 return Request.CreateResponse(HttpStatusCode.OK, q);
-              
+
             }
             catch (Exception ex)
             {
@@ -178,7 +179,82 @@ namespace API.Controllers
             }
         }
 
+
+        [HttpGet]
+        public HttpResponseMessage results()
+        {
+            try
+            {
+                var q = db.surveys
+                    .GroupJoin(db.surveyquestions, i => i.id, r => r.surveyid,
+                        (i, responses) => new
+                        {
+                            id = i.id,
+                            name = i.name,
+                            responses = responses.Select(r => new
+                            {
+                                op1 = r.option1,
+                                op2 = r.option2,
+                                op3 = r.option3,
+                                op4 = r.option4,
+
+                            })
+                        })
+                    .ToList();
+
+                return Request.CreateResponse(HttpStatusCode.OK, q);
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, ex);
+            }
+        }
+
+
+
+        [HttpGet]
+        public HttpResponseMessage calculateGraph(int sid)
+        {
+            try
+            {
+                var questions = db.surveyquestions.Where(i => i.surveyid == sid).ToList();
+                var responses = db.surveyresponses.Where(i => i.surveyid == sid).ToList();
+
+             
+                var optionCounts = new int[4] { 0, 0, 0, 0 };
+
+               
+                foreach (var response in responses)
+                {
+                    
+                    foreach (var question in questions)
+                    {
+                       
+                        if (response.response == question.option1)
+                            optionCounts[0]++;
+                        else if (response.response == question.option2)
+                            optionCounts[1]++;
+                        else if (response.response == question.option3)
+                            optionCounts[2]++;
+                        else if (response.response == question.option4)
+                            optionCounts[3]++;
+                    }
+                }
+
+                
+                int totalCount = optionCounts.Sum();
+
+              
+                var optionPercentages = optionCounts.Select(count => (count * 100.0) / totalCount).ToArray();
+
+                return Request.CreateResponse(HttpStatusCode.OK, optionPercentages);
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, ex);
+            }
+        }
+
     }
 
-
-}
+    }
