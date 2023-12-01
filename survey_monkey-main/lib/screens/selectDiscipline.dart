@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:survey_monkey/Helper/User.dart';
 import 'package:survey_monkey/screens/selectSection.dart';
 import '../widgets/appbars.dart';
 import '../widgets/spacers.dart';
@@ -50,7 +51,7 @@ class _SelectDisciplineState extends State<SelectDiscipline> {
             ),
             gap20(),
             Container(
-              margin: EdgeInsets.symmetric(horizontal: 5),
+              margin: const EdgeInsets.symmetric(horizontal: 5),
               height: 350,
               decoration: BoxDecoration(
                 color: Colors.white,
@@ -91,7 +92,7 @@ class _SelectDisciplineState extends State<SelectDiscipline> {
             gap20(),
             ElevatedButton(onPressed: (){
               Get.to(SelectSection());
-            }, child: Text("Next")),
+            }, child: const Text("Next")),
 
           ],
         ),

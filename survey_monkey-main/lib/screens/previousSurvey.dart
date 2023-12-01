@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:survey_monkey/Helper/User.dart';
 import 'package:survey_monkey/constants.dart';
 import 'package:survey_monkey/screens/selectDiscipline.dart';
 import 'package:survey_monkey/widgets/appbars.dart';
 import 'package:survey_monkey/widgets/spacers.dart';
+
+import '../http/db.dart';
 
 class PreviousSurvey extends StatefulWidget {
   const PreviousSurvey({super.key});
@@ -14,8 +17,19 @@ class PreviousSurvey extends StatefulWidget {
 
 class _PreviousSurveyState extends State<PreviousSurvey> {
   var selectedDate = DateTime.now();
+  late Future _future;
 
-  Future<void> _selectDate(BuildContext context) async {
+
+
+  @override
+  void initState() {
+    super.initState();
+    _future = Db().getAllSurveys();
+
+  }
+  
+  
+  Future<void> _selectDate(BuildContext context, DateTime tmp) async {
     final DateTime? picked = await showDatePicker(
       context: context,
       initialDate: selectedDate,
@@ -25,6 +39,7 @@ class _PreviousSurveyState extends State<PreviousSurvey> {
     if (picked != null) {
       setState(() {
         selectedDate = picked;
+        tmp = picked;
       });
     }
   }
@@ -44,103 +59,124 @@ class _PreviousSurveyState extends State<PreviousSurvey> {
               style: TextStyle(fontSize: 20, color: ck.x),
             ),
             Expanded(
-              child: ListView.builder(
-                  itemCount: 5,
-                  itemBuilder: (BuildContext context, int index) {
-                    return Column(
-                      children: [
-                        gap20(),
-                        GestureDetector(
-                          onTap: () {
-                            showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return AlertDialog(
-                                  content: SizedBox(
-                                    width: Get.width,
-                                    height: 200,
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        const Text("Select Dates for Survey"),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Text(
-                                                'Start Date : ${selectedDate.year.toString()}-${selectedDate.month.toString()}-${selectedDate.day.toString()}'),
-                                            ElevatedButton(
-                                              onPressed: () {
-                                                _selectDate(context);
-                                              },
-                                              child: const Text('Select'),
-                                            ),
-                                          ],
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Text(
-                                                'End Date : ${selectedDate.year.toString()}-${selectedDate.month.toString()}-${selectedDate.day.toString()}'),
-                                            ElevatedButton(
-                                              onPressed: () {
-                                                _selectDate(context);
-                                              },
-                                              child: const Text('Select'),
-                                            ),
-                                          ],
-                                        ),
-                                        ElevatedButton(
-                                          onPressed: () {
-                                            Navigator.pop(context);
-                                            Get.to(const SelectDiscipline());
-                                          },
-                                          child: const Text("Next"),
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                );
-                              },
-                            );
-                            // Navigator.pop(context);
-
-                            // Get.to(const SelectDiscipline());
-                          },
-                          child: Container(
-                            padding: EdgeInsets.all(10),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text("Survey ${index + 1}"),
-                                index % 3 == 0
-                                    ? const Text(
-                                        "Inactive",
-                                        style: TextStyle(
-                                          color: Colors.red,
-                                          fontWeight: FontWeight.w500,
-                                        ),
-                                      )
-                                    : Text(
-                                        "Active",
-                                        style: TextStyle(
-                                          color: ck.x,
-                                          fontWeight: FontWeight.w500,
-                                        ),
-                                      )
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    );
-                  }),
+              child:
+               _futureBuild(),
             ),
           ],
         ),
       ),
     );
   }
+
+  Widget _futureBuild() {
+    return FutureBuilder(
+      future: _future,
+      builder: (context, AsyncSnapshot snapshot) {
+        if (snapshot.hasData) {
+          return _list(snapshot);
+        } else {
+          return const Center(child: CircularProgressIndicator());
+        }
+      },
+    );
+  }
+
+  Widget _list(AsyncSnapshot snapshot) {
+    return   ListView.builder(
+        shrinkWrap: true,
+        itemCount: snapshot.data.length,
+        itemBuilder: (context, i) {
+          Map data = snapshot.data[i];
+          return Column(
+            children: [
+              gap20(),
+              GestureDetector(
+                onTap: () {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        content: SizedBox(
+                          width: Get.width,
+                          height: 200,
+                          child: Column(
+                            mainAxisAlignment:
+                            MainAxisAlignment.center,
+                            children: [
+                              const Text("Select Dates for Survey"),
+                              Row(
+                                mainAxisAlignment:
+                                MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                      'Start Date : ${selectedDate.year.toString()}-${selectedDate.month.toString()}-${selectedDate.day.toString()}'),
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      _selectDate(context,User.tempStartDate);
+                                    },
+                                    child: const Text('Select'),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                      'End Date : ${selectedDate.year.toString()}-${selectedDate.month.toString()}-${selectedDate.day.toString()}'),
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      _selectDate(context,User.tempEndDate);
+                                    },
+                                    child: const Text('Select'),
+                                  ),
+                                ],
+                              ),
+                              ElevatedButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                  Get.to(const SelectDiscipline());
+                                },
+                                child: const Text("Next"),
+                              )
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                  );
+                  // Navigator.pop(context);
+
+                  // Get.to(const SelectDiscipline());
+                },
+                child: Container(
+                  padding: const EdgeInsets.all(10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(data['name']),
+                      data['status'].toString().toLowerCase().trim() != 'public'
+                          ? const Text(
+                        "Inactive",
+                        style: TextStyle(
+                          color: Colors.red,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      )
+                          : Text(
+                        "Active",
+                        style: TextStyle(
+                          color: ck.x,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          );
+        });
+  }
+
 }

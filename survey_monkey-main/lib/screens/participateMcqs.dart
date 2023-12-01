@@ -16,9 +16,9 @@ class ParticipateMCQs extends StatefulWidget {
 }
 
 class _ParticipateMCQsState extends State<ParticipateMCQs> {
-
   late Future _future;
-
+  List<List<bool?>> isCheckedList = [];
+  List<Answers> ans = [];
   @override
   void initState() {
     super.initState();
@@ -33,113 +33,113 @@ class _ParticipateMCQsState extends State<ParticipateMCQs> {
         width: Get.width,
         height: Get.height,
         padding: const EdgeInsets.all(20),
-        child:_futureBuild(),
+        child: Column(
+          children: [
+            Expanded(child:  _futureBuild(),),
+            _submit()
+          ],
+        ),
       ),
     );
   }
 
-  Widget _futureBuild(){
-    return Expanded(
-      child: FutureBuilder(
-          future: _future,
-          builder:(context,AsyncSnapshot snapshot) {
-            if(snapshot.hasData){
-              return _list(snapshot);
-            }else{
-              return const Center(child: CircularProgressIndicator(),);
-            }
-          }),
+  Widget _futureBuild() {
+    return FutureBuilder(
+      future: _future,
+      builder: (context, AsyncSnapshot snapshot) {
+        if (snapshot.hasData) {
+          return _list(snapshot);
+        } else {
+          return const Center(child: CircularProgressIndicator());
+        }
+      },
     );
   }
 
-  Widget _list(AsyncSnapshot snapshot){
-
+  Widget _list(AsyncSnapshot snapshot) {
     return ListView.builder(
-        shrinkWrap: true,
-        itemCount:snapshot.data.length,
-        itemBuilder: (context,i){
-          Map data = snapshot.data[i];
-          List<Answers> selectedAnswers = [];
-          List<bool?> isChecked = List.generate(snapshot.data.length, (_) => false);
+      shrinkWrap: true,
+      itemCount: snapshot.data.length,
+      itemBuilder: (context, i) {
+        Map data = snapshot.data[i];
 
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "Question ${i+1}:",
-                style: TextStyle(
-                    fontSize: 16, color: ck.x, fontWeight: FontWeight.w800),
-              ),
-              Text( data['title'] ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Checkbox(
-                    value: isChecked[i],
-                    onChanged: (value) {
+        if (isCheckedList.length <= i) {
+          isCheckedList.add(List.generate(4, (_) => false));
+        }
 
-                      isChecked[i] = value!;
-                      setState(() {
-                        isChecked[i] = value!;
-                      });
-                    },
-                  ),
-                  Text(data['option1']),
-                ],
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "Question ${i + 1}:",
+              style: TextStyle(
+                fontSize: 16,
+                color: ck.x,
+                fontWeight: FontWeight.w800,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Checkbox(
-                    value: isChecked[i],
-                    onChanged: (value) {
-                      setState(() {
-                        isChecked[i] = value!;
-                      });
-                    },
-                  ),
-                  Text(data['option2']),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Checkbox(
-                    value: isChecked[i],
-                    onChanged: (value) {
-                      setState(() {
-                        isChecked[i] = value!;
-                      });
-                    },
-                  ),
-                  Text(data['option3']),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Checkbox(
-                    value: isChecked[i],
-                    onChanged: (value) {
-                      setState(() {
-                        isChecked[i] = value!;
-                      });
-                    },
-                  ),
-                  Text(data['option4']),
-                ],
-              ),
-              gap20(),
-            ],
-          );
-        }) ;
+            ),
+            Text(data['title']),
+            buildRow(data['option1'], i, 0,data),
+            buildRow(data['option2'], i, 1,data),
+            buildRow(data['option3'], i, 2, data),
+            buildRow(data['option4'], i, 3,data),
+            gap20(),
+
+          ],
+        );
+      },
+    );
   }
 
 
+  Widget buildRow(String option, int questionIndex, int checkboxIndex ,Map data) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Checkbox(
+          value: isCheckedList[questionIndex][checkboxIndex],
+          onChanged: (value) {
+            setState(() {
+              isCheckedList[questionIndex][checkboxIndex] = value;
 
+              var t = Answers();
+              t.qid = data['id'];
+              t.response = option;
+
+
+              bool isAlreadyInList = ans.any((element) =>
+              element.qid == t.qid && element.response == t.response);
+
+              if (value == true && !isAlreadyInList) {
+                ans.add(t);
+              }
+
+              else if (value == false && isAlreadyInList) {
+                ans.removeWhere((element) =>
+                element.qid == t.qid && element.response == t.response);
+              }
+            });
+          },
+        ),
+        Text(option),
+      ],
+    );
+  }
+
+
+  Widget _submit(){
+    return ElevatedButton(
+      onPressed: () async {
+        if(ans.isNotEmpty){
+            await Db().submitSurveyAnswers(ans: ans);
+        }else{
+          print('nothing to submit');
+        }
+      },
+      child: const Text("Submit"),
+    );
+
+  }
 
 }

@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:survey_monkey/Helper/User.dart';
 import 'package:survey_monkey/screens/adminHome.dart';
 import 'package:survey_monkey/screens/userHome.dart';
+import '../Helper/Answers.dart';
 import '../screens/survey/addQuestionMcqs.dart';
 import '../screens/survey/addQuestionYesNo.dart';
 
@@ -44,7 +45,7 @@ class Db{
           'type':type,
           'createdby':User.id,
            'approved':0,
-          'status':'',
+          'status':'public',
         });
 
         if(type == 'MCQS'){
@@ -108,6 +109,15 @@ class Db{
       }
     }
 
+    Future getAllSurveys()async {
+      try{
+        var rs = await _dio.get('getAllSurveys');
+        return rs.data as List;
+      }catch(ex){
+        print('error:$ex');
+      }
+    }
+
 
     Future acceptRejectSurvey({required id,required approved})async {
       try{
@@ -122,6 +132,29 @@ class Db{
       try{
         var rs = await _dio.get('surveyQuestion?id=$id');
         return rs.data as List;
+      }catch(ex){
+        print('error:$ex');
+      }
+    }
+
+
+    Future submitSurveyAnswers({ required List<Answers> ans}) async {
+      try{
+        DateTime today = DateTime.now();
+        DateTime todayDate = DateTime(today.year, today.month, today.day);
+          for (var i in ans) {
+            var res = await _dio.post('submitSurveyAnswers',data: {
+              'surveyid':User.tempSurveyId,
+              'questionid':i.qid,
+               'response':i.response,
+               'userid':User.id,
+               'date':todayDate.toString(),
+            });
+
+            print('submited-->${res.data}');
+          }
+
+          Get.back();
       }catch(ex){
         print('error:$ex');
       }

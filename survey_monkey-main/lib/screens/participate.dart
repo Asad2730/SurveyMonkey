@@ -55,17 +55,15 @@ class _ParticipateState extends State<Participate> {
 
 
   Widget _futureBuild(){
-    return Expanded(
-      child: FutureBuilder(
-          future: _future,
-          builder:(context,AsyncSnapshot snapshot) {
-            if(snapshot.hasData){
-              return _list(snapshot);
-            }else{
-              return const Center(child: CircularProgressIndicator(),);
-            }
-          }),
-    );
+    return FutureBuilder(
+        future: _future,
+        builder:(context,AsyncSnapshot snapshot) {
+          if(snapshot.hasData){
+            return _list(snapshot);
+          }else{
+            return const Center(child: CircularProgressIndicator(),);
+          }
+        });
   }
 
   Widget _list(AsyncSnapshot snapshot){
