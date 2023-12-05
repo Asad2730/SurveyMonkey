@@ -28,11 +28,15 @@ class _BarChartState extends State<BarChart> {
 
   Future<void> _loadData() async {
     await Db().calculateGraph(sid: widget.id);
+
+    String op3Value = widget.data['responses'][0]['op3'] ?? '0';
+    String op4Value = widget.data['responses'][0]['op4'] ?? '0';
+
      dt = [
-       SalesData('Poor', Graph.v1 as int),
-       SalesData('Good', Graph.v2 as int),
-       SalesData('Average', Graph.v3 as int),
-       SalesData('Excellent', Graph.v4 as int),
+       SalesData(widget.data['responses'][0]['op1'].toString(), Graph.v1 as int),
+       SalesData(widget.data['responses'][0]['op2'].toString(), Graph.v2 as int),
+       SalesData(op3Value, Graph.v3 as int),
+       SalesData(op4Value, Graph.v4 as int),
     ];
 
     setState(() {
