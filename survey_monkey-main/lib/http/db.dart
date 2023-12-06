@@ -23,13 +23,13 @@ class Db{
         var res = await _dio.get('login?id=$id&password=$password');
         if(res.data['UserType'] == 'Student'){
 
-          User.id = res?.data['Data']['Reg_No'];
-          User.name = res?.data['Data']['St_firstname'];
+          User.id = res.data['Data']['Reg_No'];
+          User.name = res.data['Data']['St_firstname'];
           Get.to(()=>const UserHome());
         }else
         {
-          User.id = res?.data['Data']['Emp_no'];
-          User.name = res?.data['Data']['Emp_firstname'];
+          User.id = res.data['Data']['Emp_no'];
+          User.name = res.data['Data']['Emp_firstname'];
           Get.to(()=>const AdminHome());
         }
       }catch(ex){

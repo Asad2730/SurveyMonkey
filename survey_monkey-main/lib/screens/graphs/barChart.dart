@@ -33,10 +33,10 @@ class _BarChartState extends State<BarChart> {
     String op4Value = widget.data['responses'][0]['op4'] ?? '0';
 
      dt = [
-       SalesData(widget.data['responses'][0]['op1'].toString(), Graph.v1 as int),
-       SalesData(widget.data['responses'][0]['op2'].toString(), Graph.v2 as int),
-       SalesData(op3Value, Graph.v3 as int),
-       SalesData(op4Value, Graph.v4 as int),
+       SalesData(widget.data['responses'][0]['op1'].toString(), Graph.v1.truncate() ),
+       SalesData(widget.data['responses'][0]['op2'].toString(), Graph.v2.truncate()),
+       SalesData(op3Value, Graph.v3.truncate()),
+       SalesData(op4Value, Graph.v4.truncate()),
     ];
 
     setState(() {

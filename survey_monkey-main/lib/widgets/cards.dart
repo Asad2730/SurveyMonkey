@@ -15,13 +15,13 @@ previousCard() {
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text("Survey 1"),
+        const Text("Survey 1"),
         ElevatedButton(
           onPressed: () {},
           child: const Text("Conduct"),
         ),
-        IconButton(onPressed: (){Get.to(()=>const BarChart());}, icon: const Icon(Icons.remove_red_eye_outlined)),
-        IconButton(onPressed: (){}, icon: const Icon(Icons.delete)),
+        // IconButton(onPressed: (){Get.to(()=>const BarChart(id: null,));}, icon: const Icon(Icons.remove_red_eye_outlined)),
+        // IconButton(onPressed: (){}, icon: const Icon(Icons.delete)),
       ],
     ),
   );
@@ -39,7 +39,7 @@ activeCard() {
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text("Survey 1"),
+        const Text("Survey 1"),
         ElevatedButton(
           onPressed: () {},
           child: const Text("Respond"),
@@ -61,7 +61,7 @@ pendingCard() {
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text("Survey 1"),
+        const Text("Survey 1"),
         IconButton(onPressed: (){}, icon: const Icon(Icons.delete)),
       ],
     ),
@@ -80,7 +80,7 @@ approvalCard() {
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text("Survey 1"),
+        const Text("Survey 1"),
         Row(
           children: [
             IconButton(onPressed: (){}, icon: const Icon(Icons.check,color: Colors.green,)),
