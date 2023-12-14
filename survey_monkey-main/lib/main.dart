@@ -12,15 +12,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'BIIT Survey Monkey',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: ck.x),
-        useMaterial3: true,
-      ),
-
-      home: const Login()
-    );
+        debugShowCheckedModeBanner: false,
+        title: 'BIIT Survey Monkey',
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: ck.x),
+          useMaterial3: true,
+        ),
+        home: const Login());
   }
 }
-
