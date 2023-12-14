@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:survey_monkey/constants.dart';
-import 'package:survey_monkey/screens/graphs/barChart.dart';
 
 previousCard() {
   return Container(
@@ -62,7 +61,7 @@ pendingCard() {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         const Text("Survey 1"),
-        IconButton(onPressed: (){}, icon: const Icon(Icons.delete)),
+        IconButton(onPressed: () {}, icon: const Icon(Icons.delete)),
       ],
     ),
   );
@@ -83,8 +82,18 @@ approvalCard() {
         const Text("Survey 1"),
         Row(
           children: [
-            IconButton(onPressed: (){}, icon: const Icon(Icons.check,color: Colors.green,)),
-            IconButton(onPressed: (){}, icon: const Icon(Icons.close,color: Colors.red,)),
+            IconButton(
+                onPressed: () {},
+                icon: const Icon(
+                  Icons.check,
+                  color: Colors.green,
+                )),
+            IconButton(
+                onPressed: () {},
+                icon: const Icon(
+                  Icons.close,
+                  color: Colors.red,
+                )),
           ],
         )
       ],

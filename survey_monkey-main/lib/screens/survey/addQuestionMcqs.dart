@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:survey_monkey/http/db.dart';
-import 'package:survey_monkey/screens/userHome.dart';
 
 import '../../widgets/appbars.dart';
 import '../../widgets/spacers.dart';
@@ -15,7 +14,6 @@ class AddQuestionMcqs extends StatefulWidget {
 }
 
 class _AddQuestionMcqsState extends State<AddQuestionMcqs> {
-
   TextEditingController q = TextEditingController();
   TextEditingController o1 = TextEditingController();
   TextEditingController o2 = TextEditingController();
@@ -25,12 +23,11 @@ class _AddQuestionMcqsState extends State<AddQuestionMcqs> {
   @override
   void dispose() {
     super.dispose();
-     q.text = '';
-     o1.text = '';
+    q.text = '';
+    o1.text = '';
     o2.text = '';
     o3.text = '';
     o4.text = '';
-
   }
 
   @override
@@ -52,14 +49,17 @@ class _AddQuestionMcqsState extends State<AddQuestionMcqs> {
               gap20(),
               TextField(
                 controller: q,
-                decoration: const InputDecoration(hintText: "Question",border: OutlineInputBorder()),
+                decoration: const InputDecoration(
+                    hintText: "Question", border: OutlineInputBorder()),
                 minLines: 4,
                 maxLines: 5,
               ),
               gap20(),
               TextField(
                 controller: o1,
-                decoration: const InputDecoration(hintText: "Option 1",),
+                decoration: const InputDecoration(
+                  hintText: "Option 1",
+                ),
               ),
               gap20(),
               TextField(
@@ -82,9 +82,13 @@ class _AddQuestionMcqsState extends State<AddQuestionMcqs> {
                 children: [
                   ElevatedButton(
                     onPressed: () {
-
-                      Db().addMcq(title: q.text, id: widget.id,
-                          op1: o1.text, op2: o2.text, op3: o3.text ,op4: o4.text,
+                      Db().addMcq(
+                          title: q.text,
+                          id: widget.id,
+                          op1: o1.text,
+                          op2: o2.text,
+                          op3: o3.text,
+                          op4: o4.text,
                           isMore: true);
                       dispose();
                     },
@@ -92,15 +96,19 @@ class _AddQuestionMcqsState extends State<AddQuestionMcqs> {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      Db().addMcq(title: q.text, id: widget.id,
-                          op1: o1.text, op2: o2.text, op3: o3.text ,op4: o4.text,
+                      Db().addMcq(
+                          title: q.text,
+                          id: widget.id,
+                          op1: o1.text,
+                          op2: o2.text,
+                          op3: o3.text,
+                          op4: o4.text,
                           isMore: false);
                     },
                     child: const Text("Done"),
                   ),
                 ],
               ),
-
             ],
           ),
         ),

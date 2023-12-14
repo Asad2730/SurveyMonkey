@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:survey_monkey/constants.dart';
 import 'package:survey_monkey/http/db.dart';
-import 'package:survey_monkey/screens/survey/addQuestionMcqs.dart';
-import 'package:survey_monkey/screens/survey/addQuestionYesNo.dart';
 import 'package:survey_monkey/widgets/spacers.dart';
 import 'package:survey_monkey/widgets/textfields.dart';
 
@@ -78,12 +76,10 @@ class _AddNameState extends State<AddName> {
             gap20(),
             ElevatedButton(
               onPressed: () {
-
                 if (radioValue == 2) {
-                  Db().createSurvey(name: name.text,type: 'MCQS');
-
+                  Db().createSurvey(name: name.text, type: 'MCQS');
                 } else {
-                  Db().createSurvey(name: name.text,type: 'Yes/No');
+                  Db().createSurvey(name: name.text, type: 'Yes/No');
                 }
               },
               child: const Text("Next"),

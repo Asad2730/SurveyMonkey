@@ -1,24 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:survey_monkey/http/db.dart';
-import 'package:survey_monkey/screens/userHome.dart';
 
 import '../../widgets/appbars.dart';
 import '../../widgets/spacers.dart';
 
 class AddQuestionYesNo extends StatefulWidget {
   final int id;
-  const AddQuestionYesNo( {super.key,required this.id});
+  const AddQuestionYesNo({super.key, required this.id});
 
   @override
   State<AddQuestionYesNo> createState() => _AddQuestionYesNoState();
 }
 
 class _AddQuestionYesNoState extends State<AddQuestionYesNo> {
-
   TextEditingController q = TextEditingController();
 
- @override
+  @override
   void dispose() {
     super.dispose();
     q.text = '';
@@ -43,7 +41,8 @@ class _AddQuestionYesNoState extends State<AddQuestionYesNo> {
               gap20(),
               TextField(
                 controller: q,
-                decoration: const InputDecoration(hintText: "Question",border: OutlineInputBorder()),
+                decoration: const InputDecoration(
+                    hintText: "Question", border: OutlineInputBorder()),
                 minLines: 4,
                 maxLines: 5,
               ),
@@ -53,20 +52,19 @@ class _AddQuestionYesNoState extends State<AddQuestionYesNo> {
                 children: [
                   ElevatedButton(
                     onPressed: () {
-                      Db().addQuestion( q: q.text, id: widget.id, isMore: true);
+                      Db().addQuestion(q: q.text, id: widget.id, isMore: true);
                       dispose();
                     },
                     child: const Text("Add More"),
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      Db().addQuestion( q: q.text, id: widget.id, isMore: false);
+                      Db().addQuestion(q: q.text, id: widget.id, isMore: false);
                     },
                     child: const Text("Done"),
                   ),
                 ],
               ),
-
             ],
           ),
         ),

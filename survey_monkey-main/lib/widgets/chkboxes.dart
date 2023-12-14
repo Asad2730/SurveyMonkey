@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class ChkBox extends StatefulWidget {
   ChkBox({super.key});
 
-  bool isChk=true;
-  String txt="";
+  bool isChk = true;
+  String txt = "";
 
-  ChkBox.set(isChked,text){
-    isChk=isChked;
-    txt=text;
+  ChkBox.set(isChked, text) {
+    isChk = isChked;
+    txt = text;
   }
   @override
   State<ChkBox> createState() => _ChkBoxState();

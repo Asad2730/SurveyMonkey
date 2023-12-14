@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:survey_monkey/Helper/User.dart';
 import 'package:survey_monkey/screens/selectSection.dart';
 import '../widgets/appbars.dart';
 import '../widgets/spacers.dart';
@@ -15,19 +14,14 @@ class SelectDiscipline extends StatefulWidget {
 class _SelectDisciplineState extends State<SelectDiscipline> {
   var isChecked = false;
   var checkList = [];
-  var disciplineList=[];
+  var disciplineList = [];
 
+  var disciplineAll = [];
 
-  var disciplineAll=[];
-
-  var snap=["BSCS","BSIT","BSSE","BSAI"];
-
-
-
+  var snap = ["BSCS", "BSIT", "BSSE", "BSAI"];
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: simpleAppBar(),
       body: Container(
@@ -44,9 +38,7 @@ class _SelectDisciplineState extends State<SelectDiscipline> {
             CheckboxListTile(
               title: const Text("Select All"),
               value: isChecked,
-              onChanged: (newValue) {
-
-              },
+              onChanged: (newValue) {},
               controlAffinity: ListTileControlAffinity.leading,
             ),
             gap20(),
@@ -77,11 +69,8 @@ class _SelectDisciplineState extends State<SelectDiscipline> {
                         return CheckboxListTile(
                           title: Text(snap[index].toString()),
                           value: false,
-                          onChanged: (newValue) {
-
-                          },
-                          controlAffinity:
-                          ListTileControlAffinity.leading,
+                          onChanged: (newValue) {},
+                          controlAffinity: ListTileControlAffinity.leading,
                         );
                       },
                     ),
@@ -90,10 +79,11 @@ class _SelectDisciplineState extends State<SelectDiscipline> {
               ),
             ),
             gap20(),
-            ElevatedButton(onPressed: (){
-              Get.to(SelectSection());
-            }, child: const Text("Next")),
-
+            ElevatedButton(
+                onPressed: () {
+                  Get.to(SelectSection());
+                },
+                child: const Text("Next")),
           ],
         ),
       ),
