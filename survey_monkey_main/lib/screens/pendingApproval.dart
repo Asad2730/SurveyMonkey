@@ -14,7 +14,6 @@ class PendingApproval extends StatefulWidget {
 }
 
 class _PendingApprovalState extends State<PendingApproval> {
-
   late Future _future;
 
   @override
@@ -25,7 +24,6 @@ class _PendingApprovalState extends State<PendingApproval> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: simpleAppBar(),
       body: Container(
@@ -40,7 +38,7 @@ class _PendingApprovalState extends State<PendingApproval> {
             ),
             gap20(),
             Expanded(
-              child:_futureBuild(),
+              child: _futureBuild(),
             ),
           ],
         ),
@@ -48,27 +46,27 @@ class _PendingApprovalState extends State<PendingApproval> {
     );
   }
 
-
-  Widget _futureBuild(){
+  Widget _futureBuild() {
     return Expanded(
       child: FutureBuilder(
           future: _future,
-          builder:(context,AsyncSnapshot snapshot) {
-            if(snapshot.hasData){
+          builder: (context, AsyncSnapshot snapshot) {
+            if (snapshot.hasData) {
               return _list(snapshot);
-            }else{
-              return const Center(child: CircularProgressIndicator(),);
+            } else {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
             }
           }),
     );
   }
 
-  Widget _list(AsyncSnapshot snapshot){
-
+  Widget _list(AsyncSnapshot snapshot) {
     return ListView.builder(
         shrinkWrap: true,
-        itemCount:snapshot.data.length,
-        itemBuilder: (context,i){
+        itemCount: snapshot.data.length,
+        itemBuilder: (context, i) {
           Map data = snapshot.data[i];
           return Column(
             children: [
@@ -79,16 +77,18 @@ class _PendingApprovalState extends State<PendingApproval> {
                   Row(
                     children: [
                       IconButton(
-                        onPressed: () async{
-                          await Db().acceptRejectSurvey(id: data['id'], approved: 1);
+                        onPressed: () async {
+                          await Db()
+                              .acceptRejectSurvey(id: data['id'], approved: 1);
                           setState(() {});
                         },
                         color: ck.x,
                         icon: const Icon(Icons.check),
                       ),
                       IconButton(
-                        onPressed: () async{
-                          await Db().acceptRejectSurvey(id: data['id'], approved: 2);
+                        onPressed: () async {
+                          await Db()
+                              .acceptRejectSurvey(id: data['id'], approved: 2);
                           setState(() {});
                         },
                         color: Colors.red,
@@ -101,6 +101,6 @@ class _PendingApprovalState extends State<PendingApproval> {
               gap20(),
             ],
           );
-        }) ;
+        });
   }
 }
