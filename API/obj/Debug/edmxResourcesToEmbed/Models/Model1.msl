@@ -735,6 +735,7 @@
     <EntitySetMapping Name="STMTRs">
       <EntityTypeMapping TypeName="Model.STMTR">
         <MappingFragment StoreEntitySet="STMTR">
+          <ScalarProperty Name="Discipline" ColumnName="Discipline" />
           <ScalarProperty Name="Reg_No" ColumnName="Reg_No" />
           <ScalarProperty Name="App_no" ColumnName="App_no" />
           <ScalarProperty Name="St_firstname" ColumnName="St_firstname" />

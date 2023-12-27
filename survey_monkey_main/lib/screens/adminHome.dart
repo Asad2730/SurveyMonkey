@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:survey_monkey/constants.dart';
 import 'package:survey_monkey/screens/approvedApporoval.dart';
 import 'package:survey_monkey/screens/pendingApproval.dart';
+import 'package:survey_monkey/screens/previousSurvey.dart';
 import 'package:survey_monkey/screens/survey/addName.dart';
 import 'package:survey_monkey/widgets/spacers.dart';
 
@@ -38,7 +39,9 @@ class _AdminHomeState extends State<AdminHome> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 GestureDetector(
-                  onTap: ()=>Get.to(()=>const AddName()),
+                  onTap: () {
+                    Get.to(() => const AddName());
+                  },
                   child: Container(
                     width: Get.width / 2.5,
                     height: 125,
@@ -52,11 +55,11 @@ class _AdminHomeState extends State<AdminHome> {
                           spreadRadius: 2,
                           blurRadius: 2,
                           offset:
-                          const Offset(4, 4), // changes position of shadow
+                              const Offset(4, 4), // changes position of shadow
                         ),
                       ],
                     ),
-                    child:const Center(
+                    child: const Center(
                       child: Text(
                         "New Survey",
                         style: TextStyle(color: Colors.white, fontSize: 16),
@@ -65,8 +68,8 @@ class _AdminHomeState extends State<AdminHome> {
                   ),
                 ),
                 GestureDetector(
-                  onTap: () => Get.to(()=>const ApprovedApproval()),
-                  child:   Container(
+                  onTap: () => Get.to(() => const ApprovedApproval()),
+                  child: Container(
                     width: Get.width / 2.5,
                     height: 125,
                     padding: const EdgeInsets.all(30),
@@ -74,14 +77,12 @@ class _AdminHomeState extends State<AdminHome> {
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(20),
                       boxShadow: [
-
                         BoxShadow(
                           color: Colors.grey.withOpacity(0.5),
                           spreadRadius: 2,
                           blurRadius: 2,
                           offset:
-                          const Offset(4, 4), // changes position of shadow
-
+                              const Offset(4, 4), // changes position of shadow
                         ),
                       ],
                     ),
@@ -99,32 +100,37 @@ class _AdminHomeState extends State<AdminHome> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Container(
-                  width: Get.width / 2.5,
-                  height: 125,
-                  padding: const EdgeInsets.all(30),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(20),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.5),
-                        spreadRadius: 2,
-                        blurRadius: 2,
-                        offset:
-                        const Offset(4, 4), // changes position of shadow
+                GestureDetector(
+                  onTap: () {
+                    Get.to(() => const PreviousSurvey());
+                  },
+                  child: Container(
+                    width: Get.width / 2.5,
+                    height: 125,
+                    padding: const EdgeInsets.all(30),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(20),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 2,
+                          blurRadius: 2,
+                          offset:
+                              const Offset(4, 4), // changes position of shadow
+                        ),
+                      ],
+                    ),
+                    child: const Center(
+                      child: Text(
+                        "Previous",
+                        style: TextStyle(fontSize: 16),
                       ),
-                    ],
-                  ),
-                  child: const Center(
-                    child: Text(
-                      "Previous",
-                      style: TextStyle(fontSize: 16),
                     ),
                   ),
                 ),
                 GestureDetector(
-                  onTap: (){
+                  onTap: () {
                     Get.to(const PendingApproval());
                   },
                   child: Container(

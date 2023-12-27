@@ -611,6 +611,7 @@ warning 6002: The table/view 'survey monkey database.dbo.STMTR' does not have a 
     <Property Name="SOS" Type="char" MaxLength="10" />
     <Property Name="Section" Type="char" MaxLength="1" />
     <Property Name="Password" Type="varchar" MaxLength="255" />
+    <Property Name="Discipline" Type="varchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="STMTRold">
     <Key>
@@ -1190,7 +1191,8 @@ warning 6002: The table/view 'survey monkey database.dbo.tempFEE' does not have 
     [STMTR].[Enrl_status] AS [Enrl_status], 
     [STMTR].[SOS] AS [SOS], 
     [STMTR].[Section] AS [Section], 
-    [STMTR].[Password] AS [Password]
+    [STMTR].[Password] AS [Password], 
+    [STMTR].[Discipline] AS [Discipline]
     FROM [dbo].[STMTR] AS [STMTR]</DefiningQuery>
     </EntitySet>
     <EntitySet Name="STMTRtemp" EntityType="Self.STMTRtemp" store:Type="Tables" store:Schema="dbo">

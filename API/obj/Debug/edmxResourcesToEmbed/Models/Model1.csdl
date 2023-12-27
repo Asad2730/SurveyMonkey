@@ -774,6 +774,7 @@
     <Property Name="SOS" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
     <Property Name="Section" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
     <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Discipline" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="STMTRtemp">
     <Key>

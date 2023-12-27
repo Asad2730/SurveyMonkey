@@ -10,7 +10,7 @@ import '../screens/survey/addQuestionYesNo.dart';
 
 class Db {
   final _dio = Dio();
-  final _ip = '192.168.10.11';
+  final _ip = '192.168.0.156';
 
   Db() {
     _dio.options.baseUrl = 'http://$_ip/API/api/Survey/';
@@ -173,6 +173,27 @@ class Db {
       Graph.v4 = rs.data[3];
     } catch (ex) {
       print('error:$ex');
+    }
+  }
+
+  Future<List<String>> getDiscipline() async {
+    try {
+      var rs = await _dio.get('getDiscipline');
+
+      return (rs.data as List).cast<String>();
+    } catch (ex) {
+      print('error:$ex');
+      return [];
+    }
+  }
+
+  Future getSection() async {
+    try {
+      var rs = await _dio.get('getSection?discipline=${User.tempDiscipline}');
+      return rs.data as List;
+    } catch (ex) {
+      print('error:$ex');
+      return [];
     }
   }
 }

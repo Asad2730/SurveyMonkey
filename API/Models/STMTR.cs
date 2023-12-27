@@ -39,5 +39,6 @@ namespace API.Models
         public string SOS { get; set; }
         public string Section { get; set; }
         public string Password { get; set; }
+        public string Discipline { get; set; }
     }
 }

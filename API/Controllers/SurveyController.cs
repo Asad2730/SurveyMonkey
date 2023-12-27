@@ -255,6 +255,45 @@ namespace API.Controllers
             }
         }
 
-    }
+
+
+        [HttpGet]
+        public HttpResponseMessage getDiscipline()
+        {
+            try
+            {
+                var q = db.Crsdtls.Select(c => c.DISCIPLINE).Distinct().ToList();
+                return Request.CreateResponse(HttpStatusCode.OK,q);
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, ex);
+            }
+        }
+
+
+        [HttpGet]
+        public HttpResponseMessage getSection(string discipline)
+        {
+            try
+            {
+                var q = db.Crsdtls
+                    .Where(c => c.SEMESTER_NO == "2022SM" && c.DISCIPLINE == discipline)
+                    .Select(c => new { c.CrsSemNo, c.SECTION })  
+                    .Distinct()
+                    .OrderBy(c => c.CrsSemNo)
+                    .ToList();
+
+                return Request.CreateResponse(HttpStatusCode.OK, q);
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, ex);
+            }
+        }
+
+
 
     }
+
+}

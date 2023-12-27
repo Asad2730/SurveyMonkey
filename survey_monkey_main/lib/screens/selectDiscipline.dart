@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:survey_monkey/Helper/User.dart';
+import 'package:survey_monkey/http/db.dart';
 import 'package:survey_monkey/screens/selectSection.dart';
 import '../widgets/appbars.dart';
 import '../widgets/spacers.dart';
@@ -17,8 +19,12 @@ class _SelectDisciplineState extends State<SelectDiscipline> {
   var disciplineList = [];
 
   var disciplineAll = [];
-
-  var snap = ["BSCS", "BSIT", "BSSE", "BSAI"];
+  late Future<List<String>> _future;
+  @override
+  void initState() {
+    super.initState();
+    _future = Db().getDiscipline();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,13 +39,6 @@ class _SelectDisciplineState extends State<SelectDiscipline> {
             const Text(
               "Select Discipline",
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            ),
-            gap20(),
-            CheckboxListTile(
-              title: const Text("Select All"),
-              value: isChecked,
-              onChanged: (newValue) {},
-              controlAffinity: ListTileControlAffinity.leading,
             ),
             gap20(),
             Container(
@@ -57,26 +56,7 @@ class _SelectDisciplineState extends State<SelectDiscipline> {
                   ),
                 ],
               ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Expanded(
-                    child: ListView.builder(
-                      itemCount: snap.length,
-                      shrinkWrap: true,
-                      scrollDirection: Axis.vertical,
-                      itemBuilder: (context, index) {
-                        return CheckboxListTile(
-                          title: Text(snap[index].toString()),
-                          value: false,
-                          onChanged: (newValue) {},
-                          controlAffinity: ListTileControlAffinity.leading,
-                        );
-                      },
-                    ),
-                  ),
-                ],
-              ),
+              child: _futureBuild(),
             ),
             gap20(),
             ElevatedButton(
@@ -87,6 +67,47 @@ class _SelectDisciplineState extends State<SelectDiscipline> {
           ],
         ),
       ),
+    );
+  }
+
+  Widget _futureBuild() {
+    return FutureBuilder<List<String>>(
+      future: _future,
+      builder: (context, AsyncSnapshot<List<String>> snapshot) {
+        if (snapshot.hasData) {
+          return _list(snapshot);
+        } else {
+          return const Center(child: CircularProgressIndicator());
+        }
+      },
+    );
+  }
+
+  Widget _list(AsyncSnapshot<List<String>> snapshot) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Expanded(
+          child: ListView.builder(
+            itemCount: snapshot.data?.length ?? 0,
+            shrinkWrap: true,
+            scrollDirection: Axis.vertical,
+            itemBuilder: (context, index) {
+              String? discipline = snapshot.data?[index];
+
+              return CheckboxListTile(
+                title: Text(discipline ?? ''),
+                value: false,
+                onChanged: (newValue) {
+                  User.tempDiscipline = discipline!;
+                  Get.to(() => SelectSection());
+                },
+                controlAffinity: ListTileControlAffinity.leading,
+              );
+            },
+          ),
+        ),
+      ],
     );
   }
 }
