@@ -23,6 +23,18 @@
     <Property Name="SemC" Type="Int32" />
     <Property Name="dropCount" Type="Int32" />
   </EntityType>
+  <EntityType Name="ActiveSurvey">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="sid" Type="Int32" />
+    <Property Name="startDate" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="endDate" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="discipline" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="semester" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="section" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
   <EntityType Name="AggScore">
     <Key>
       <PropertyRef Name="COURSE_NO" />
@@ -396,6 +408,18 @@
     <Property Name="St_last_name" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
     <Property Name="Discipline" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
     <Property Name="Disc_allow" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+  </EntityType>
+  <EntityType Name="survey">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="createdby" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="approved" Type="Int32" />
+    <Property Name="type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="aid" Type="Int32" />
   </EntityType>
   <EntityType Name="surveyaudience">
     <Key>
@@ -902,8 +926,9 @@
     <Property Name="Receipt_no" Type="String" MaxLength="15" FixedLength="true" Unicode="true" Nullable="false" />
     <Property Name="Paid_date" Type="DateTime" Nullable="false" Precision="3" />
   </EntityType>
-  <EntityContainer Name="survey_monkey_databaseEntities" annotation:LazyLoadingEnabled="true">
+  <EntityContainer Name="survey_monkey_databaseEntities1" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Accgpas" EntityType="Self.Accgpa" />
+    <EntitySet Name="ActiveSurveys" EntityType="Self.ActiveSurvey" />
     <EntitySet Name="AggScores" EntityType="Self.AggScore" />
     <EntitySet Name="Alerts" EntityType="Self.Alert" />
     <EntitySet Name="AlertUsers" EntityType="Self.AlertUser" />
@@ -933,6 +958,7 @@
     <EntitySet Name="STMTRolds" EntityType="Self.STMTRold" />
     <EntitySet Name="stuapps" EntityType="Self.stuapp" />
     <EntitySet Name="Student_Relationship" EntityType="Self.Student_Relationship" />
+    <EntitySet Name="surveys" EntityType="Self.survey" />
     <EntitySet Name="surveyaudiences" EntityType="Self.surveyaudience" />
     <EntitySet Name="surveyquestions" EntityType="Self.surveyquestion" />
     <EntitySet Name="surveyresponses" EntityType="Self.surveyresponse" />
@@ -964,17 +990,5 @@
     <EntitySet Name="TempCrs2" EntityType="Self.TempCrs2" />
     <EntitySet Name="TEMPCrsdtls" EntityType="Self.TEMPCrsdtl" />
     <EntitySet Name="tempFEEs" EntityType="Self.tempFEE" />
-    <EntitySet Name="surveys" EntityType="Model.survey" />
   </EntityContainer>
-  <EntityType Name="survey">
-    <Key>
-      <PropertyRef Name="id" />
-    </Key>
-    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="createdby" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="approved" Type="Int32" />
-    <Property Name="type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-  </EntityType>
 </Schema>

@@ -12,14 +12,14 @@ namespace API.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class survey
+    public partial class ActiveSurvey
     {
-        public string name { get; set; }
-        public string createdby { get; set; }
         public int id { get; set; }
-        public Nullable<int> approved { get; set; }
-        public string type { get; set; }
-        public string status { get; set; }
-        public Nullable<int> aid { get; set; }
+        public Nullable<int> sid { get; set; }
+        public string startDate { get; set; }
+        public string endDate { get; set; }
+        public string discipline { get; set; }
+        public string semester { get; set; }
+        public string section { get; set; }
     }
 }

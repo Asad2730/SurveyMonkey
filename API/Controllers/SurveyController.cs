@@ -14,7 +14,7 @@ namespace API.Controllers
     public class SurveyController : ApiController
     {
 
-        public survey_monkey_databaseEntities db = new survey_monkey_databaseEntities();
+        public survey_monkey_databaseEntities1 db = new survey_monkey_databaseEntities1();
 
 
         [HttpGet]
@@ -99,11 +99,46 @@ namespace API.Controllers
 
 
         [HttpGet]
-        public HttpResponseMessage surveyByApproved(int ap)
+        public HttpResponseMessage surveyByApproved(int ap,string Discipline,string Section,string Semester_no)
         {
             try
             {
+
+                List<survey> list = new List<survey>();
+
+                var rs = db.surveys.Join(db.ActiveSurveys, s => s.id, a => a.sid,
+                    (s, a) => new
+                    {
+                        s,
+                        a,
+                    }).Where(w=>w.a.discipline == Discipline && w.a.section == Section && w.a.semester == Semester_no).ToList();
+
+                rs.ForEach(i =>
+                {
+                    list.Add(i.s);
+                });
                 var q = db.surveys.Where(i => i.approved == ap && i.status == "public").ToList();
+
+                q.ForEach(i =>
+                {
+                    list.Add(i);
+                });
+                return Request.CreateResponse(HttpStatusCode.OK, list);
+
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, ex);
+            }
+        }
+
+
+        [HttpGet]
+        public HttpResponseMessage surveyNotApproved()
+        {
+            try
+            {
+                var q = db.surveys.Where(i => i.approved == 2 && i.status == "public").ToList();          
                 return Request.CreateResponse(HttpStatusCode.OK, q);
 
             }
@@ -112,6 +147,7 @@ namespace API.Controllers
                 return Request.CreateResponse(HttpStatusCode.InternalServerError, ex);
             }
         }
+
 
 
         [HttpGet]
@@ -292,6 +328,23 @@ namespace API.Controllers
             }
         }
 
+        [HttpPost]
+        public HttpResponseMessage addActiveSurvey(ActiveSurvey a)
+        {
+            try
+            {   
+                //var s = db.surveys.FirstOrDefault(i=>i.id == a.id);
+                //s.aid = a.sid;
+                //db.SaveChanges();
+                var q = db.ActiveSurveys.Add(a);
+                db.SaveChanges();
+                return Request.CreateResponse(HttpStatusCode.OK, q);
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, ex);
+            }
+        }
 
 
     }

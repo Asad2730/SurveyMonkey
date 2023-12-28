@@ -19,16 +19,12 @@ class _PreviousSurveyState extends State<PreviousSurvey> {
   var selectedDate = DateTime.now();
   late Future _future;
 
-
-
   @override
   void initState() {
     super.initState();
-    _future = Db().getAllSurveys();
-
+    _future = Db().surveyNotApproved();
   }
-  
-  
+
   Future<void> _selectDate(BuildContext context, DateTime tmp) async {
     final DateTime? picked = await showDatePicker(
       context: context,
@@ -59,8 +55,7 @@ class _PreviousSurveyState extends State<PreviousSurvey> {
               style: TextStyle(fontSize: 20, color: ck.x),
             ),
             Expanded(
-              child:
-               _futureBuild(),
+              child: _futureBuild(),
             ),
           ],
         ),
@@ -82,7 +77,7 @@ class _PreviousSurveyState extends State<PreviousSurvey> {
   }
 
   Widget _list(AsyncSnapshot snapshot) {
-    return   ListView.builder(
+    return ListView.builder(
         shrinkWrap: true,
         itemCount: snapshot.data.length,
         itemBuilder: (context, i) {
@@ -100,19 +95,18 @@ class _PreviousSurveyState extends State<PreviousSurvey> {
                           width: Get.width,
                           height: 200,
                           child: Column(
-                            mainAxisAlignment:
-                            MainAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               const Text("Select Dates for Survey"),
                               Row(
                                 mainAxisAlignment:
-                                MainAxisAlignment.spaceBetween,
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
                                       'Start Date : ${selectedDate.year.toString()}-${selectedDate.month.toString()}-${selectedDate.day.toString()}'),
                                   ElevatedButton(
                                     onPressed: () {
-                                      _selectDate(context,User.tempStartDate);
+                                      _selectDate(context, User.tempStartDate);
                                     },
                                     child: const Text('Select'),
                                   ),
@@ -120,13 +114,13 @@ class _PreviousSurveyState extends State<PreviousSurvey> {
                               ),
                               Row(
                                 mainAxisAlignment:
-                                MainAxisAlignment.spaceBetween,
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
                                       'End Date : ${selectedDate.year.toString()}-${selectedDate.month.toString()}-${selectedDate.day.toString()}'),
                                   ElevatedButton(
                                     onPressed: () {
-                                      _selectDate(context,User.tempEndDate);
+                                      _selectDate(context, User.tempEndDate);
                                     },
                                     child: const Text('Select'),
                                   ),
@@ -135,6 +129,7 @@ class _PreviousSurveyState extends State<PreviousSurvey> {
                               ElevatedButton(
                                 onPressed: () {
                                   Navigator.pop(context);
+                                  User.tempSurveyId = data['id'];
                                   Get.to(const SelectDiscipline());
                                 },
                                 child: const Text("Next"),
@@ -155,18 +150,10 @@ class _PreviousSurveyState extends State<PreviousSurvey> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(data['name']),
-                      data['status'].toString().toLowerCase().trim() != 'public'
-                          ? const Text(
+                      const Text(
                         "Inactive",
                         style: TextStyle(
                           color: Colors.red,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      )
-                          : Text(
-                        "Active",
-                        style: TextStyle(
-                          color: ck.x,
                           fontWeight: FontWeight.w500,
                         ),
                       )
@@ -178,5 +165,4 @@ class _PreviousSurveyState extends State<PreviousSurvey> {
           );
         });
   }
-
 }

@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
+import 'package:survey_monkey/Helper/ActiveSurvey.dart';
 import 'package:survey_monkey/Helper/Graph.dart';
 import 'package:survey_monkey/Helper/User.dart';
 import 'package:survey_monkey/screens/adminHome.dart';
@@ -10,7 +11,7 @@ import '../screens/survey/addQuestionYesNo.dart';
 
 class Db {
   final _dio = Dio();
-  final _ip = '192.168.0.156';
+  final _ip = '192.168.0.51';
 
   Db() {
     _dio.options.baseUrl = 'http://$_ip/API/api/Survey/';
@@ -22,10 +23,16 @@ class Db {
       if (res.data['UserType'] == 'Student') {
         User.id = res.data['Data']['Reg_No'];
         User.name = res.data['Data']['St_firstname'];
+        User.discipline = res.data['Data']['Discipline'];
+        User.semesterNo = res.data['Data']['Semester_no'];
+        User.section = res.data['Data']['Section'];
         Get.to(() => const UserHome());
       } else {
         User.id = res.data['Data']['Emp_no'];
         User.name = res.data['Data']['Emp_firstname'];
+        User.discipline = '';
+        User.semesterNo = '';
+        User.section = '';
         Get.to(() => const AdminHome());
       }
     } catch (ex) {
@@ -100,7 +107,22 @@ class Db {
 
   Future surveyByApproved({required ap}) async {
     try {
-      var rs = await _dio.get('surveyByApproved?ap=$ap');
+      var rs = await _dio.get('surveyByApproved', queryParameters: {
+        'ap': ap,
+        'Discipline': User.discipline,
+        'Section': User.section,
+        'Semester_no': User.semesterNo,
+      });
+      return rs.data as List;
+    } catch (ex) {
+      print('error:$ex');
+    }
+  }
+
+  //these are conducted surves
+  Future surveyNotApproved() async {
+    try {
+      var rs = await _dio.get('surveyNotApproved');
       return rs.data as List;
     } catch (ex) {
       print('error:$ex');
@@ -194,6 +216,23 @@ class Db {
     } catch (ex) {
       print('error:$ex');
       return [];
+    }
+  }
+
+  Future addActiveSurvey({required List<ActiveSurvey> survey}) async {
+    try {
+      for (var i in survey) {
+        var q = await _dio.post('addActiveSurvey', data: {
+          'sid': User.tempSurveyId,
+          'startDate': User.tempStartDate.toString(),
+          'endDate': User.tempEndDate.toString(),
+          'section': i.section.toString(),
+          'semester': i.semester.toString(),
+          'discipline': User.tempDiscipline.toString()
+        });
+      }
+    } catch (ex) {
+      print('error:$ex');
     }
   }
 }

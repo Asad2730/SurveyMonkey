@@ -171,6 +171,9 @@
     <Compile Include="Models\Accgpa.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ActiveSurvey.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\AggScore.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

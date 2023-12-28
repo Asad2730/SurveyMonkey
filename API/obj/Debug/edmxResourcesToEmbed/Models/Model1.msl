@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="survey_monkey_databaseEntities">
+  <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="survey_monkey_databaseEntities1">
     <EntitySetMapping Name="Accgpas">
       <EntityTypeMapping TypeName="Model.Accgpa">
         <MappingFragment StoreEntitySet="Accgpa">
@@ -20,6 +20,19 @@
           <ScalarProperty Name="SEM_STATUS" ColumnName="SEM_STATUS" />
           <ScalarProperty Name="SemC" ColumnName="SemC" />
           <ScalarProperty Name="dropCount" ColumnName="dropCount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ActiveSurveys">
+      <EntityTypeMapping TypeName="Model.ActiveSurvey">
+        <MappingFragment StoreEntitySet="ActiveSurvey">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="sid" ColumnName="sid" />
+          <ScalarProperty Name="startDate" ColumnName="startDate" />
+          <ScalarProperty Name="endDate" ColumnName="endDate" />
+          <ScalarProperty Name="discipline" ColumnName="discipline" />
+          <ScalarProperty Name="semester" ColumnName="semester" />
+          <ScalarProperty Name="section" ColumnName="section" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -278,10 +291,10 @@
     <EntitySetMapping Name="Question_Answer">
       <EntityTypeMapping TypeName="Model.Question_Answer">
         <MappingFragment StoreEntitySet="Question_Answer">
-          <ScalarProperty Name="sid" ColumnName="sid" />
           <ScalarProperty Name="Question_ID" ColumnName="Question_ID" />
           <ScalarProperty Name="Question" ColumnName="Question" />
           <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="sid" ColumnName="sid" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -403,6 +416,19 @@
           <ScalarProperty Name="St_last_name" ColumnName="St_last_name" />
           <ScalarProperty Name="Discipline" ColumnName="Discipline" />
           <ScalarProperty Name="Disc_allow" ColumnName="Disc_allow" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="surveys">
+      <EntityTypeMapping TypeName="Model.survey">
+        <MappingFragment StoreEntitySet="survey">
+          <ScalarProperty Name="aid" ColumnName="aid" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="createdby" ColumnName="createdby" />
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="approved" ColumnName="approved" />
+          <ScalarProperty Name="type" ColumnName="type" />
+          <ScalarProperty Name="status" ColumnName="status" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -735,7 +761,6 @@
     <EntitySetMapping Name="STMTRs">
       <EntityTypeMapping TypeName="Model.STMTR">
         <MappingFragment StoreEntitySet="STMTR">
-          <ScalarProperty Name="Discipline" ColumnName="Discipline" />
           <ScalarProperty Name="Reg_No" ColumnName="Reg_No" />
           <ScalarProperty Name="App_no" ColumnName="App_no" />
           <ScalarProperty Name="St_firstname" ColumnName="St_firstname" />
@@ -761,6 +786,7 @@
           <ScalarProperty Name="SOS" ColumnName="SOS" />
           <ScalarProperty Name="Section" ColumnName="Section" />
           <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Discipline" ColumnName="Discipline" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -878,18 +904,6 @@
           <ScalarProperty Name="Semester_no" ColumnName="Semester_no" />
           <ScalarProperty Name="Receipt_no" ColumnName="Receipt_no" />
           <ScalarProperty Name="Paid_date" ColumnName="Paid_date" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="surveys">
-      <EntityTypeMapping TypeName="Model.survey">
-        <MappingFragment StoreEntitySet="survey">
-          <ScalarProperty Name="status" ColumnName="status" />
-          <ScalarProperty Name="type" ColumnName="type" />
-          <ScalarProperty Name="approved" ColumnName="approved" />
-          <ScalarProperty Name="id" ColumnName="id" />
-          <ScalarProperty Name="createdby" ColumnName="createdby" />
-          <ScalarProperty Name="name" ColumnName="name" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

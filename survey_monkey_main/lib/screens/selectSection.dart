@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:survey_monkey/Helper/ActiveSurvey.dart';
 import 'package:survey_monkey/Helper/User.dart';
 import 'package:survey_monkey/http/db.dart';
 import 'package:survey_monkey/widgets/appbars.dart';
@@ -17,6 +18,8 @@ class _SelectSectionState extends State<SelectSection> {
   var isChecked = false;
 
   late Future _future;
+  List<ActiveSurvey> list = [];
+
   @override
   void initState() {
     super.initState();
@@ -53,7 +56,13 @@ class _SelectSectionState extends State<SelectSection> {
                 child: _futureBuild(),
               ),
               gap20(),
-              ElevatedButton(onPressed: () {}, child: const Text("Next")),
+              ElevatedButton(
+                  onPressed: () async {
+                    if (list.isNotEmpty) {
+                      await Db().addActiveSurvey(survey: list);
+                    }
+                  },
+                  child: const Text("Next")),
             ],
           ),
         ),
@@ -95,7 +104,16 @@ class _SelectSectionState extends State<SelectSection> {
                     child: CheckboxListTile(
                       title: Text("${data['CrsSemNo']}-${data['SECTION']}"),
                       value: false,
-                      onChanged: (newValue) {},
+                      onChanged: (newValue) {
+                        var ob = ActiveSurvey();
+                        ob.semester = data['CrsSemNo'].toString();
+                        ob.section = data['SECTION'].toString();
+                        if (list.contains(ob)) {
+                          list.remove(ob);
+                        } else {
+                          list.add(ob);
+                        }
+                      },
                       controlAffinity: ListTileControlAffinity.leading,
                     ));
               }),

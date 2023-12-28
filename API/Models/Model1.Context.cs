@@ -13,10 +13,10 @@ namespace API.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class survey_monkey_databaseEntities : DbContext
+    public partial class survey_monkey_databaseEntities1 : DbContext
     {
-        public survey_monkey_databaseEntities()
-            : base("name=survey_monkey_databaseEntities")
+        public survey_monkey_databaseEntities1()
+            : base("name=survey_monkey_databaseEntities1")
         {
         }
     
@@ -26,6 +26,7 @@ namespace API.Models
         }
     
         public virtual DbSet<Accgpa> Accgpas { get; set; }
+        public virtual DbSet<ActiveSurvey> ActiveSurveys { get; set; }
         public virtual DbSet<AggScore> AggScores { get; set; }
         public virtual DbSet<Alert> Alerts { get; set; }
         public virtual DbSet<AlertUser> AlertUsers { get; set; }
@@ -55,6 +56,7 @@ namespace API.Models
         public virtual DbSet<STMTRold> STMTRolds { get; set; }
         public virtual DbSet<stuapp> stuapps { get; set; }
         public virtual DbSet<Student_Relationship> Student_Relationship { get; set; }
+        public virtual DbSet<survey> surveys { get; set; }
         public virtual DbSet<surveyaudience> surveyaudiences { get; set; }
         public virtual DbSet<surveyquestion> surveyquestions { get; set; }
         public virtual DbSet<surveyresponse> surveyresponses { get; set; }
@@ -86,6 +88,5 @@ namespace API.Models
         public virtual DbSet<TempCrs2> TempCrs2 { get; set; }
         public virtual DbSet<TEMPCrsdtl> TEMPCrsdtls { get; set; }
         public virtual DbSet<tempFEE> tempFEEs { get; set; }
-        public virtual DbSet<survey> surveys { get; set; }
     }
 }

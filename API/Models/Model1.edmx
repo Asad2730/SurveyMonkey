@@ -28,6 +28,18 @@
           <Property Name="SemC" Type="int" />
           <Property Name="dropCount" Type="int" />
         </EntityType>
+        <EntityType Name="ActiveSurvey">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="sid" Type="int" />
+          <Property Name="startDate" Type="varchar" MaxLength="50" />
+          <Property Name="endDate" Type="varchar" MaxLength="50" />
+          <Property Name="discipline" Type="varchar" MaxLength="50" />
+          <Property Name="semester" Type="varchar" MaxLength="50" />
+          <Property Name="section" Type="varchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="AggScore">
           <Key>
             <PropertyRef Name="COURSE_NO" />
@@ -738,6 +750,7 @@ warning 6002: The table/view 'survey monkey database.dbo.STMTRtemp' does not hav
           <Property Name="approved" Type="int" />
           <Property Name="type" Type="varchar" MaxLength="50" />
           <Property Name="status" Type="varchar" MaxLength="20" />
+          <Property Name="aid" Type="int" />
         </EntityType>
         <EntityType Name="surveyaudience">
           <Key>
@@ -962,6 +975,7 @@ warning 6002: The table/view 'survey monkey database.dbo.tempFEE' does not have 
         </EntityType>
         <EntityContainer Name="ModelStoreContainer">
           <EntitySet Name="Accgpa" EntityType="Self.Accgpa" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ActiveSurvey" EntityType="Self.ActiveSurvey" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AggScore" EntityType="Self.AggScore" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Alert" EntityType="Self.Alert" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AlertUser" EntityType="Self.AlertUser" Schema="dbo" store:Type="Tables" />
@@ -1332,6 +1346,18 @@ warning 6002: The table/view 'survey monkey database.dbo.tempFEE' does not have 
           <Property Name="SEM_STATUS" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
           <Property Name="SemC" Type="Int32" />
           <Property Name="dropCount" Type="Int32" />
+        </EntityType>
+        <EntityType Name="ActiveSurvey">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sid" Type="Int32" />
+          <Property Name="startDate" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="endDate" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="discipline" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="semester" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="section" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="AggScore">
           <Key>
@@ -1706,6 +1732,18 @@ warning 6002: The table/view 'survey monkey database.dbo.tempFEE' does not have 
           <Property Name="St_last_name" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="Discipline" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
           <Property Name="Disc_allow" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="survey">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="createdby" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="approved" Type="Int32" />
+          <Property Name="type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="aid" Type="Int32" />
         </EntityType>
         <EntityType Name="surveyaudience">
           <Key>
@@ -2212,8 +2250,9 @@ warning 6002: The table/view 'survey monkey database.dbo.tempFEE' does not have 
           <Property Name="Receipt_no" Type="String" MaxLength="15" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="Paid_date" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
-        <EntityContainer Name="survey_monkey_databaseEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="survey_monkey_databaseEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Accgpas" EntityType="Self.Accgpa" />
+          <EntitySet Name="ActiveSurveys" EntityType="Self.ActiveSurvey" />
           <EntitySet Name="AggScores" EntityType="Self.AggScore" />
           <EntitySet Name="Alerts" EntityType="Self.Alert" />
           <EntitySet Name="AlertUsers" EntityType="Self.AlertUser" />
@@ -2243,6 +2282,7 @@ warning 6002: The table/view 'survey monkey database.dbo.tempFEE' does not have 
           <EntitySet Name="STMTRolds" EntityType="Self.STMTRold" />
           <EntitySet Name="stuapps" EntityType="Self.stuapp" />
           <EntitySet Name="Student_Relationship" EntityType="Self.Student_Relationship" />
+          <EntitySet Name="surveys" EntityType="Self.survey" />
           <EntitySet Name="surveyaudiences" EntityType="Self.surveyaudience" />
           <EntitySet Name="surveyquestions" EntityType="Self.surveyquestion" />
           <EntitySet Name="surveyresponses" EntityType="Self.surveyresponse" />
@@ -2274,25 +2314,13 @@ warning 6002: The table/view 'survey monkey database.dbo.tempFEE' does not have 
           <EntitySet Name="TempCrs2" EntityType="Self.TempCrs2" />
           <EntitySet Name="TEMPCrsdtls" EntityType="Self.TEMPCrsdtl" />
           <EntitySet Name="tempFEEs" EntityType="Self.tempFEE" />
-          <EntitySet Name="surveys" EntityType="Model.survey" />
         </EntityContainer>
-        <EntityType Name="survey">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="createdby" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="approved" Type="Int32" />
-          <Property Name="type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="survey_monkey_databaseEntities">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="survey_monkey_databaseEntities1">
           <EntitySetMapping Name="Accgpas">
             <EntityTypeMapping TypeName="Model.Accgpa">
               <MappingFragment StoreEntitySet="Accgpa">
@@ -2312,6 +2340,19 @@ warning 6002: The table/view 'survey monkey database.dbo.tempFEE' does not have 
                 <ScalarProperty Name="SEM_STATUS" ColumnName="SEM_STATUS" />
                 <ScalarProperty Name="SemC" ColumnName="SemC" />
                 <ScalarProperty Name="dropCount" ColumnName="dropCount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ActiveSurveys">
+            <EntityTypeMapping TypeName="Model.ActiveSurvey">
+              <MappingFragment StoreEntitySet="ActiveSurvey">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="sid" ColumnName="sid" />
+                <ScalarProperty Name="startDate" ColumnName="startDate" />
+                <ScalarProperty Name="endDate" ColumnName="endDate" />
+                <ScalarProperty Name="discipline" ColumnName="discipline" />
+                <ScalarProperty Name="semester" ColumnName="semester" />
+                <ScalarProperty Name="section" ColumnName="section" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2570,10 +2611,10 @@ warning 6002: The table/view 'survey monkey database.dbo.tempFEE' does not have 
           <EntitySetMapping Name="Question_Answer">
             <EntityTypeMapping TypeName="Model.Question_Answer">
               <MappingFragment StoreEntitySet="Question_Answer">
-                <ScalarProperty Name="sid" ColumnName="sid" />
                 <ScalarProperty Name="Question_ID" ColumnName="Question_ID" />
                 <ScalarProperty Name="Question" ColumnName="Question" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="sid" ColumnName="sid" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2695,6 +2736,19 @@ warning 6002: The table/view 'survey monkey database.dbo.tempFEE' does not have 
                 <ScalarProperty Name="St_last_name" ColumnName="St_last_name" />
                 <ScalarProperty Name="Discipline" ColumnName="Discipline" />
                 <ScalarProperty Name="Disc_allow" ColumnName="Disc_allow" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="surveys">
+            <EntityTypeMapping TypeName="Model.survey">
+              <MappingFragment StoreEntitySet="survey">
+                <ScalarProperty Name="aid" ColumnName="aid" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="createdby" ColumnName="createdby" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="approved" ColumnName="approved" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="status" ColumnName="status" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -3027,7 +3081,6 @@ warning 6002: The table/view 'survey monkey database.dbo.tempFEE' does not have 
           <EntitySetMapping Name="STMTRs">
             <EntityTypeMapping TypeName="Model.STMTR">
               <MappingFragment StoreEntitySet="STMTR">
-                <ScalarProperty Name="Discipline" ColumnName="Discipline" />
                 <ScalarProperty Name="Reg_No" ColumnName="Reg_No" />
                 <ScalarProperty Name="App_no" ColumnName="App_no" />
                 <ScalarProperty Name="St_firstname" ColumnName="St_firstname" />
@@ -3053,6 +3106,7 @@ warning 6002: The table/view 'survey monkey database.dbo.tempFEE' does not have 
                 <ScalarProperty Name="SOS" ColumnName="SOS" />
                 <ScalarProperty Name="Section" ColumnName="Section" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Discipline" ColumnName="Discipline" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -3170,18 +3224,6 @@ warning 6002: The table/view 'survey monkey database.dbo.tempFEE' does not have 
                 <ScalarProperty Name="Semester_no" ColumnName="Semester_no" />
                 <ScalarProperty Name="Receipt_no" ColumnName="Receipt_no" />
                 <ScalarProperty Name="Paid_date" ColumnName="Paid_date" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="surveys">
-            <EntityTypeMapping TypeName="Model.survey">
-              <MappingFragment StoreEntitySet="survey">
-                <ScalarProperty Name="status" ColumnName="status" />
-                <ScalarProperty Name="type" ColumnName="type" />
-                <ScalarProperty Name="approved" ColumnName="approved" />
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="createdby" ColumnName="createdby" />
-                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -23,6 +23,18 @@
     <Property Name="SemC" Type="int" />
     <Property Name="dropCount" Type="int" />
   </EntityType>
+  <EntityType Name="ActiveSurvey">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="sid" Type="int" />
+    <Property Name="startDate" Type="varchar" MaxLength="50" />
+    <Property Name="endDate" Type="varchar" MaxLength="50" />
+    <Property Name="discipline" Type="varchar" MaxLength="50" />
+    <Property Name="semester" Type="varchar" MaxLength="50" />
+    <Property Name="section" Type="varchar" MaxLength="50" />
+  </EntityType>
   <EntityType Name="AggScore">
     <Key>
       <PropertyRef Name="COURSE_NO" />
@@ -733,6 +745,7 @@ warning 6002: The table/view 'survey monkey database.dbo.STMTRtemp' does not hav
     <Property Name="approved" Type="int" />
     <Property Name="type" Type="varchar" MaxLength="50" />
     <Property Name="status" Type="varchar" MaxLength="20" />
+    <Property Name="aid" Type="int" />
   </EntityType>
   <EntityType Name="surveyaudience">
     <Key>
@@ -957,6 +970,7 @@ warning 6002: The table/view 'survey monkey database.dbo.tempFEE' does not have 
   </EntityType>
   <EntityContainer Name="ModelStoreContainer">
     <EntitySet Name="Accgpa" EntityType="Self.Accgpa" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ActiveSurvey" EntityType="Self.ActiveSurvey" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AggScore" EntityType="Self.AggScore" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Alert" EntityType="Self.Alert" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AlertUser" EntityType="Self.AlertUser" Schema="dbo" store:Type="Tables" />
