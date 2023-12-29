@@ -333,9 +333,10 @@ namespace API.Controllers
         {
             try
             {   
-                //var s = db.surveys.FirstOrDefault(i=>i.id == a.id);
-                //s.aid = a.sid;
-                //db.SaveChanges();
+                var s = db.surveys.FirstOrDefault(i=>i.id == a.id);
+                s.aid = a.sid;
+                s.status = "public";
+                s.approved = 1;
                 var q = db.ActiveSurveys.Add(a);
                 db.SaveChanges();
                 return Request.CreateResponse(HttpStatusCode.OK, q);

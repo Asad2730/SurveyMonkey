@@ -1,3 +1,4 @@
+// ignore: file_names
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:survey_monkey/Helper/User.dart';
@@ -7,19 +8,18 @@ import '../widgets/appbars.dart';
 import '../widgets/spacers.dart';
 
 class SelectDiscipline extends StatefulWidget {
-  const SelectDiscipline({Key? key}) : super(key: key);
+  const SelectDiscipline({super.key});
 
   @override
   State<SelectDiscipline> createState() => _SelectDisciplineState();
 }
 
 class _SelectDisciplineState extends State<SelectDiscipline> {
-  var isChecked = false;
-  var checkList = [];
-  var disciplineList = [];
-
-  var disciplineAll = [];
   late Future<List<String>> _future;
+
+  //late List<bool> _selectedDisciplines;
+  final List<bool> _selectedDisciplines = List.generate(100, (index) => false);
+
   @override
   void initState() {
     super.initState();
@@ -60,10 +60,11 @@ class _SelectDisciplineState extends State<SelectDiscipline> {
             ),
             gap20(),
             ElevatedButton(
-                onPressed: () {
-                  Get.to(SelectSection());
-                },
-                child: const Text("Next")),
+              onPressed: () {
+                Get.to(const SelectSection());
+              },
+              child: const Text("Next"),
+            ),
           ],
         ),
       ),
@@ -75,6 +76,8 @@ class _SelectDisciplineState extends State<SelectDiscipline> {
       future: _future,
       builder: (context, AsyncSnapshot<List<String>> snapshot) {
         if (snapshot.hasData) {
+          // _selectedDisciplines =
+          //     List.generate(snapshot.data!.length, (index) => false);
           return _list(snapshot);
         } else {
           return const Center(child: CircularProgressIndicator());
@@ -97,10 +100,13 @@ class _SelectDisciplineState extends State<SelectDiscipline> {
 
               return CheckboxListTile(
                 title: Text(discipline ?? ''),
-                value: false,
+                value: _selectedDisciplines[index],
                 onChanged: (newValue) {
-                  User.tempDiscipline = discipline!;
-                  Get.to(() => SelectSection());
+                  setState(() {
+                    _selectedDisciplines[index] = newValue!;
+                    User.tempDiscipline = discipline!;
+                  });
+                  Get.to(const SelectSection());
                 },
                 controlAffinity: ListTileControlAffinity.leading,
               );

@@ -11,7 +11,7 @@ import '../screens/survey/addQuestionYesNo.dart';
 
 class Db {
   final _dio = Dio();
-  final _ip = '192.168.0.51';
+  final _ip = '192.168.10.12';
 
   Db() {
     _dio.options.baseUrl = 'http://$_ip/API/api/Survey/';
@@ -169,15 +169,13 @@ class Db {
       DateTime today = DateTime.now();
       DateTime todayDate = DateTime(today.year, today.month, today.day);
       for (var i in ans) {
-        var res = await _dio.post('submitSurveyAnswers', data: {
+        await _dio.post('submitSurveyAnswers', data: {
           'surveyid': User.tempSurveyId,
           'questionid': i.qid,
           'response': i.response,
           'userid': User.id,
           'date': todayDate.toString(),
         });
-
-        print('submited-->${res.data}');
       }
 
       Get.back();
@@ -201,7 +199,6 @@ class Db {
   Future<List<String>> getDiscipline() async {
     try {
       var rs = await _dio.get('getDiscipline');
-
       return (rs.data as List).cast<String>();
     } catch (ex) {
       print('error:$ex');
@@ -222,7 +219,7 @@ class Db {
   Future addActiveSurvey({required List<ActiveSurvey> survey}) async {
     try {
       for (var i in survey) {
-        var q = await _dio.post('addActiveSurvey', data: {
+        await _dio.post('addActiveSurvey', data: {
           'sid': User.tempSurveyId,
           'startDate': User.tempStartDate.toString(),
           'endDate': User.tempEndDate.toString(),

@@ -8,7 +8,7 @@ import 'package:survey_monkey/widgets/appbars.dart';
 import '../widgets/spacers.dart';
 
 class SelectSection extends StatefulWidget {
-  SelectSection({Key? key}) : super(key: key);
+  const SelectSection({super.key});
 
   @override
   State<SelectSection> createState() => _SelectSectionState();
@@ -19,6 +19,7 @@ class _SelectSectionState extends State<SelectSection> {
 
   late Future _future;
   List<ActiveSurvey> list = [];
+  final List<bool> options = List.generate(100, (index) => false);
 
   @override
   void initState() {
@@ -103,7 +104,7 @@ class _SelectSectionState extends State<SelectSection> {
                     padding: const EdgeInsets.symmetric(horizontal: 25),
                     child: CheckboxListTile(
                       title: Text("${data['CrsSemNo']}-${data['SECTION']}"),
-                      value: false,
+                      value: options[index],
                       onChanged: (newValue) {
                         var ob = ActiveSurvey();
                         ob.semester = data['CrsSemNo'].toString();
@@ -113,6 +114,9 @@ class _SelectSectionState extends State<SelectSection> {
                         } else {
                           list.add(ob);
                         }
+                        setState(() {
+                          options[index] = newValue!;
+                        });
                       },
                       controlAffinity: ListTileControlAffinity.leading,
                     ));
