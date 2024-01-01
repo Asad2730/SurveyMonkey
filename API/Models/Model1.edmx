@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Accgpa">
           <Key>
             <PropertyRef Name="REG_NO" />
@@ -58,25 +58,6 @@
           <Property Name="AGG_PRACE" Type="decimal" Precision="5" Scale="2" />
           <Property Name="SOS" Type="char" MaxLength="8" Nullable="false" />
         </EntityType>
-        <EntityType Name="Alert">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Txt" Type="varchar" MaxLength="255" />
-          <Property Name="Date" Type="datetime" />
-        </EntityType>
-        <EntityType Name="AlertUser">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserID" Type="varchar" MaxLength="255" />
-          <Property Name="Type" Type="varchar" MaxLength="255" />
-          <Property Name="Seen" Type="bit" />
-          <Property Name="AlertId" Type="int" />
-          <Property Name="Date" Type="date" />
-        </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'survey monkey database.dbo.ALLOCATE' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ALLOCATE">
@@ -100,63 +81,6 @@ warning 6002: The table/view 'survey monkey database.dbo.ALLOCATE' does not have
           <Property Name="LEC3_DT" Type="char" MaxLength="20" />
           <Property Name="SemC" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="Attendance">
-          <Key>
-            <PropertyRef Name="Semester_no" />
-            <PropertyRef Name="Reg_No" />
-            <PropertyRef Name="course_no" />
-            <PropertyRef Name="ADate" />
-          </Key>
-          <Property Name="Semester_no" Type="varchar" MaxLength="12" Nullable="false" />
-          <Property Name="Reg_No" Type="varchar" MaxLength="14" Nullable="false" />
-          <Property Name="course_no" Type="varchar" MaxLength="9" Nullable="false" />
-          <Property Name="Section" Type="varchar" MaxLength="7" Nullable="false" />
-          <Property Name="ADate" Type="varchar" MaxLength="8" Nullable="false" />
-          <Property Name="Att" Type="char" MaxLength="1" />
-          <Property Name="Teacher" Type="char" MaxLength="20" />
-        </EntityType>
-        <EntityType Name="CHALLAN">
-          <Key>
-            <PropertyRef Name="Reciept_no" />
-          </Key>
-          <Property Name="Reg_no" Type="varchar" MaxLength="14" />
-          <Property Name="Final_Course" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="Semester_no" Type="varchar" MaxLength="12" Nullable="false" />
-          <Property Name="Sem_Fee" Type="money" />
-          <Property Name="Reg Fee" Type="money" />
-          <Property Name="Adm_Fee" Type="money" />
-          <Property Name="Total" Type="money" />
-          <Property Name="Inst_No" Type="int" />
-          <Property Name="Disc_Amt" Type="money" />
-          <Property Name="Net_amt" Type="money" />
-          <Property Name="Installments" Type="nchar" MaxLength="1" Nullable="false" />
-          <Property Name="Inst_amt" Type="money" />
-          <Property Name="Reciept_no" Type="nchar" MaxLength="9" Nullable="false" />
-          <Property Name="Fine" Type="money" />
-          <Property Name="SOS" Type="char" MaxLength="15" Nullable="false" />
-          <Property Name="ddate" Type="datetime" />
-          <Property Name="ExtraCourse_Fee" Type="money" />
-          <Property Name="Other_Fee" Type="money" />
-          <Property Name="SemC" Type="int" />
-          <Property Name="Issue_time" Type="int" />
-          <Property Name="Fee_type" Type="char" MaxLength="20" />
-          <Property Name="issue_fine" Type="int" />
-          <Property Name="Paid?" Type="bit" />
-          <Property Name="Sch_amt" Type="int" />
-          <Property Name="Total_Payable" Type="money" />
-          <Property Name="App_no" Type="char" MaxLength="12" />
-          <Property Name="Comments" Type="char" MaxLength="40" />
-          <Property Name="ReIssue" Type="bit" />
-        </EntityType>
-        <EntityType Name="clash">
-          <Key>
-            <PropertyRef Name="reg_no" />
-            <PropertyRef Name="course_no" />
-          </Key>
-          <Property Name="reg_no" Type="varchar" MaxLength="15" Nullable="false" />
-          <Property Name="course_no" Type="varchar" MaxLength="10" Nullable="false" />
-          <Property Name="name" Type="varchar" MaxLength="50" />
-        </EntityType>
         <EntityType Name="conductsurvey">
           <Key>
             <PropertyRef Name="id" />
@@ -165,13 +89,6 @@ warning 6002: The table/view 'survey monkey database.dbo.ALLOCATE' does not have
           <Property Name="fromdate" Type="nvarchar" MaxLength="50" />
           <Property Name="todate" Type="nvarchar" MaxLength="50" />
           <Property Name="surveyid" Type="int" />
-        </EntityType>
-        <EntityType Name="confirmVenue">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" Nullable="false" />
-          <Property Name="name" Type="varchar" MaxLength="20" />
         </EntityType>
         <EntityType Name="course">
           <Key>
@@ -333,35 +250,12 @@ warning 6002: The table/view 'survey monkey database.dbo.CRSPRE' does not have a
           <Property Name="PreCOURSE_NO" Type="varchar" MaxLength="9" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'survey monkey database.dbo.DscplnEntry' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="DscplnEntry">
-          <Key>
-            <PropertyRef Name="Final_Course" />
-            <PropertyRef Name="SemC" />
-          </Key>
-          <Property Name="Final_Course" Type="varchar" MaxLength="16" Nullable="false" />
-          <Property Name="Fee" Type="money" />
-          <Property Name="regFee" Type="money" />
-          <Property Name="admFee" Type="money" />
-          <Property Name="Desc" Type="char" MaxLength="50" />
-          <Property Name="SemC" Type="int" Nullable="false" />
-          <Property Name="DefDueDate" Type="datetime" />
-          <Property Name="fine1" Type="int" />
-          <Property Name="fine2" Type="int" />
-          <Property Name="fine3" Type="int" />
-        </EntityType>
-        <EntityType Name="duty">
-          <Key>
-            <PropertyRef Name="emp_no" />
-            <PropertyRef Name="date" />
-            <PropertyRef Name="time" />
-          </Key>
-          <Property Name="emp_no" Type="varchar" MaxLength="10" Nullable="false" />
-          <Property Name="emp_name" Type="varchar" MaxLength="100" />
-          <Property Name="room" Type="varchar" MaxLength="10" />
-          <Property Name="date" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="time" Type="varchar" MaxLength="10" Nullable="false" />
-        </EntityType>
+warning 6013: The table/view 'survey monkey database.dbo.CrsStuP' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="CrsStuP">
+          <Property Name="reg_no" Type="varchar" MaxLength="14" />
+          <Property Name="course_no" Type="varchar" MaxLength="9" />
+          <Property Name="grade" Type="char" MaxLength="1" />
+        </EntityType>-->
         <!--Errors Found During Generation:
 warning 6002: The table/view 'survey monkey database.dbo.EMPMTR' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="EMPMTR">
@@ -381,128 +275,6 @@ warning 6002: The table/view 'survey monkey database.dbo.EMPMTR' does not have a
           <Property Name="Password" Type="varchar" MaxLength="255" />
           <Property Name="Roles" Type="varchar" MaxLength="12" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'survey monkey database.dbo.EMPMTR_E' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="EMPMTR_E">
-          <Key>
-            <PropertyRef Name="Emp_no" />
-          </Key>
-          <Property Name="Emp_no" Type="char" MaxLength="7" Nullable="false" />
-          <Property Name="Emp_email" Type="varchar" MaxLength="30" />
-          <Property Name="USERID" Type="varchar" MaxLength="20" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'survey monkey database.dbo.Eval' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="Eval">
-          <Key>
-            <PropertyRef Name="Emp_no" />
-            <PropertyRef Name="Reg_No" />
-            <PropertyRef Name="Course_no" />
-            <PropertyRef Name="Discipline" />
-            <PropertyRef Name="Semester_no" />
-            <PropertyRef Name="Question_Desc" />
-          </Key>
-          <Property Name="Emp_no" Type="char" MaxLength="7" Nullable="false" />
-          <Property Name="Reg_No" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Course_no" Type="varchar" MaxLength="9" Nullable="false" />
-          <Property Name="Discipline" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="Semester_no" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="Question_Desc" Type="int" Nullable="false" />
-          <Property Name="Answer_Desc" Type="nvarchar" MaxLength="50" />
-          <Property Name="Answer_Marks" Type="int" />
-        </EntityType>
-        <EntityType Name="Group">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="varchar" MaxLength="50" />
-          <Property Name="Owner_ID" Type="varchar" MaxLength="50" />
-          <Property Name="IsPublic" Type="int" />
-        </EntityType>
-        <EntityType Name="GroupMember">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="RegNo" Type="nvarchar" MaxLength="50" />
-          <Property Name="GroupId" Type="int" />
-        </EntityType>
-        <EntityType Name="InstDate">
-          <Key>
-            <PropertyRef Name="inst_no" />
-          </Key>
-          <Property Name="inst_no" Type="int" Nullable="false" />
-          <Property Name="duedate" Type="datetime" />
-          <Property Name="duedate1" Type="datetime" />
-          <Property Name="duedate2" Type="datetime" />
-          <Property Name="duedate3" Type="datetime" />
-        </EntityType>
-        <EntityType Name="InstDate2">
-          <Key>
-            <PropertyRef Name="inst_no" />
-          </Key>
-          <Property Name="inst_no" Type="int" Nullable="false" />
-          <Property Name="duedate" Type="datetime" />
-          <Property Name="duedate1" Type="datetime" />
-          <Property Name="duedate2" Type="datetime" />
-          <Property Name="duedate3" Type="datetime" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'survey monkey database.dbo.Log_In' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="Log_In">
-          <Key>
-            <PropertyRef Name="User_name" />
-            <PropertyRef Name="User_id" />
-            <PropertyRef Name="User_type" />
-            <PropertyRef Name="User_password" />
-          </Key>
-          <Property Name="User_name" Type="nchar" MaxLength="20" Nullable="false" />
-          <Property Name="User_id" Type="nchar" MaxLength="20" Nullable="false" />
-          <Property Name="User_type" Type="nchar" MaxLength="20" Nullable="false" />
-          <Property Name="User_password" Type="nchar" MaxLength="30" Nullable="false" />
-          <Property Name="MAC" Type="nchar" MaxLength="17" />
-          <Property Name="VID" Type="nchar" MaxLength="200" />
-          <Property Name="att" Type="char" MaxLength="1" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'survey monkey database.dbo.meritTemp' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="meritTemp">
-          <Key>
-            <PropertyRef Name="App_no" />
-          </Key>
-          <Property Name="App_no" Type="char" MaxLength="12" Nullable="false" />
-          <Property Name="St_firstname" Type="varchar" MaxLength="12" />
-          <Property Name="St_lastname" Type="varchar" MaxLength="20" />
-          <Property Name="St_middlename" Type="varchar" MaxLength="12" />
-          <Property Name="Father_name" Type="varchar" MaxLength="45" />
-          <Property Name="Semester_no" Type="char" MaxLength="6" />
-          <Property Name="Final_course" Type="varchar" MaxLength="12" />
-          <Property Name="Discipline" Type="varchar" MaxLength="12" />
-          <Property Name="Obj_score" Type="float" />
-          <Property Name="Total_score" Type="float" />
-          <Property Name="Percentage" Type="float" />
-        </EntityType>
-        <EntityType Name="Population">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="section" Type="varchar" MaxLength="50" />
-          <Property Name="semester" Type="varchar" MaxLength="50" />
-          <Property Name="discipline" Type="varchar" MaxLength="50" />
-          <Property Name="gender" Type="varchar" MaxLength="10" />
-          <Property Name="survey_id" Type="int" />
-        </EntityType>
-        <EntityType Name="Project">
-          <Key>
-            <PropertyRef Name="pid" />
-          </Key>
-          <Property Name="pid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="project" Type="varchar" MaxLength="100" />
-          <Property Name="objectives" Type="varchar(max)" />
-          <Property Name="Semester_no" Type="varchar" MaxLength="12" />
-        </EntityType>
         <EntityType Name="Question_Answer">
           <Key>
             <PropertyRef Name="Question_ID" />
@@ -512,38 +284,13 @@ warning 6002: The table/view 'survey monkey database.dbo.meritTemp' does not hav
           <Property Name="Description" Type="varchar" MaxLength="30" />
           <Property Name="sid" Type="int" />
         </EntityType>
-        <EntityType Name="seat">
-          <Key>
-            <PropertyRef Name="reg_no" />
-            <PropertyRef Name="date" />
-            <PropertyRef Name="time" />
-          </Key>
-          <Property Name="reg_no" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="date" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="time" Type="varchar" MaxLength="10" Nullable="false" />
-          <Property Name="room" Type="varchar" MaxLength="10" />
-          <Property Name="row" Type="varchar" MaxLength="5" />
-          <Property Name="seat" Type="varchar" MaxLength="5" />
-          <Property Name="images" Type="varchar" MaxLength="1000" />
-          <Property Name="section_no" Type="varchar" MaxLength="20" />
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'survey monkey database.dbo.section' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="section">
+          <Property Name="reg_no" Type="varchar" MaxLength="20" />
           <Property Name="course_no" Type="varchar" MaxLength="20" />
-        </EntityType>
-        <EntityType Name="sectiontbl">
-          <Key>
-            <PropertyRef Name="emp_no" />
-            <PropertyRef Name="reg_no" />
-            <PropertyRef Name="course_no" />
-            <PropertyRef Name="discipline" />
-          </Key>
-          <Property Name="emp_no" Type="varchar" MaxLength="54" Nullable="false" />
-          <Property Name="reg_no" Type="varchar" MaxLength="54" Nullable="false" />
-          <Property Name="course_no" Type="varchar" MaxLength="54" Nullable="false" />
-          <Property Name="section" Type="varchar" MaxLength="54" />
-          <Property Name="discipline" Type="varchar" MaxLength="54" Nullable="false" />
-          <Property Name="semC" Type="varchar" MaxLength="54" />
-          <Property Name="semester_no" Type="varchar" MaxLength="54" />
-          <Property Name="deleted" Type="varchar" MaxLength="1" />
-        </EntityType>
+          <Property Name="_section" Type="varchar" MaxLength="10" />
+        </EntityType>-->
         <EntityType Name="SEMMTR">
           <Key>
             <PropertyRef Name="Semester_no" />
@@ -563,37 +310,6 @@ warning 6002: The table/view 'survey monkey database.dbo.semReg' does not have a
           <Property Name="regenrl" Type="varchar" MaxLength="14" Nullable="false" />
           <Property Name="discipline" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="reaccgpa" Type="varchar" MaxLength="14" />
-        </EntityType>
-        <EntityType Name="short_attendance">
-          <Key>
-            <PropertyRef Name="course_no" />
-            <PropertyRef Name="reg_no" />
-          </Key>
-          <Property Name="course_no" Type="varchar" MaxLength="8" Nullable="false" />
-          <Property Name="reg_no" Type="varchar" MaxLength="14" Nullable="false" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'survey monkey database.dbo.sReg' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="sReg">
-          <Key>
-            <PropertyRef Name="regenrl" />
-            <PropertyRef Name="discipline" />
-            <PropertyRef Name="semester_no" />
-          </Key>
-          <Property Name="regenrl" Type="varchar" MaxLength="14" Nullable="false" />
-          <Property Name="discipline" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="semester_no" Type="varchar" MaxLength="12" Nullable="false" />
-          <Property Name="reaccgpa" Type="varchar" MaxLength="14" />
-        </EntityType>
-        <EntityType Name="ST_REMARKS">
-          <Key>
-            <PropertyRef Name="REG_NO" />
-            <PropertyRef Name="SEMESTER_NO" />
-          </Key>
-          <Property Name="REG_NO" Type="varchar" MaxLength="12" Nullable="false" />
-          <Property Name="SEMESTER_NO" Type="varchar" MaxLength="12" Nullable="false" />
-          <Property Name="REMARKS" Type="varchar" MaxLength="300" />
-          <Property Name="EMP_NO" Type="char" MaxLength="17" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'survey monkey database.dbo.STMTR' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -629,116 +345,6 @@ warning 6002: The table/view 'survey monkey database.dbo.STMTR' does not have a 
           <Property Name="Section" Type="char" MaxLength="1" />
           <Property Name="Password" Type="varchar" MaxLength="255" />
           <Property Name="Discipline" Type="varchar" MaxLength="50" />
-        </EntityType>
-        <EntityType Name="STMTRold">
-          <Key>
-            <PropertyRef Name="Reg_No" />
-          </Key>
-          <Property Name="Reg_No" Type="varchar" MaxLength="14" Nullable="false" />
-          <Property Name="App_no" Type="char" MaxLength="12" Nullable="false" />
-          <Property Name="St_firstname" Type="varchar" MaxLength="25" />
-          <Property Name="St_lastname" Type="varchar" MaxLength="25" />
-          <Property Name="St_middlename" Type="varchar" MaxLength="25" />
-          <Property Name="Father_name" Type="varchar" MaxLength="50" />
-          <Property Name="St_email" Type="varchar" MaxLength="30" />
-          <Property Name="Sex" Type="char" MaxLength="1" />
-          <Property Name="Uaar_reg_no" Type="char" MaxLength="12" />
-          <Property Name="Marital_status" Type="char" MaxLength="1" />
-          <Property Name="Birth_date" Type="datetime" Nullable="false" />
-          <Property Name="Nic_no" Type="char" MaxLength="20" />
-          <Property Name="Pr_city" Type="varchar" MaxLength="20" />
-          <Property Name="Per_city" Type="varchar" MaxLength="20" />
-          <Property Name="Ad_status" Type="varchar" MaxLength="20" />
-          <Property Name="Sess" Type="char" MaxLength="1" />
-          <Property Name="Pref_1" Type="varchar" MaxLength="12" />
-          <Property Name="Pref_2" Type="varchar" MaxLength="12" />
-          <Property Name="Adm_date" Type="datetime" />
-          <Property Name="Semester_no" Type="char" MaxLength="6" />
-          <Property Name="Remarks" Type="varchar" MaxLength="40" />
-          <Property Name="St_status" Type="char" MaxLength="9" />
-          <Property Name="USER_ID" Type="varchar" MaxLength="50" />
-          <Property Name="Acc_status" Type="char" MaxLength="9" />
-          <Property Name="St_assets" Type="nvarchar" MaxLength="10" />
-          <Property Name="Whom_STATUS" Type="varchar" MaxLength="20" />
-          <Property Name="Fin_status" Type="varchar" MaxLength="20" />
-          <Property Name="Final_course" Type="varchar" MaxLength="12" />
-          <Property Name="Enrl_status" Type="char" MaxLength="12" />
-          <Property Name="DOMICILE" Type="varchar" MaxLength="30" />
-          <Property Name="Degree_Received" Type="char" MaxLength="3" />
-          <Property Name="Deg_No" Type="char" MaxLength="7" />
-          <Property Name="Year" Type="char" MaxLength="4" />
-          <Property Name="SOS" Type="char" MaxLength="10" />
-          <Property Name="Section" Type="char" MaxLength="1" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'survey monkey database.dbo.STMTRtemp' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="STMTRtemp">
-          <Key>
-            <PropertyRef Name="Reg_No" />
-            <PropertyRef Name="App_no" />
-            <PropertyRef Name="Birth_date" />
-          </Key>
-          <Property Name="Reg_No" Type="varchar" MaxLength="14" Nullable="false" />
-          <Property Name="App_no" Type="char" MaxLength="12" Nullable="false" />
-          <Property Name="St_firstname" Type="varchar" MaxLength="25" />
-          <Property Name="St_lastname" Type="varchar" MaxLength="25" />
-          <Property Name="St_middlename" Type="varchar" MaxLength="25" />
-          <Property Name="Father_name" Type="varchar" MaxLength="50" />
-          <Property Name="St_email" Type="varchar" MaxLength="30" />
-          <Property Name="Sex" Type="char" MaxLength="1" />
-          <Property Name="Uaar_reg_no" Type="char" MaxLength="12" />
-          <Property Name="Marital_status" Type="char" MaxLength="1" />
-          <Property Name="Birth_date" Type="datetime" Nullable="false" />
-          <Property Name="Nic_no" Type="char" MaxLength="20" />
-          <Property Name="Pr_address" Type="varchar" MaxLength="100" />
-          <Property Name="Pr_city" Type="varchar" MaxLength="20" />
-          <Property Name="Per_address" Type="varchar" MaxLength="100" />
-          <Property Name="Per_city" Type="varchar" MaxLength="20" />
-          <Property Name="Em_telno" Type="varchar" MaxLength="20" />
-          <Property Name="Per_telno" Type="varchar" MaxLength="20" />
-          <Property Name="Ad_status" Type="varchar" MaxLength="20" />
-          <Property Name="Sess" Type="char" MaxLength="1" />
-          <Property Name="Pref_1" Type="varchar" MaxLength="12" />
-          <Property Name="Pref_2" Type="varchar" MaxLength="12" />
-          <Property Name="Adm_date" Type="datetime" />
-          <Property Name="Semester_no" Type="char" MaxLength="6" />
-          <Property Name="Remarks" Type="varchar" MaxLength="40" />
-          <Property Name="St_status" Type="char" MaxLength="9" />
-          <Property Name="USER_ID" Type="varchar" MaxLength="50" />
-          <Property Name="Acc_status" Type="char" MaxLength="9" />
-          <Property Name="St_assets" Type="nvarchar" MaxLength="10" />
-          <Property Name="Whom_STATUS" Type="varchar" MaxLength="20" />
-          <Property Name="Fin_status" Type="varchar" MaxLength="20" />
-          <Property Name="Final_course" Type="varchar" MaxLength="12" />
-          <Property Name="Enrl_status" Type="char" MaxLength="12" />
-          <Property Name="DOMICILE" Type="varchar" MaxLength="30" />
-          <Property Name="Degree_Received" Type="char" MaxLength="3" />
-          <Property Name="Deg_No" Type="char" MaxLength="7" />
-          <Property Name="Year" Type="char" MaxLength="4" />
-          <Property Name="SOS" Type="char" MaxLength="10" />
-          <Property Name="Section" Type="char" MaxLength="1" />
-        </EntityType>
-        <EntityType Name="stuapp">
-          <Key>
-            <PropertyRef Name="app_no" />
-          </Key>
-          <Property Name="app_no" Type="char" MaxLength="12" Nullable="false" />
-          <Property Name="section" Type="char" MaxLength="1" />
-          <Property Name="semc" Type="int" />
-        </EntityType>
-        <EntityType Name="Student_Relationship">
-          <Key>
-            <PropertyRef Name="St_reg_no1" />
-            <PropertyRef Name="St_reg_no2" />
-          </Key>
-          <Property Name="St_reg_no1" Type="varchar" MaxLength="14" Nullable="false" />
-          <Property Name="St_reg_no2" Type="varchar" MaxLength="12" Nullable="false" />
-          <Property Name="Relationship" Type="varchar" MaxLength="25" />
-          <Property Name="Discount" Type="nvarchar" MaxLength="50" />
-          <Property Name="St_first_name" Type="varchar" MaxLength="25" />
-          <Property Name="St_last_name" Type="varchar" MaxLength="25" />
-          <Property Name="Discipline" Type="varchar" MaxLength="12" />
-          <Property Name="Disc_allow" Type="char" MaxLength="1" />
         </EntityType>
         <EntityType Name="survey">
           <Key>
@@ -783,13 +389,6 @@ warning 6002: The table/view 'survey monkey database.dbo.STMTRtemp' does not hav
           <Property Name="userid" Type="varchar" MaxLength="50" />
           <Property Name="date" Type="varchar" MaxLength="50" />
         </EntityType>
-        <EntityType Name="tbl_User_Roles">
-          <Key>
-            <PropertyRef Name="role_id" />
-          </Key>
-          <Property Name="role_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="role_name" Type="nvarchar" MaxLength="50" />
-        </EntityType>
         <EntityType Name="teacher">
           <Key>
             <PropertyRef Name="emp_no" />
@@ -803,219 +402,23 @@ warning 6002: The table/view 'survey monkey database.dbo.STMTRtemp' does not hav
           <Property Name="phone_no" Type="varchar" MaxLength="15" />
           <Property Name="order" Type="int" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'survey monkey database.dbo.temp' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="temp">
-          <Key>
-            <PropertyRef Name="reg_no" />
-            <PropertyRef Name="course_no" />
-          </Key>
-          <Property Name="name" Type="varchar" MaxLength="50" />
-          <Property Name="reg_no" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="course_no" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="section" Type="varchar" MaxLength="2" />
-          <Property Name="discipline" Type="varchar" MaxLength="10" />
-          <Property Name="emp_name" Type="varchar" MaxLength="60" />
-          <Property Name="section_no" Type="varchar" MaxLength="10" />
-        </EntityType>
-        <EntityType Name="temp_venue">
-          <Key>
-            <PropertyRef Name="room" />
-          </Key>
-          <Property Name="room" Type="varchar" MaxLength="10" Nullable="false" />
-          <Property Name="total_seat" Type="varchar" MaxLength="10" />
-          <Property Name="no_of_rows" Type="varchar" MaxLength="10" />
-          <Property Name="row1" Type="varchar" MaxLength="10" />
-          <Property Name="row2" Type="varchar" MaxLength="10" />
-          <Property Name="row3" Type="varchar" MaxLength="10" />
-          <Property Name="row4" Type="varchar" MaxLength="10" />
-          <Property Name="row5" Type="varchar" MaxLength="10" />
-          <Property Name="row6" Type="varchar" MaxLength="10" />
-          <Property Name="row7" Type="varchar" MaxLength="10" />
-          <Property Name="id" Type="int" />
-        </EntityType>
-        <EntityType Name="Temp1">
-          <Key>
-            <PropertyRef Name="Id" />
-            <PropertyRef Name="Course_no" />
-            <PropertyRef Name="Attempt_no" />
-            <PropertyRef Name="Reg_no" />
-            <PropertyRef Name="Emp_no" />
-            <PropertyRef Name="Semester_no" />
-            <PropertyRef Name="Section" />
-            <PropertyRef Name="Discipline" />
-          </Key>
-          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Course_no" Type="varchar" MaxLength="9" Nullable="false" />
-          <Property Name="Attempt_no" Type="nvarchar" MaxLength="1" Nullable="false" />
-          <Property Name="Reg_no" Type="varchar" MaxLength="14" Nullable="false" />
-          <Property Name="Emp_no" Type="char" MaxLength="7" Nullable="false" />
-          <Property Name="Semester_no" Type="varchar" MaxLength="12" Nullable="false" />
-          <Property Name="Section" Type="char" MaxLength="1" Nullable="false" />
-          <Property Name="Discipline" Type="varchar" MaxLength="12" Nullable="false" />
-          <Property Name="Semester" Type="varchar" MaxLength="3" Nullable="false" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'survey monkey database.dbo.TempCrs' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="TempCrs">
-          <Key>
-            <PropertyRef Name="Course_no" />
-            <PropertyRef Name="reg_no" />
-          </Key>
-          <Property Name="Course_no" Type="varchar" MaxLength="9" Nullable="false" />
-          <Property Name="reg_no" Type="varchar" MaxLength="14" Nullable="false" />
-          <Property Name="Credit_hrs" Type="char" MaxLength="10" />
-          <Property Name="Q_points" Type="decimal" Precision="5" Scale="2" />
-          <Property Name="Discipline" Type="varchar" MaxLength="20" />
-          <Property Name="Section" Type="char" MaxLength="1" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'survey monkey database.dbo.TempCrs2' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="TempCrs2">
-          <Key>
-            <PropertyRef Name="Course_no" />
-            <PropertyRef Name="reg_no" />
-          </Key>
-          <Property Name="Course_no" Type="varchar" MaxLength="9" Nullable="false" />
-          <Property Name="reg_no" Type="varchar" MaxLength="14" Nullable="false" />
-          <Property Name="Credit_hrs" Type="char" MaxLength="10" />
-          <Property Name="Q_points" Type="decimal" Precision="5" Scale="2" />
-          <Property Name="Discipline" Type="varchar" MaxLength="20" />
-          <Property Name="Section" Type="char" MaxLength="1" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'survey monkey database.dbo.TEMPCrsdtl' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="TEMPCrsdtl">
-          <Key>
-            <PropertyRef Name="Course_no" />
-            <PropertyRef Name="ATTEMPT_NO" />
-            <PropertyRef Name="REG_NO" />
-            <PropertyRef Name="Emp_no" />
-            <PropertyRef Name="SEMESTER_NO" />
-            <PropertyRef Name="SECTION" />
-            <PropertyRef Name="DISCIPLINE" />
-            <PropertyRef Name="SOS" />
-          </Key>
-          <Property Name="Course_no" Type="varchar" MaxLength="9" Nullable="false" />
-          <Property Name="ATTEMPT_NO" Type="nvarchar" MaxLength="1" Nullable="false" />
-          <Property Name="REG_NO" Type="varchar" MaxLength="14" Nullable="false" />
-          <Property Name="Emp_no" Type="char" MaxLength="7" Nullable="false" />
-          <Property Name="SEMESTER_NO" Type="varchar" MaxLength="12" Nullable="false" />
-          <Property Name="SECTION" Type="char" MaxLength="1" Nullable="false" />
-          <Property Name="Final_score" Type="decimal" Precision="5" Scale="2" />
-          <Property Name="Midterm_score" Type="decimal" Precision="5" Scale="2" />
-          <Property Name="Assi_score" Type="decimal" Precision="5" Scale="2" />
-          <Property Name="Prac_score" Type="decimal" Precision="5" Scale="2" />
-          <Property Name="Grade" Type="char" MaxLength="12" />
-          <Property Name="Q_points" Type="decimal" Precision="5" Scale="2" />
-          <Property Name="DISCIPLINE" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="SOS" Type="char" MaxLength="8" Nullable="false" />
-          <Property Name="pGrade" Type="char" MaxLength="1" />
-          <Property Name="Mid_att" Type="char" MaxLength="1" />
-          <Property Name="Fin_att" Type="char" MaxLength="1" />
-          <Property Name="CrsSemNo" Type="int" />
-          <Property Name="DT" Type="datetime" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'survey monkey database.dbo.tempFEE' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="tempFEE">
-          <Key>
-            <PropertyRef Name="Reg_no" />
-            <PropertyRef Name="Semester_no" />
-            <PropertyRef Name="Receipt_no" />
-            <PropertyRef Name="Paid_date" />
-          </Key>
-          <Property Name="Reg_no" Type="varchar" MaxLength="14" Nullable="false" />
-          <Property Name="Semester_no" Type="varchar" MaxLength="12" Nullable="false" />
-          <Property Name="Receipt_no" Type="nchar" MaxLength="15" Nullable="false" />
-          <Property Name="Paid_date" Type="datetime" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Template">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="Course_no" Type="varchar" MaxLength="9" Nullable="false" />
-          <Property Name="USER_ID" Type="varchar" MaxLength="20" />
-          <Property Name="DISCIPLINE" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="SOS" Type="char" MaxLength="8" Nullable="false" />
-          <Property Name="SEMNO" Type="int" Nullable="false" />
-          <Property Name="TNAME" Type="char" MaxLength="10" Nullable="false" />
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-        </EntityType>
-        <EntityType Name="THESIS_ENTRY">
-          <Key>
-            <PropertyRef Name="REG_NO" />
-            <PropertyRef Name="COURSE_NO" />
-            <PropertyRef Name="DISCIPLINE" />
-            <PropertyRef Name="EMP_NO" />
-            <PropertyRef Name="SEMESTER_NO" />
-          </Key>
-          <Property Name="REG_NO" Type="varchar" MaxLength="12" Nullable="false" />
-          <Property Name="COURSE_NO" Type="char" MaxLength="9" Nullable="false" />
-          <Property Name="DISCIPLINE" Type="varchar" MaxLength="12" Nullable="false" />
-          <Property Name="EMP_NO" Type="char" MaxLength="7" Nullable="false" />
-          <Property Name="SEMESTER_NO" Type="varchar" MaxLength="12" Nullable="false" />
-          <Property Name="STATUS" Type="char" MaxLength="1" />
-        </EntityType>
-        <EntityType Name="venue">
-          <Key>
-            <PropertyRef Name="room" />
-          </Key>
-          <Property Name="room" Type="varchar" MaxLength="10" Nullable="false" />
-          <Property Name="total_seat" Type="varchar" MaxLength="10" />
-          <Property Name="no_of_rows" Type="varchar" MaxLength="10" />
-          <Property Name="row1" Type="varchar" MaxLength="10" />
-          <Property Name="row2" Type="varchar" MaxLength="10" />
-          <Property Name="row3" Type="varchar" MaxLength="10" />
-          <Property Name="row4" Type="varchar" MaxLength="10" />
-          <Property Name="row5" Type="varchar" MaxLength="10" />
-          <Property Name="row6" Type="varchar" MaxLength="10" />
-          <Property Name="row7" Type="varchar" MaxLength="10" />
-          <Property Name="id" Type="int" />
-        </EntityType>
         <EntityContainer Name="ModelStoreContainer">
           <EntitySet Name="Accgpa" EntityType="Self.Accgpa" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ActiveSurvey" EntityType="Self.ActiveSurvey" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AggScore" EntityType="Self.AggScore" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Alert" EntityType="Self.Alert" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="AlertUser" EntityType="Self.AlertUser" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Attendance" EntityType="Self.Attendance" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="CHALLAN" EntityType="Self.CHALLAN" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="clash" EntityType="Self.clash" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="conductsurvey" EntityType="Self.conductsurvey" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="confirmVenue" EntityType="Self.confirmVenue" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="course" EntityType="Self.course" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Crsdtl" EntityType="Self.Crsdtl" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="crsdtl_enrl" EntityType="Self.crsdtl_enrl" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CRSMTR" EntityType="Self.CRSMTR" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CrsmtrShorts" EntityType="Self.CrsmtrShorts" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="duty" EntityType="Self.duty" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Group" EntityType="Self.Group" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="GroupMember" EntityType="Self.GroupMember" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="InstDate" EntityType="Self.InstDate" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="InstDate2" EntityType="Self.InstDate2" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Population" EntityType="Self.Population" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Project" EntityType="Self.Project" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Question_Answer" EntityType="Self.Question_Answer" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="seat" EntityType="Self.seat" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sectiontbl" EntityType="Self.sectiontbl" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SEMMTR" EntityType="Self.SEMMTR" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="short_attendance" EntityType="Self.short_attendance" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ST_REMARKS" EntityType="Self.ST_REMARKS" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="STMTRold" EntityType="Self.STMTRold" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="stuapp" EntityType="Self.stuapp" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Student_Relationship" EntityType="Self.Student_Relationship" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="survey" EntityType="Self.survey" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="surveyaudience" EntityType="Self.surveyaudience" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="surveyquestion" EntityType="Self.surveyquestion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="surveyresponse" EntityType="Self.surveyresponse" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="tbl_User_Roles" EntityType="Self.tbl_User_Roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="teacher" EntityType="Self.teacher" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="temp_venue" EntityType="Self.temp_venue" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Temp1" EntityType="Self.Temp1" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Template" EntityType="Self.Template" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="THESIS_ENTRY" EntityType="Self.THESIS_ENTRY" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="venue" EntityType="Self.venue" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ALLOCATE" EntityType="Self.ALLOCATE" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [ALLOCATE].[EMP_NO] AS [EMP_NO], 
@@ -1094,20 +497,6 @@ warning 6002: The table/view 'survey monkey database.dbo.tempFEE' does not have 
     [CRSPRE].[PreCOURSE_NO] AS [PreCOURSE_NO]
     FROM [dbo].[CRSPRE] AS [CRSPRE]</DefiningQuery>
           </EntitySet>
-          <EntitySet Name="DscplnEntry" EntityType="Self.DscplnEntry" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [DscplnEntry].[Final_Course] AS [Final_Course], 
-    [DscplnEntry].[Fee] AS [Fee], 
-    [DscplnEntry].[regFee] AS [regFee], 
-    [DscplnEntry].[admFee] AS [admFee], 
-    [DscplnEntry].[Desc] AS [Desc], 
-    [DscplnEntry].[SemC] AS [SemC], 
-    [DscplnEntry].[DefDueDate] AS [DefDueDate], 
-    [DscplnEntry].[fine1] AS [fine1], 
-    [DscplnEntry].[fine2] AS [fine2], 
-    [DscplnEntry].[fine3] AS [fine3]
-    FROM [dbo].[DscplnEntry] AS [DscplnEntry]</DefiningQuery>
-          </EntitySet>
           <EntitySet Name="EMPMTR" EntityType="Self.EMPMTR" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [EMPMTR].[Emp_no] AS [Emp_no], 
@@ -1124,65 +513,12 @@ warning 6002: The table/view 'survey monkey database.dbo.tempFEE' does not have 
     [EMPMTR].[Roles] AS [Roles]
     FROM [dbo].[EMPMTR] AS [EMPMTR]</DefiningQuery>
           </EntitySet>
-          <EntitySet Name="EMPMTR_E" EntityType="Self.EMPMTR_E" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [EMPMTR_E].[Emp_no] AS [Emp_no], 
-    [EMPMTR_E].[Emp_email] AS [Emp_email], 
-    [EMPMTR_E].[USERID] AS [USERID]
-    FROM [dbo].[EMPMTR_E] AS [EMPMTR_E]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="Eval" EntityType="Self.Eval" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Eval].[Emp_no] AS [Emp_no], 
-    [Eval].[Reg_No] AS [Reg_No], 
-    [Eval].[Course_no] AS [Course_no], 
-    [Eval].[Discipline] AS [Discipline], 
-    [Eval].[Semester_no] AS [Semester_no], 
-    [Eval].[Question_Desc] AS [Question_Desc], 
-    [Eval].[Answer_Desc] AS [Answer_Desc], 
-    [Eval].[Answer_Marks] AS [Answer_Marks]
-    FROM [dbo].[Eval] AS [Eval]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="Log_In" EntityType="Self.Log_In" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Log_In].[User_name] AS [User_name], 
-    [Log_In].[User_id] AS [User_id], 
-    [Log_In].[User_type] AS [User_type], 
-    [Log_In].[User_password] AS [User_password], 
-    [Log_In].[MAC] AS [MAC], 
-    [Log_In].[VID] AS [VID], 
-    [Log_In].[att] AS [att]
-    FROM [dbo].[Log_In] AS [Log_In]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="meritTemp" EntityType="Self.meritTemp" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [meritTemp].[App_no] AS [App_no], 
-    [meritTemp].[St_firstname] AS [St_firstname], 
-    [meritTemp].[St_lastname] AS [St_lastname], 
-    [meritTemp].[St_middlename] AS [St_middlename], 
-    [meritTemp].[Father_name] AS [Father_name], 
-    [meritTemp].[Semester_no] AS [Semester_no], 
-    [meritTemp].[Final_course] AS [Final_course], 
-    [meritTemp].[Discipline] AS [Discipline], 
-    [meritTemp].[Obj_score] AS [Obj_score], 
-    [meritTemp].[Total_score] AS [Total_score], 
-    [meritTemp].[Percentage] AS [Percentage]
-    FROM [dbo].[meritTemp] AS [meritTemp]</DefiningQuery>
-          </EntitySet>
           <EntitySet Name="semReg" EntityType="Self.semReg" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [semReg].[regenrl] AS [regenrl], 
     [semReg].[discipline] AS [discipline], 
     [semReg].[reaccgpa] AS [reaccgpa]
     FROM [dbo].[semReg] AS [semReg]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="sReg" EntityType="Self.sReg" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [sReg].[regenrl] AS [regenrl], 
-    [sReg].[discipline] AS [discipline], 
-    [sReg].[semester_no] AS [semester_no], 
-    [sReg].[reaccgpa] AS [reaccgpa]
-    FROM [dbo].[sReg] AS [sReg]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="STMTR" EntityType="Self.STMTR" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -1214,113 +550,9 @@ warning 6002: The table/view 'survey monkey database.dbo.tempFEE' does not have 
     [STMTR].[Discipline] AS [Discipline]
     FROM [dbo].[STMTR] AS [STMTR]</DefiningQuery>
           </EntitySet>
-          <EntitySet Name="STMTRtemp" EntityType="Self.STMTRtemp" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [STMTRtemp].[Reg_No] AS [Reg_No], 
-    [STMTRtemp].[App_no] AS [App_no], 
-    [STMTRtemp].[St_firstname] AS [St_firstname], 
-    [STMTRtemp].[St_lastname] AS [St_lastname], 
-    [STMTRtemp].[St_middlename] AS [St_middlename], 
-    [STMTRtemp].[Father_name] AS [Father_name], 
-    [STMTRtemp].[St_email] AS [St_email], 
-    [STMTRtemp].[Sex] AS [Sex], 
-    [STMTRtemp].[Uaar_reg_no] AS [Uaar_reg_no], 
-    [STMTRtemp].[Marital_status] AS [Marital_status], 
-    [STMTRtemp].[Birth_date] AS [Birth_date], 
-    [STMTRtemp].[Nic_no] AS [Nic_no], 
-    [STMTRtemp].[Pr_address] AS [Pr_address], 
-    [STMTRtemp].[Pr_city] AS [Pr_city], 
-    [STMTRtemp].[Per_address] AS [Per_address], 
-    [STMTRtemp].[Per_city] AS [Per_city], 
-    [STMTRtemp].[Em_telno] AS [Em_telno], 
-    [STMTRtemp].[Per_telno] AS [Per_telno], 
-    [STMTRtemp].[Ad_status] AS [Ad_status], 
-    [STMTRtemp].[Sess] AS [Sess], 
-    [STMTRtemp].[Pref_1] AS [Pref_1], 
-    [STMTRtemp].[Pref_2] AS [Pref_2], 
-    [STMTRtemp].[Adm_date] AS [Adm_date], 
-    [STMTRtemp].[Semester_no] AS [Semester_no], 
-    [STMTRtemp].[Remarks] AS [Remarks], 
-    [STMTRtemp].[St_status] AS [St_status], 
-    [STMTRtemp].[USER_ID] AS [USER_ID], 
-    [STMTRtemp].[Acc_status] AS [Acc_status], 
-    [STMTRtemp].[St_assets] AS [St_assets], 
-    [STMTRtemp].[Whom_STATUS] AS [Whom_STATUS], 
-    [STMTRtemp].[Fin_status] AS [Fin_status], 
-    [STMTRtemp].[Final_course] AS [Final_course], 
-    [STMTRtemp].[Enrl_status] AS [Enrl_status], 
-    [STMTRtemp].[DOMICILE] AS [DOMICILE], 
-    [STMTRtemp].[Degree_Received] AS [Degree_Received], 
-    [STMTRtemp].[Deg_No] AS [Deg_No], 
-    [STMTRtemp].[Year] AS [Year], 
-    [STMTRtemp].[SOS] AS [SOS], 
-    [STMTRtemp].[Section] AS [Section]
-    FROM [dbo].[STMTRtemp] AS [STMTRtemp]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="temp" EntityType="Self.temp" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [temp].[name] AS [name], 
-    [temp].[reg_no] AS [reg_no], 
-    [temp].[course_no] AS [course_no], 
-    [temp].[section] AS [section], 
-    [temp].[discipline] AS [discipline], 
-    [temp].[emp_name] AS [emp_name], 
-    [temp].[section_no] AS [section_no]
-    FROM [dbo].[temp] AS [temp]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="TempCrs" EntityType="Self.TempCrs" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [TempCrs].[Course_no] AS [Course_no], 
-    [TempCrs].[reg_no] AS [reg_no], 
-    [TempCrs].[Credit_hrs] AS [Credit_hrs], 
-    [TempCrs].[Q_points] AS [Q_points], 
-    [TempCrs].[Discipline] AS [Discipline], 
-    [TempCrs].[Section] AS [Section]
-    FROM [dbo].[TempCrs] AS [TempCrs]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="TempCrs2" EntityType="Self.TempCrs2" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [TempCrs2].[Course_no] AS [Course_no], 
-    [TempCrs2].[reg_no] AS [reg_no], 
-    [TempCrs2].[Credit_hrs] AS [Credit_hrs], 
-    [TempCrs2].[Q_points] AS [Q_points], 
-    [TempCrs2].[Discipline] AS [Discipline], 
-    [TempCrs2].[Section] AS [Section]
-    FROM [dbo].[TempCrs2] AS [TempCrs2]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="TEMPCrsdtl" EntityType="Self.TEMPCrsdtl" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [TEMPCrsdtl].[Course_no] AS [Course_no], 
-    [TEMPCrsdtl].[ATTEMPT_NO] AS [ATTEMPT_NO], 
-    [TEMPCrsdtl].[REG_NO] AS [REG_NO], 
-    [TEMPCrsdtl].[Emp_no] AS [Emp_no], 
-    [TEMPCrsdtl].[SEMESTER_NO] AS [SEMESTER_NO], 
-    [TEMPCrsdtl].[SECTION] AS [SECTION], 
-    [TEMPCrsdtl].[Final_score] AS [Final_score], 
-    [TEMPCrsdtl].[Midterm_score] AS [Midterm_score], 
-    [TEMPCrsdtl].[Assi_score] AS [Assi_score], 
-    [TEMPCrsdtl].[Prac_score] AS [Prac_score], 
-    [TEMPCrsdtl].[Grade] AS [Grade], 
-    [TEMPCrsdtl].[Q_points] AS [Q_points], 
-    [TEMPCrsdtl].[DISCIPLINE] AS [DISCIPLINE], 
-    [TEMPCrsdtl].[SOS] AS [SOS], 
-    [TEMPCrsdtl].[pGrade] AS [pGrade], 
-    [TEMPCrsdtl].[Mid_att] AS [Mid_att], 
-    [TEMPCrsdtl].[Fin_att] AS [Fin_att], 
-    [TEMPCrsdtl].[CrsSemNo] AS [CrsSemNo], 
-    [TEMPCrsdtl].[DT] AS [DT]
-    FROM [dbo].[TEMPCrsdtl] AS [TEMPCrsdtl]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="tempFEE" EntityType="Self.tempFEE" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [tempFEE].[Reg_no] AS [Reg_no], 
-    [tempFEE].[Semester_no] AS [Semester_no], 
-    [tempFEE].[Receipt_no] AS [Receipt_no], 
-    [tempFEE].[Paid_date] AS [Paid_date]
-    FROM [dbo].[tempFEE] AS [tempFEE]</DefiningQuery>
-          </EntitySet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1377,82 +609,6 @@ warning 6002: The table/view 'survey monkey database.dbo.tempFEE' does not have 
           <Property Name="AGG_PRACE" Type="Decimal" Precision="5" Scale="2" />
           <Property Name="SOS" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
         </EntityType>
-        <EntityType Name="Alert">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Txt" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="Date" Type="DateTime" Precision="3" />
-        </EntityType>
-        <EntityType Name="AlertUser">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="Type" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="Seen" Type="Boolean" />
-          <Property Name="AlertId" Type="Int32" />
-          <Property Name="Date" Type="DateTime" Precision="0" />
-        </EntityType>
-        <EntityType Name="Attendance">
-          <Key>
-            <PropertyRef Name="Semester_no" />
-            <PropertyRef Name="Reg_No" />
-            <PropertyRef Name="course_no" />
-            <PropertyRef Name="ADate" />
-          </Key>
-          <Property Name="Semester_no" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Reg_No" Type="String" MaxLength="14" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="course_no" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Section" Type="String" MaxLength="7" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="ADate" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Att" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="Teacher" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
-        </EntityType>
-        <EntityType Name="CHALLAN">
-          <Key>
-            <PropertyRef Name="Reciept_no" />
-          </Key>
-          <Property Name="Reg_no" Type="String" MaxLength="14" FixedLength="false" Unicode="false" />
-          <Property Name="Final_Course" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Semester_no" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Sem_Fee" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="Reg_Fee" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="Adm_Fee" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="Total" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="Inst_No" Type="Int32" />
-          <Property Name="Disc_Amt" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="Net_amt" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="Installments" Type="String" MaxLength="1" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="Inst_amt" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="Reciept_no" Type="String" MaxLength="9" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="Fine" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="SOS" Type="String" MaxLength="15" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="ddate" Type="DateTime" Precision="3" />
-          <Property Name="ExtraCourse_Fee" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="Other_Fee" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="SemC" Type="Int32" />
-          <Property Name="Issue_time" Type="Int32" />
-          <Property Name="Fee_type" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
-          <Property Name="issue_fine" Type="Int32" />
-          <Property Name="Paid_" Type="Boolean" />
-          <Property Name="Sch_amt" Type="Int32" />
-          <Property Name="Total_Payable" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="App_no" Type="String" MaxLength="12" FixedLength="true" Unicode="false" />
-          <Property Name="Comments" Type="String" MaxLength="40" FixedLength="true" Unicode="false" />
-          <Property Name="ReIssue" Type="Boolean" />
-        </EntityType>
-        <EntityType Name="clash">
-          <Key>
-            <PropertyRef Name="reg_no" />
-            <PropertyRef Name="course_no" />
-          </Key>
-          <Property Name="reg_no" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="course_no" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-        </EntityType>
         <EntityType Name="conductsurvey">
           <Key>
             <PropertyRef Name="id" />
@@ -1461,13 +617,6 @@ warning 6002: The table/view 'survey monkey database.dbo.tempFEE' does not have 
           <Property Name="fromdate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="todate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="surveyid" Type="Int32" />
-        </EntityType>
-        <EntityType Name="confirmVenue">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
-          <Property Name="name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="course">
           <Key>
@@ -1534,75 +683,6 @@ warning 6002: The table/view 'survey monkey database.dbo.tempFEE' does not have 
           <Property Name="Course_Desc" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
           <Property Name="Title" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="duty">
-          <Key>
-            <PropertyRef Name="emp_no" />
-            <PropertyRef Name="date" />
-            <PropertyRef Name="time" />
-          </Key>
-          <Property Name="emp_no" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="emp_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="room" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="date" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="time" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Group">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Owner_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="IsPublic" Type="Int32" />
-        </EntityType>
-        <EntityType Name="GroupMember">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="RegNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="GroupId" Type="Int32" />
-        </EntityType>
-        <EntityType Name="InstDate">
-          <Key>
-            <PropertyRef Name="inst_no" />
-          </Key>
-          <Property Name="inst_no" Type="Int32" Nullable="false" />
-          <Property Name="duedate" Type="DateTime" Precision="3" />
-          <Property Name="duedate1" Type="DateTime" Precision="3" />
-          <Property Name="duedate2" Type="DateTime" Precision="3" />
-          <Property Name="duedate3" Type="DateTime" Precision="3" />
-        </EntityType>
-        <EntityType Name="InstDate2">
-          <Key>
-            <PropertyRef Name="inst_no" />
-          </Key>
-          <Property Name="inst_no" Type="Int32" Nullable="false" />
-          <Property Name="duedate" Type="DateTime" Precision="3" />
-          <Property Name="duedate1" Type="DateTime" Precision="3" />
-          <Property Name="duedate2" Type="DateTime" Precision="3" />
-          <Property Name="duedate3" Type="DateTime" Precision="3" />
-        </EntityType>
-        <EntityType Name="Population">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="section" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="semester" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="discipline" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="gender" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="survey_id" Type="Int32" />
-        </EntityType>
-        <EntityType Name="Project">
-          <Key>
-            <PropertyRef Name="pid" />
-          </Key>
-          <Property Name="pid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="project1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="objectives" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Semester_no" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
-        </EntityType>
         <EntityType Name="Question_Answer">
           <Key>
             <PropertyRef Name="Question_ID" />
@@ -1612,38 +692,6 @@ warning 6002: The table/view 'survey monkey database.dbo.tempFEE' does not have 
           <Property Name="Description" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="sid" Type="Int32" />
         </EntityType>
-        <EntityType Name="seat">
-          <Key>
-            <PropertyRef Name="reg_no" />
-            <PropertyRef Name="date" />
-            <PropertyRef Name="time" />
-          </Key>
-          <Property Name="reg_no" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="date" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="time" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="room" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="row" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
-          <Property Name="seat1" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
-          <Property Name="images" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
-          <Property Name="section_no" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="course_no" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="sectiontbl">
-          <Key>
-            <PropertyRef Name="emp_no" />
-            <PropertyRef Name="reg_no" />
-            <PropertyRef Name="course_no" />
-            <PropertyRef Name="discipline" />
-          </Key>
-          <Property Name="emp_no" Type="String" MaxLength="54" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="reg_no" Type="String" MaxLength="54" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="course_no" Type="String" MaxLength="54" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="section" Type="String" MaxLength="54" FixedLength="false" Unicode="false" />
-          <Property Name="discipline" Type="String" MaxLength="54" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="semC" Type="String" MaxLength="54" FixedLength="false" Unicode="false" />
-          <Property Name="semester_no" Type="String" MaxLength="54" FixedLength="false" Unicode="false" />
-          <Property Name="deleted" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
-        </EntityType>
         <EntityType Name="SEMMTR">
           <Key>
             <PropertyRef Name="Semester_no" />
@@ -1652,86 +700,6 @@ warning 6002: The table/view 'survey monkey database.dbo.tempFEE' does not have 
           <Property Name="Semester_desc" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Start_date" Type="DateTime" Precision="3" />
           <Property Name="End_date" Type="DateTime" Precision="3" />
-        </EntityType>
-        <EntityType Name="short_attendance">
-          <Key>
-            <PropertyRef Name="course_no" />
-            <PropertyRef Name="reg_no" />
-          </Key>
-          <Property Name="course_no" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="reg_no" Type="String" MaxLength="14" FixedLength="false" Unicode="false" Nullable="false" />
-        </EntityType>
-        <EntityType Name="ST_REMARKS">
-          <Key>
-            <PropertyRef Name="REG_NO" />
-            <PropertyRef Name="SEMESTER_NO" />
-          </Key>
-          <Property Name="REG_NO" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="SEMESTER_NO" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="REMARKS" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
-          <Property Name="EMP_NO" Type="String" MaxLength="17" FixedLength="true" Unicode="false" />
-        </EntityType>
-        <EntityType Name="STMTRold">
-          <Key>
-            <PropertyRef Name="Reg_No" />
-          </Key>
-          <Property Name="Reg_No" Type="String" MaxLength="14" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="App_no" Type="String" MaxLength="12" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="St_firstname" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="St_lastname" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="St_middlename" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="Father_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="St_email" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="Sex" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="Uaar_reg_no" Type="String" MaxLength="12" FixedLength="true" Unicode="false" />
-          <Property Name="Marital_status" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="Birth_date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Nic_no" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
-          <Property Name="Pr_city" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Per_city" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Ad_status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Sess" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="Pref_1" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
-          <Property Name="Pref_2" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
-          <Property Name="Adm_date" Type="DateTime" Precision="3" />
-          <Property Name="Semester_no" Type="String" MaxLength="6" FixedLength="true" Unicode="false" />
-          <Property Name="Remarks" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
-          <Property Name="St_status" Type="String" MaxLength="9" FixedLength="true" Unicode="false" />
-          <Property Name="USER_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Acc_status" Type="String" MaxLength="9" FixedLength="true" Unicode="false" />
-          <Property Name="St_assets" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="Whom_STATUS" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Fin_status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Final_course" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
-          <Property Name="Enrl_status" Type="String" MaxLength="12" FixedLength="true" Unicode="false" />
-          <Property Name="DOMICILE" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="Degree_Received" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
-          <Property Name="Deg_No" Type="String" MaxLength="7" FixedLength="true" Unicode="false" />
-          <Property Name="Year" Type="String" MaxLength="4" FixedLength="true" Unicode="false" />
-          <Property Name="SOS" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
-          <Property Name="Section" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-        </EntityType>
-        <EntityType Name="stuapp">
-          <Key>
-            <PropertyRef Name="app_no" />
-          </Key>
-          <Property Name="app_no" Type="String" MaxLength="12" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="section" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="semc" Type="Int32" />
-        </EntityType>
-        <EntityType Name="Student_Relationship">
-          <Key>
-            <PropertyRef Name="St_reg_no1" />
-            <PropertyRef Name="St_reg_no2" />
-          </Key>
-          <Property Name="St_reg_no1" Type="String" MaxLength="14" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="St_reg_no2" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Relationship" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="Discount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="St_first_name" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="St_last_name" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="Discipline" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
-          <Property Name="Disc_allow" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
         </EntityType>
         <EntityType Name="survey">
           <Key>
@@ -1776,13 +744,6 @@ warning 6002: The table/view 'survey monkey database.dbo.tempFEE' does not have 
           <Property Name="userid" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="date" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="tbl_User_Roles">
-          <Key>
-            <PropertyRef Name="role_id" />
-          </Key>
-          <Property Name="role_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="role_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="teacher">
           <Key>
             <PropertyRef Name="emp_no" />
@@ -1795,86 +756,6 @@ warning 6002: The table/view 'survey monkey database.dbo.tempFEE' does not have 
           <Property Name="status" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="phone_no" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="order" Type="Int32" />
-        </EntityType>
-        <EntityType Name="temp_venue">
-          <Key>
-            <PropertyRef Name="room" />
-          </Key>
-          <Property Name="room" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="total_seat" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="no_of_rows" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="row1" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="row2" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="row3" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="row4" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="row5" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="row6" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="row7" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="id" Type="Int32" />
-        </EntityType>
-        <EntityType Name="Temp1">
-          <Key>
-            <PropertyRef Name="Id" />
-            <PropertyRef Name="Course_no" />
-            <PropertyRef Name="Attempt_no" />
-            <PropertyRef Name="Reg_no" />
-            <PropertyRef Name="Emp_no" />
-            <PropertyRef Name="Semester_no" />
-            <PropertyRef Name="Section" />
-            <PropertyRef Name="Discipline" />
-          </Key>
-          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Course_no" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Attempt_no" Type="String" MaxLength="1" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Reg_no" Type="String" MaxLength="14" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Emp_no" Type="String" MaxLength="7" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="Semester_no" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Section" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="Discipline" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Semester" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Template">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="Course_no" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="USER_ID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="DISCIPLINE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="SOS" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="SEMNO" Type="Int32" Nullable="false" />
-          <Property Name="TNAME" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-        </EntityType>
-        <EntityType Name="THESIS_ENTRY">
-          <Key>
-            <PropertyRef Name="REG_NO" />
-            <PropertyRef Name="COURSE_NO" />
-            <PropertyRef Name="DISCIPLINE" />
-            <PropertyRef Name="EMP_NO" />
-            <PropertyRef Name="SEMESTER_NO" />
-          </Key>
-          <Property Name="REG_NO" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="COURSE_NO" Type="String" MaxLength="9" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="DISCIPLINE" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="EMP_NO" Type="String" MaxLength="7" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="SEMESTER_NO" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="STATUS" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-        </EntityType>
-        <EntityType Name="venue">
-          <Key>
-            <PropertyRef Name="room" />
-          </Key>
-          <Property Name="room" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="total_seat" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="no_of_rows" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="row1" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="row2" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="row3" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="row4" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="row5" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="row6" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="row7" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="id" Type="Int32" />
         </EntityType>
         <EntityType Name="ALLOCATE">
           <Key>
@@ -1981,22 +862,6 @@ warning 6002: The table/view 'survey monkey database.dbo.tempFEE' does not have 
           <Property Name="SOS" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="PreCOURSE_NO" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="DscplnEntry">
-          <Key>
-            <PropertyRef Name="Final_Course" />
-            <PropertyRef Name="SemC" />
-          </Key>
-          <Property Name="Final_Course" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Fee" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="regFee" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="admFee" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="Desc" Type="String" MaxLength="50" FixedLength="true" Unicode="false" />
-          <Property Name="SemC" Type="Int32" Nullable="false" />
-          <Property Name="DefDueDate" Type="DateTime" Precision="3" />
-          <Property Name="fine1" Type="Int32" />
-          <Property Name="fine2" Type="Int32" />
-          <Property Name="fine3" Type="Int32" />
-        </EntityType>
         <EntityType Name="EMPMTR">
           <Key>
             <PropertyRef Name="Emp_no" />
@@ -2014,63 +879,6 @@ warning 6002: The table/view 'survey monkey database.dbo.tempFEE' does not have 
           <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Roles" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="EMPMTR_E">
-          <Key>
-            <PropertyRef Name="Emp_no" />
-          </Key>
-          <Property Name="Emp_no" Type="String" MaxLength="7" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="Emp_email" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="USERID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="Eval">
-          <Key>
-            <PropertyRef Name="Emp_no" />
-            <PropertyRef Name="Reg_No" />
-            <PropertyRef Name="Course_no" />
-            <PropertyRef Name="Discipline" />
-            <PropertyRef Name="Semester_no" />
-            <PropertyRef Name="Question_Desc" />
-          </Key>
-          <Property Name="Emp_no" Type="String" MaxLength="7" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="Reg_No" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Course_no" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Discipline" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Semester_no" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Question_Desc" Type="Int32" Nullable="false" />
-          <Property Name="Answer_Desc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Answer_Marks" Type="Int32" />
-        </EntityType>
-        <EntityType Name="Log_In">
-          <Key>
-            <PropertyRef Name="User_name" />
-            <PropertyRef Name="User_id" />
-            <PropertyRef Name="User_type" />
-            <PropertyRef Name="User_password" />
-          </Key>
-          <Property Name="User_name" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="User_id" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="User_type" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="User_password" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="MAC" Type="String" MaxLength="17" FixedLength="true" Unicode="true" />
-          <Property Name="VID" Type="String" MaxLength="200" FixedLength="true" Unicode="true" />
-          <Property Name="att" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-        </EntityType>
-        <EntityType Name="meritTemp">
-          <Key>
-            <PropertyRef Name="App_no" />
-          </Key>
-          <Property Name="App_no" Type="String" MaxLength="12" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="St_firstname" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
-          <Property Name="St_lastname" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="St_middlename" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
-          <Property Name="Father_name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="Semester_no" Type="String" MaxLength="6" FixedLength="true" Unicode="false" />
-          <Property Name="Final_course" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
-          <Property Name="Discipline" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
-          <Property Name="Obj_score" Type="Double" />
-          <Property Name="Total_score" Type="Double" />
-          <Property Name="Percentage" Type="Double" />
-        </EntityType>
         <EntityType Name="semReg">
           <Key>
             <PropertyRef Name="regenrl" />
@@ -2078,17 +886,6 @@ warning 6002: The table/view 'survey monkey database.dbo.tempFEE' does not have 
           </Key>
           <Property Name="regenrl" Type="String" MaxLength="14" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="discipline" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="reaccgpa" Type="String" MaxLength="14" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="sReg">
-          <Key>
-            <PropertyRef Name="regenrl" />
-            <PropertyRef Name="discipline" />
-            <PropertyRef Name="semester_no" />
-          </Key>
-          <Property Name="regenrl" Type="String" MaxLength="14" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="discipline" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="semester_no" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="reaccgpa" Type="String" MaxLength="14" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="STMTR">
@@ -2124,203 +921,39 @@ warning 6002: The table/view 'survey monkey database.dbo.tempFEE' does not have 
           <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Discipline" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="STMTRtemp">
-          <Key>
-            <PropertyRef Name="Reg_No" />
-            <PropertyRef Name="App_no" />
-            <PropertyRef Name="Birth_date" />
-          </Key>
-          <Property Name="Reg_No" Type="String" MaxLength="14" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="App_no" Type="String" MaxLength="12" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="St_firstname" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="St_lastname" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="St_middlename" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="Father_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="St_email" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="Sex" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="Uaar_reg_no" Type="String" MaxLength="12" FixedLength="true" Unicode="false" />
-          <Property Name="Marital_status" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="Birth_date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Nic_no" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
-          <Property Name="Pr_address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Pr_city" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Per_address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Per_city" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Em_telno" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Per_telno" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Ad_status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Sess" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="Pref_1" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
-          <Property Name="Pref_2" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
-          <Property Name="Adm_date" Type="DateTime" Precision="3" />
-          <Property Name="Semester_no" Type="String" MaxLength="6" FixedLength="true" Unicode="false" />
-          <Property Name="Remarks" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
-          <Property Name="St_status" Type="String" MaxLength="9" FixedLength="true" Unicode="false" />
-          <Property Name="USER_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Acc_status" Type="String" MaxLength="9" FixedLength="true" Unicode="false" />
-          <Property Name="St_assets" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="Whom_STATUS" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Fin_status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Final_course" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
-          <Property Name="Enrl_status" Type="String" MaxLength="12" FixedLength="true" Unicode="false" />
-          <Property Name="DOMICILE" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="Degree_Received" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
-          <Property Name="Deg_No" Type="String" MaxLength="7" FixedLength="true" Unicode="false" />
-          <Property Name="Year" Type="String" MaxLength="4" FixedLength="true" Unicode="false" />
-          <Property Name="SOS" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
-          <Property Name="Section" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-        </EntityType>
-        <EntityType Name="temp">
-          <Key>
-            <PropertyRef Name="reg_no" />
-            <PropertyRef Name="course_no" />
-          </Key>
-          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="reg_no" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="course_no" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="section" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
-          <Property Name="discipline" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="emp_name" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
-          <Property Name="section_no" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="TempCr">
-          <Key>
-            <PropertyRef Name="Course_no" />
-            <PropertyRef Name="reg_no" />
-          </Key>
-          <Property Name="Course_no" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="reg_no" Type="String" MaxLength="14" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Credit_hrs" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
-          <Property Name="Q_points" Type="Decimal" Precision="5" Scale="2" />
-          <Property Name="Discipline" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Section" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-        </EntityType>
-        <EntityType Name="TempCrs2">
-          <Key>
-            <PropertyRef Name="Course_no" />
-            <PropertyRef Name="reg_no" />
-          </Key>
-          <Property Name="Course_no" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="reg_no" Type="String" MaxLength="14" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Credit_hrs" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
-          <Property Name="Q_points" Type="Decimal" Precision="5" Scale="2" />
-          <Property Name="Discipline" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Section" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-        </EntityType>
-        <EntityType Name="TEMPCrsdtl">
-          <Key>
-            <PropertyRef Name="Course_no" />
-            <PropertyRef Name="ATTEMPT_NO" />
-            <PropertyRef Name="REG_NO" />
-            <PropertyRef Name="Emp_no" />
-            <PropertyRef Name="SEMESTER_NO" />
-            <PropertyRef Name="SECTION" />
-            <PropertyRef Name="DISCIPLINE" />
-            <PropertyRef Name="SOS" />
-          </Key>
-          <Property Name="Course_no" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="ATTEMPT_NO" Type="String" MaxLength="1" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="REG_NO" Type="String" MaxLength="14" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Emp_no" Type="String" MaxLength="7" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="SEMESTER_NO" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="SECTION" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="Final_score" Type="Decimal" Precision="5" Scale="2" />
-          <Property Name="Midterm_score" Type="Decimal" Precision="5" Scale="2" />
-          <Property Name="Assi_score" Type="Decimal" Precision="5" Scale="2" />
-          <Property Name="Prac_score" Type="Decimal" Precision="5" Scale="2" />
-          <Property Name="Grade" Type="String" MaxLength="12" FixedLength="true" Unicode="false" />
-          <Property Name="Q_points" Type="Decimal" Precision="5" Scale="2" />
-          <Property Name="DISCIPLINE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="SOS" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="pGrade" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="Mid_att" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="Fin_att" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="CrsSemNo" Type="Int32" />
-          <Property Name="DT" Type="DateTime" Precision="3" />
-        </EntityType>
-        <EntityType Name="tempFEE">
-          <Key>
-            <PropertyRef Name="Reg_no" />
-            <PropertyRef Name="Semester_no" />
-            <PropertyRef Name="Receipt_no" />
-            <PropertyRef Name="Paid_date" />
-          </Key>
-          <Property Name="Reg_no" Type="String" MaxLength="14" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Semester_no" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Receipt_no" Type="String" MaxLength="15" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="Paid_date" Type="DateTime" Nullable="false" Precision="3" />
-        </EntityType>
-        <EntityContainer Name="survey_monkey_databaseEntities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="survey_monkey_databaseEntities2" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Accgpas" EntityType="Self.Accgpa" />
           <EntitySet Name="ActiveSurveys" EntityType="Self.ActiveSurvey" />
           <EntitySet Name="AggScores" EntityType="Self.AggScore" />
-          <EntitySet Name="Alerts" EntityType="Self.Alert" />
-          <EntitySet Name="AlertUsers" EntityType="Self.AlertUser" />
-          <EntitySet Name="Attendances" EntityType="Self.Attendance" />
-          <EntitySet Name="CHALLANs" EntityType="Self.CHALLAN" />
-          <EntitySet Name="clashes" EntityType="Self.clash" />
           <EntitySet Name="conductsurveys" EntityType="Self.conductsurvey" />
-          <EntitySet Name="confirmVenues" EntityType="Self.confirmVenue" />
           <EntitySet Name="courses" EntityType="Self.course" />
           <EntitySet Name="Crsdtls" EntityType="Self.Crsdtl" />
           <EntitySet Name="crsdtl_enrl" EntityType="Self.crsdtl_enrl" />
           <EntitySet Name="CRSMTRs" EntityType="Self.CRSMTR" />
           <EntitySet Name="CrsmtrShorts" EntityType="Self.CrsmtrShort" />
-          <EntitySet Name="duties" EntityType="Self.duty" />
-          <EntitySet Name="Groups" EntityType="Self.Group" />
-          <EntitySet Name="GroupMembers" EntityType="Self.GroupMember" />
-          <EntitySet Name="InstDates" EntityType="Self.InstDate" />
-          <EntitySet Name="InstDate2" EntityType="Self.InstDate2" />
-          <EntitySet Name="Populations" EntityType="Self.Population" />
-          <EntitySet Name="Projects" EntityType="Self.Project" />
           <EntitySet Name="Question_Answer" EntityType="Self.Question_Answer" />
-          <EntitySet Name="seats" EntityType="Self.seat" />
-          <EntitySet Name="sectiontbls" EntityType="Self.sectiontbl" />
           <EntitySet Name="SEMMTRs" EntityType="Self.SEMMTR" />
-          <EntitySet Name="short_attendance" EntityType="Self.short_attendance" />
-          <EntitySet Name="ST_REMARKS" EntityType="Self.ST_REMARKS" />
-          <EntitySet Name="STMTRolds" EntityType="Self.STMTRold" />
-          <EntitySet Name="stuapps" EntityType="Self.stuapp" />
-          <EntitySet Name="Student_Relationship" EntityType="Self.Student_Relationship" />
           <EntitySet Name="surveys" EntityType="Self.survey" />
           <EntitySet Name="surveyaudiences" EntityType="Self.surveyaudience" />
           <EntitySet Name="surveyquestions" EntityType="Self.surveyquestion" />
           <EntitySet Name="surveyresponses" EntityType="Self.surveyresponse" />
-          <EntitySet Name="tbl_User_Roles" EntityType="Self.tbl_User_Roles" />
           <EntitySet Name="teachers" EntityType="Self.teacher" />
-          <EntitySet Name="temp_venue" EntityType="Self.temp_venue" />
-          <EntitySet Name="Temp1" EntityType="Self.Temp1" />
-          <EntitySet Name="Templates" EntityType="Self.Template" />
-          <EntitySet Name="THESIS_ENTRY" EntityType="Self.THESIS_ENTRY" />
-          <EntitySet Name="venues" EntityType="Self.venue" />
           <EntitySet Name="ALLOCATEs" EntityType="Self.ALLOCATE" />
           <EntitySet Name="CrsdtlTemps" EntityType="Self.CrsdtlTemp" />
           <EntitySet Name="CrsEnrFs" EntityType="Self.CrsEnrF" />
           <EntitySet Name="CrsEnrps" EntityType="Self.CrsEnrp" />
           <EntitySet Name="CrsFails" EntityType="Self.CrsFail" />
           <EntitySet Name="CRSPREs" EntityType="Self.CRSPRE" />
-          <EntitySet Name="DscplnEntries" EntityType="Self.DscplnEntry" />
           <EntitySet Name="EMPMTRs" EntityType="Self.EMPMTR" />
-          <EntitySet Name="EMPMTR_E" EntityType="Self.EMPMTR_E" />
-          <EntitySet Name="Evals" EntityType="Self.Eval" />
-          <EntitySet Name="Log_In" EntityType="Self.Log_In" />
-          <EntitySet Name="meritTemps" EntityType="Self.meritTemp" />
           <EntitySet Name="semRegs" EntityType="Self.semReg" />
-          <EntitySet Name="sRegs" EntityType="Self.sReg" />
           <EntitySet Name="STMTRs" EntityType="Self.STMTR" />
-          <EntitySet Name="STMTRtemps" EntityType="Self.STMTRtemp" />
-          <EntitySet Name="temps" EntityType="Self.temp" />
-          <EntitySet Name="TempCrs" EntityType="Self.TempCr" />
-          <EntitySet Name="TempCrs2" EntityType="Self.TempCrs2" />
-          <EntitySet Name="TEMPCrsdtls" EntityType="Self.TEMPCrsdtl" />
-          <EntitySet Name="tempFEEs" EntityType="Self.tempFEE" />
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="survey_monkey_databaseEntities1">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="survey_monkey_databaseEntities2">
           <EntitySetMapping Name="Accgpas">
             <EntityTypeMapping TypeName="Model.Accgpa">
               <MappingFragment StoreEntitySet="Accgpa">
@@ -2373,83 +1006,6 @@ warning 6002: The table/view 'survey monkey database.dbo.tempFEE' does not have 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Alerts">
-            <EntityTypeMapping TypeName="Model.Alert">
-              <MappingFragment StoreEntitySet="Alert">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Txt" ColumnName="Txt" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="AlertUsers">
-            <EntityTypeMapping TypeName="Model.AlertUser">
-              <MappingFragment StoreEntitySet="AlertUser">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-                <ScalarProperty Name="Type" ColumnName="Type" />
-                <ScalarProperty Name="Seen" ColumnName="Seen" />
-                <ScalarProperty Name="AlertId" ColumnName="AlertId" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Attendances">
-            <EntityTypeMapping TypeName="Model.Attendance">
-              <MappingFragment StoreEntitySet="Attendance">
-                <ScalarProperty Name="Semester_no" ColumnName="Semester_no" />
-                <ScalarProperty Name="Reg_No" ColumnName="Reg_No" />
-                <ScalarProperty Name="course_no" ColumnName="course_no" />
-                <ScalarProperty Name="Section" ColumnName="Section" />
-                <ScalarProperty Name="ADate" ColumnName="ADate" />
-                <ScalarProperty Name="Att" ColumnName="Att" />
-                <ScalarProperty Name="Teacher" ColumnName="Teacher" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CHALLANs">
-            <EntityTypeMapping TypeName="Model.CHALLAN">
-              <MappingFragment StoreEntitySet="CHALLAN">
-                <ScalarProperty Name="Reg_no" ColumnName="Reg_no" />
-                <ScalarProperty Name="Final_Course" ColumnName="Final_Course" />
-                <ScalarProperty Name="Semester_no" ColumnName="Semester_no" />
-                <ScalarProperty Name="Sem_Fee" ColumnName="Sem_Fee" />
-                <ScalarProperty Name="Reg_Fee" ColumnName="Reg Fee" />
-                <ScalarProperty Name="Adm_Fee" ColumnName="Adm_Fee" />
-                <ScalarProperty Name="Total" ColumnName="Total" />
-                <ScalarProperty Name="Inst_No" ColumnName="Inst_No" />
-                <ScalarProperty Name="Disc_Amt" ColumnName="Disc_Amt" />
-                <ScalarProperty Name="Net_amt" ColumnName="Net_amt" />
-                <ScalarProperty Name="Installments" ColumnName="Installments" />
-                <ScalarProperty Name="Inst_amt" ColumnName="Inst_amt" />
-                <ScalarProperty Name="Reciept_no" ColumnName="Reciept_no" />
-                <ScalarProperty Name="Fine" ColumnName="Fine" />
-                <ScalarProperty Name="SOS" ColumnName="SOS" />
-                <ScalarProperty Name="ddate" ColumnName="ddate" />
-                <ScalarProperty Name="ExtraCourse_Fee" ColumnName="ExtraCourse_Fee" />
-                <ScalarProperty Name="Other_Fee" ColumnName="Other_Fee" />
-                <ScalarProperty Name="SemC" ColumnName="SemC" />
-                <ScalarProperty Name="Issue_time" ColumnName="Issue_time" />
-                <ScalarProperty Name="Fee_type" ColumnName="Fee_type" />
-                <ScalarProperty Name="issue_fine" ColumnName="issue_fine" />
-                <ScalarProperty Name="Paid_" ColumnName="Paid?" />
-                <ScalarProperty Name="Sch_amt" ColumnName="Sch_amt" />
-                <ScalarProperty Name="Total_Payable" ColumnName="Total_Payable" />
-                <ScalarProperty Name="App_no" ColumnName="App_no" />
-                <ScalarProperty Name="Comments" ColumnName="Comments" />
-                <ScalarProperty Name="ReIssue" ColumnName="ReIssue" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="clashes">
-            <EntityTypeMapping TypeName="Model.clash">
-              <MappingFragment StoreEntitySet="clash">
-                <ScalarProperty Name="reg_no" ColumnName="reg_no" />
-                <ScalarProperty Name="course_no" ColumnName="course_no" />
-                <ScalarProperty Name="name" ColumnName="name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="conductsurveys">
             <EntityTypeMapping TypeName="Model.conductsurvey">
               <MappingFragment StoreEntitySet="conductsurvey">
@@ -2457,14 +1013,6 @@ warning 6002: The table/view 'survey monkey database.dbo.tempFEE' does not have 
                 <ScalarProperty Name="fromdate" ColumnName="fromdate" />
                 <ScalarProperty Name="todate" ColumnName="todate" />
                 <ScalarProperty Name="surveyid" ColumnName="surveyid" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="confirmVenues">
-            <EntityTypeMapping TypeName="Model.confirmVenue">
-              <MappingFragment StoreEntitySet="confirmVenue">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2534,80 +1082,6 @@ warning 6002: The table/view 'survey monkey database.dbo.tempFEE' does not have 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="duties">
-            <EntityTypeMapping TypeName="Model.duty">
-              <MappingFragment StoreEntitySet="duty">
-                <ScalarProperty Name="emp_no" ColumnName="emp_no" />
-                <ScalarProperty Name="emp_name" ColumnName="emp_name" />
-                <ScalarProperty Name="room" ColumnName="room" />
-                <ScalarProperty Name="date" ColumnName="date" />
-                <ScalarProperty Name="time" ColumnName="time" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Groups">
-            <EntityTypeMapping TypeName="Model.Group">
-              <MappingFragment StoreEntitySet="Group">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Owner_ID" ColumnName="Owner_ID" />
-                <ScalarProperty Name="IsPublic" ColumnName="IsPublic" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="GroupMembers">
-            <EntityTypeMapping TypeName="Model.GroupMember">
-              <MappingFragment StoreEntitySet="GroupMember">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="RegNo" ColumnName="RegNo" />
-                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="InstDates">
-            <EntityTypeMapping TypeName="Model.InstDate">
-              <MappingFragment StoreEntitySet="InstDate">
-                <ScalarProperty Name="inst_no" ColumnName="inst_no" />
-                <ScalarProperty Name="duedate" ColumnName="duedate" />
-                <ScalarProperty Name="duedate1" ColumnName="duedate1" />
-                <ScalarProperty Name="duedate2" ColumnName="duedate2" />
-                <ScalarProperty Name="duedate3" ColumnName="duedate3" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="InstDate2">
-            <EntityTypeMapping TypeName="Model.InstDate2">
-              <MappingFragment StoreEntitySet="InstDate2">
-                <ScalarProperty Name="inst_no" ColumnName="inst_no" />
-                <ScalarProperty Name="duedate" ColumnName="duedate" />
-                <ScalarProperty Name="duedate1" ColumnName="duedate1" />
-                <ScalarProperty Name="duedate2" ColumnName="duedate2" />
-                <ScalarProperty Name="duedate3" ColumnName="duedate3" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Populations">
-            <EntityTypeMapping TypeName="Model.Population">
-              <MappingFragment StoreEntitySet="Population">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="section" ColumnName="section" />
-                <ScalarProperty Name="semester" ColumnName="semester" />
-                <ScalarProperty Name="discipline" ColumnName="discipline" />
-                <ScalarProperty Name="gender" ColumnName="gender" />
-                <ScalarProperty Name="survey_id" ColumnName="survey_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Projects">
-            <EntityTypeMapping TypeName="Model.Project">
-              <MappingFragment StoreEntitySet="Project">
-                <ScalarProperty Name="pid" ColumnName="pid" />
-                <ScalarProperty Name="project1" ColumnName="project" />
-                <ScalarProperty Name="objectives" ColumnName="objectives" />
-                <ScalarProperty Name="Semester_no" ColumnName="Semester_no" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Question_Answer">
             <EntityTypeMapping TypeName="Model.Question_Answer">
               <MappingFragment StoreEntitySet="Question_Answer">
@@ -2615,35 +1089,6 @@ warning 6002: The table/view 'survey monkey database.dbo.tempFEE' does not have 
                 <ScalarProperty Name="Question" ColumnName="Question" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="sid" ColumnName="sid" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="seats">
-            <EntityTypeMapping TypeName="Model.seat">
-              <MappingFragment StoreEntitySet="seat">
-                <ScalarProperty Name="reg_no" ColumnName="reg_no" />
-                <ScalarProperty Name="date" ColumnName="date" />
-                <ScalarProperty Name="time" ColumnName="time" />
-                <ScalarProperty Name="room" ColumnName="room" />
-                <ScalarProperty Name="row" ColumnName="row" />
-                <ScalarProperty Name="seat1" ColumnName="seat" />
-                <ScalarProperty Name="images" ColumnName="images" />
-                <ScalarProperty Name="section_no" ColumnName="section_no" />
-                <ScalarProperty Name="course_no" ColumnName="course_no" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="sectiontbls">
-            <EntityTypeMapping TypeName="Model.sectiontbl">
-              <MappingFragment StoreEntitySet="sectiontbl">
-                <ScalarProperty Name="emp_no" ColumnName="emp_no" />
-                <ScalarProperty Name="reg_no" ColumnName="reg_no" />
-                <ScalarProperty Name="course_no" ColumnName="course_no" />
-                <ScalarProperty Name="section" ColumnName="section" />
-                <ScalarProperty Name="discipline" ColumnName="discipline" />
-                <ScalarProperty Name="semC" ColumnName="semC" />
-                <ScalarProperty Name="semester_no" ColumnName="semester_no" />
-                <ScalarProperty Name="deleted" ColumnName="deleted" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2657,98 +1102,16 @@ warning 6002: The table/view 'survey monkey database.dbo.tempFEE' does not have 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="short_attendance">
-            <EntityTypeMapping TypeName="Model.short_attendance">
-              <MappingFragment StoreEntitySet="short_attendance">
-                <ScalarProperty Name="course_no" ColumnName="course_no" />
-                <ScalarProperty Name="reg_no" ColumnName="reg_no" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ST_REMARKS">
-            <EntityTypeMapping TypeName="Model.ST_REMARKS">
-              <MappingFragment StoreEntitySet="ST_REMARKS">
-                <ScalarProperty Name="REG_NO" ColumnName="REG_NO" />
-                <ScalarProperty Name="SEMESTER_NO" ColumnName="SEMESTER_NO" />
-                <ScalarProperty Name="REMARKS" ColumnName="REMARKS" />
-                <ScalarProperty Name="EMP_NO" ColumnName="EMP_NO" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="STMTRolds">
-            <EntityTypeMapping TypeName="Model.STMTRold">
-              <MappingFragment StoreEntitySet="STMTRold">
-                <ScalarProperty Name="Reg_No" ColumnName="Reg_No" />
-                <ScalarProperty Name="App_no" ColumnName="App_no" />
-                <ScalarProperty Name="St_firstname" ColumnName="St_firstname" />
-                <ScalarProperty Name="St_lastname" ColumnName="St_lastname" />
-                <ScalarProperty Name="St_middlename" ColumnName="St_middlename" />
-                <ScalarProperty Name="Father_name" ColumnName="Father_name" />
-                <ScalarProperty Name="St_email" ColumnName="St_email" />
-                <ScalarProperty Name="Sex" ColumnName="Sex" />
-                <ScalarProperty Name="Uaar_reg_no" ColumnName="Uaar_reg_no" />
-                <ScalarProperty Name="Marital_status" ColumnName="Marital_status" />
-                <ScalarProperty Name="Birth_date" ColumnName="Birth_date" />
-                <ScalarProperty Name="Nic_no" ColumnName="Nic_no" />
-                <ScalarProperty Name="Pr_city" ColumnName="Pr_city" />
-                <ScalarProperty Name="Per_city" ColumnName="Per_city" />
-                <ScalarProperty Name="Ad_status" ColumnName="Ad_status" />
-                <ScalarProperty Name="Sess" ColumnName="Sess" />
-                <ScalarProperty Name="Pref_1" ColumnName="Pref_1" />
-                <ScalarProperty Name="Pref_2" ColumnName="Pref_2" />
-                <ScalarProperty Name="Adm_date" ColumnName="Adm_date" />
-                <ScalarProperty Name="Semester_no" ColumnName="Semester_no" />
-                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
-                <ScalarProperty Name="St_status" ColumnName="St_status" />
-                <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
-                <ScalarProperty Name="Acc_status" ColumnName="Acc_status" />
-                <ScalarProperty Name="St_assets" ColumnName="St_assets" />
-                <ScalarProperty Name="Whom_STATUS" ColumnName="Whom_STATUS" />
-                <ScalarProperty Name="Fin_status" ColumnName="Fin_status" />
-                <ScalarProperty Name="Final_course" ColumnName="Final_course" />
-                <ScalarProperty Name="Enrl_status" ColumnName="Enrl_status" />
-                <ScalarProperty Name="DOMICILE" ColumnName="DOMICILE" />
-                <ScalarProperty Name="Degree_Received" ColumnName="Degree_Received" />
-                <ScalarProperty Name="Deg_No" ColumnName="Deg_No" />
-                <ScalarProperty Name="Year" ColumnName="Year" />
-                <ScalarProperty Name="SOS" ColumnName="SOS" />
-                <ScalarProperty Name="Section" ColumnName="Section" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="stuapps">
-            <EntityTypeMapping TypeName="Model.stuapp">
-              <MappingFragment StoreEntitySet="stuapp">
-                <ScalarProperty Name="app_no" ColumnName="app_no" />
-                <ScalarProperty Name="section" ColumnName="section" />
-                <ScalarProperty Name="semc" ColumnName="semc" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Student_Relationship">
-            <EntityTypeMapping TypeName="Model.Student_Relationship">
-              <MappingFragment StoreEntitySet="Student_Relationship">
-                <ScalarProperty Name="St_reg_no1" ColumnName="St_reg_no1" />
-                <ScalarProperty Name="St_reg_no2" ColumnName="St_reg_no2" />
-                <ScalarProperty Name="Relationship" ColumnName="Relationship" />
-                <ScalarProperty Name="Discount" ColumnName="Discount" />
-                <ScalarProperty Name="St_first_name" ColumnName="St_first_name" />
-                <ScalarProperty Name="St_last_name" ColumnName="St_last_name" />
-                <ScalarProperty Name="Discipline" ColumnName="Discipline" />
-                <ScalarProperty Name="Disc_allow" ColumnName="Disc_allow" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="surveys">
             <EntityTypeMapping TypeName="Model.survey">
               <MappingFragment StoreEntitySet="survey">
-                <ScalarProperty Name="aid" ColumnName="aid" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="createdby" ColumnName="createdby" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="approved" ColumnName="approved" />
                 <ScalarProperty Name="type" ColumnName="type" />
                 <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="aid" ColumnName="aid" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2786,14 +1149,6 @@ warning 6002: The table/view 'survey monkey database.dbo.tempFEE' does not have 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="tbl_User_Roles">
-            <EntityTypeMapping TypeName="Model.tbl_User_Roles">
-              <MappingFragment StoreEntitySet="tbl_User_Roles">
-                <ScalarProperty Name="role_id" ColumnName="role_id" />
-                <ScalarProperty Name="role_name" ColumnName="role_name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="teachers">
             <EntityTypeMapping TypeName="Model.teacher">
               <MappingFragment StoreEntitySet="teacher">
@@ -2805,80 +1160,6 @@ warning 6002: The table/view 'survey monkey database.dbo.tempFEE' does not have 
                 <ScalarProperty Name="status" ColumnName="status" />
                 <ScalarProperty Name="phone_no" ColumnName="phone_no" />
                 <ScalarProperty Name="order" ColumnName="order" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="temp_venue">
-            <EntityTypeMapping TypeName="Model.temp_venue">
-              <MappingFragment StoreEntitySet="temp_venue">
-                <ScalarProperty Name="room" ColumnName="room" />
-                <ScalarProperty Name="total_seat" ColumnName="total_seat" />
-                <ScalarProperty Name="no_of_rows" ColumnName="no_of_rows" />
-                <ScalarProperty Name="row1" ColumnName="row1" />
-                <ScalarProperty Name="row2" ColumnName="row2" />
-                <ScalarProperty Name="row3" ColumnName="row3" />
-                <ScalarProperty Name="row4" ColumnName="row4" />
-                <ScalarProperty Name="row5" ColumnName="row5" />
-                <ScalarProperty Name="row6" ColumnName="row6" />
-                <ScalarProperty Name="row7" ColumnName="row7" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Temp1">
-            <EntityTypeMapping TypeName="Model.Temp1">
-              <MappingFragment StoreEntitySet="Temp1">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Course_no" ColumnName="Course_no" />
-                <ScalarProperty Name="Attempt_no" ColumnName="Attempt_no" />
-                <ScalarProperty Name="Reg_no" ColumnName="Reg_no" />
-                <ScalarProperty Name="Emp_no" ColumnName="Emp_no" />
-                <ScalarProperty Name="Semester_no" ColumnName="Semester_no" />
-                <ScalarProperty Name="Section" ColumnName="Section" />
-                <ScalarProperty Name="Discipline" ColumnName="Discipline" />
-                <ScalarProperty Name="Semester" ColumnName="Semester" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Templates">
-            <EntityTypeMapping TypeName="Model.Template">
-              <MappingFragment StoreEntitySet="Template">
-                <ScalarProperty Name="Course_no" ColumnName="Course_no" />
-                <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
-                <ScalarProperty Name="DISCIPLINE" ColumnName="DISCIPLINE" />
-                <ScalarProperty Name="SOS" ColumnName="SOS" />
-                <ScalarProperty Name="SEMNO" ColumnName="SEMNO" />
-                <ScalarProperty Name="TNAME" ColumnName="TNAME" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="THESIS_ENTRY">
-            <EntityTypeMapping TypeName="Model.THESIS_ENTRY">
-              <MappingFragment StoreEntitySet="THESIS_ENTRY">
-                <ScalarProperty Name="REG_NO" ColumnName="REG_NO" />
-                <ScalarProperty Name="COURSE_NO" ColumnName="COURSE_NO" />
-                <ScalarProperty Name="DISCIPLINE" ColumnName="DISCIPLINE" />
-                <ScalarProperty Name="EMP_NO" ColumnName="EMP_NO" />
-                <ScalarProperty Name="SEMESTER_NO" ColumnName="SEMESTER_NO" />
-                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="venues">
-            <EntityTypeMapping TypeName="Model.venue">
-              <MappingFragment StoreEntitySet="venue">
-                <ScalarProperty Name="room" ColumnName="room" />
-                <ScalarProperty Name="total_seat" ColumnName="total_seat" />
-                <ScalarProperty Name="no_of_rows" ColumnName="no_of_rows" />
-                <ScalarProperty Name="row1" ColumnName="row1" />
-                <ScalarProperty Name="row2" ColumnName="row2" />
-                <ScalarProperty Name="row3" ColumnName="row3" />
-                <ScalarProperty Name="row4" ColumnName="row4" />
-                <ScalarProperty Name="row5" ColumnName="row5" />
-                <ScalarProperty Name="row6" ColumnName="row6" />
-                <ScalarProperty Name="row7" ColumnName="row7" />
-                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2972,22 +1253,6 @@ warning 6002: The table/view 'survey monkey database.dbo.tempFEE' does not have 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="DscplnEntries">
-            <EntityTypeMapping TypeName="Model.DscplnEntry">
-              <MappingFragment StoreEntitySet="DscplnEntry">
-                <ScalarProperty Name="Final_Course" ColumnName="Final_Course" />
-                <ScalarProperty Name="Fee" ColumnName="Fee" />
-                <ScalarProperty Name="regFee" ColumnName="regFee" />
-                <ScalarProperty Name="admFee" ColumnName="admFee" />
-                <ScalarProperty Name="Desc" ColumnName="Desc" />
-                <ScalarProperty Name="SemC" ColumnName="SemC" />
-                <ScalarProperty Name="DefDueDate" ColumnName="DefDueDate" />
-                <ScalarProperty Name="fine1" ColumnName="fine1" />
-                <ScalarProperty Name="fine2" ColumnName="fine2" />
-                <ScalarProperty Name="fine3" ColumnName="fine3" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="EMPMTRs">
             <EntityTypeMapping TypeName="Model.EMPMTR">
               <MappingFragment StoreEntitySet="EMPMTR">
@@ -3006,74 +1271,11 @@ warning 6002: The table/view 'survey monkey database.dbo.tempFEE' does not have 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="EMPMTR_E">
-            <EntityTypeMapping TypeName="Model.EMPMTR_E">
-              <MappingFragment StoreEntitySet="EMPMTR_E">
-                <ScalarProperty Name="Emp_no" ColumnName="Emp_no" />
-                <ScalarProperty Name="Emp_email" ColumnName="Emp_email" />
-                <ScalarProperty Name="USERID" ColumnName="USERID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Evals">
-            <EntityTypeMapping TypeName="Model.Eval">
-              <MappingFragment StoreEntitySet="Eval">
-                <ScalarProperty Name="Emp_no" ColumnName="Emp_no" />
-                <ScalarProperty Name="Reg_No" ColumnName="Reg_No" />
-                <ScalarProperty Name="Course_no" ColumnName="Course_no" />
-                <ScalarProperty Name="Discipline" ColumnName="Discipline" />
-                <ScalarProperty Name="Semester_no" ColumnName="Semester_no" />
-                <ScalarProperty Name="Question_Desc" ColumnName="Question_Desc" />
-                <ScalarProperty Name="Answer_Desc" ColumnName="Answer_Desc" />
-                <ScalarProperty Name="Answer_Marks" ColumnName="Answer_Marks" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Log_In">
-            <EntityTypeMapping TypeName="Model.Log_In">
-              <MappingFragment StoreEntitySet="Log_In">
-                <ScalarProperty Name="User_name" ColumnName="User_name" />
-                <ScalarProperty Name="User_id" ColumnName="User_id" />
-                <ScalarProperty Name="User_type" ColumnName="User_type" />
-                <ScalarProperty Name="User_password" ColumnName="User_password" />
-                <ScalarProperty Name="MAC" ColumnName="MAC" />
-                <ScalarProperty Name="VID" ColumnName="VID" />
-                <ScalarProperty Name="att" ColumnName="att" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="meritTemps">
-            <EntityTypeMapping TypeName="Model.meritTemp">
-              <MappingFragment StoreEntitySet="meritTemp">
-                <ScalarProperty Name="App_no" ColumnName="App_no" />
-                <ScalarProperty Name="St_firstname" ColumnName="St_firstname" />
-                <ScalarProperty Name="St_lastname" ColumnName="St_lastname" />
-                <ScalarProperty Name="St_middlename" ColumnName="St_middlename" />
-                <ScalarProperty Name="Father_name" ColumnName="Father_name" />
-                <ScalarProperty Name="Semester_no" ColumnName="Semester_no" />
-                <ScalarProperty Name="Final_course" ColumnName="Final_course" />
-                <ScalarProperty Name="Discipline" ColumnName="Discipline" />
-                <ScalarProperty Name="Obj_score" ColumnName="Obj_score" />
-                <ScalarProperty Name="Total_score" ColumnName="Total_score" />
-                <ScalarProperty Name="Percentage" ColumnName="Percentage" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="semRegs">
             <EntityTypeMapping TypeName="Model.semReg">
               <MappingFragment StoreEntitySet="semReg">
                 <ScalarProperty Name="regenrl" ColumnName="regenrl" />
                 <ScalarProperty Name="discipline" ColumnName="discipline" />
-                <ScalarProperty Name="reaccgpa" ColumnName="reaccgpa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="sRegs">
-            <EntityTypeMapping TypeName="Model.sReg">
-              <MappingFragment StoreEntitySet="sReg">
-                <ScalarProperty Name="regenrl" ColumnName="regenrl" />
-                <ScalarProperty Name="discipline" ColumnName="discipline" />
-                <ScalarProperty Name="semester_no" ColumnName="semester_no" />
                 <ScalarProperty Name="reaccgpa" ColumnName="reaccgpa" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -3107,123 +1309,6 @@ warning 6002: The table/view 'survey monkey database.dbo.tempFEE' does not have 
                 <ScalarProperty Name="Section" ColumnName="Section" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="Discipline" ColumnName="Discipline" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="STMTRtemps">
-            <EntityTypeMapping TypeName="Model.STMTRtemp">
-              <MappingFragment StoreEntitySet="STMTRtemp">
-                <ScalarProperty Name="Reg_No" ColumnName="Reg_No" />
-                <ScalarProperty Name="App_no" ColumnName="App_no" />
-                <ScalarProperty Name="St_firstname" ColumnName="St_firstname" />
-                <ScalarProperty Name="St_lastname" ColumnName="St_lastname" />
-                <ScalarProperty Name="St_middlename" ColumnName="St_middlename" />
-                <ScalarProperty Name="Father_name" ColumnName="Father_name" />
-                <ScalarProperty Name="St_email" ColumnName="St_email" />
-                <ScalarProperty Name="Sex" ColumnName="Sex" />
-                <ScalarProperty Name="Uaar_reg_no" ColumnName="Uaar_reg_no" />
-                <ScalarProperty Name="Marital_status" ColumnName="Marital_status" />
-                <ScalarProperty Name="Birth_date" ColumnName="Birth_date" />
-                <ScalarProperty Name="Nic_no" ColumnName="Nic_no" />
-                <ScalarProperty Name="Pr_address" ColumnName="Pr_address" />
-                <ScalarProperty Name="Pr_city" ColumnName="Pr_city" />
-                <ScalarProperty Name="Per_address" ColumnName="Per_address" />
-                <ScalarProperty Name="Per_city" ColumnName="Per_city" />
-                <ScalarProperty Name="Em_telno" ColumnName="Em_telno" />
-                <ScalarProperty Name="Per_telno" ColumnName="Per_telno" />
-                <ScalarProperty Name="Ad_status" ColumnName="Ad_status" />
-                <ScalarProperty Name="Sess" ColumnName="Sess" />
-                <ScalarProperty Name="Pref_1" ColumnName="Pref_1" />
-                <ScalarProperty Name="Pref_2" ColumnName="Pref_2" />
-                <ScalarProperty Name="Adm_date" ColumnName="Adm_date" />
-                <ScalarProperty Name="Semester_no" ColumnName="Semester_no" />
-                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
-                <ScalarProperty Name="St_status" ColumnName="St_status" />
-                <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
-                <ScalarProperty Name="Acc_status" ColumnName="Acc_status" />
-                <ScalarProperty Name="St_assets" ColumnName="St_assets" />
-                <ScalarProperty Name="Whom_STATUS" ColumnName="Whom_STATUS" />
-                <ScalarProperty Name="Fin_status" ColumnName="Fin_status" />
-                <ScalarProperty Name="Final_course" ColumnName="Final_course" />
-                <ScalarProperty Name="Enrl_status" ColumnName="Enrl_status" />
-                <ScalarProperty Name="DOMICILE" ColumnName="DOMICILE" />
-                <ScalarProperty Name="Degree_Received" ColumnName="Degree_Received" />
-                <ScalarProperty Name="Deg_No" ColumnName="Deg_No" />
-                <ScalarProperty Name="Year" ColumnName="Year" />
-                <ScalarProperty Name="SOS" ColumnName="SOS" />
-                <ScalarProperty Name="Section" ColumnName="Section" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="temps">
-            <EntityTypeMapping TypeName="Model.temp">
-              <MappingFragment StoreEntitySet="temp">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="reg_no" ColumnName="reg_no" />
-                <ScalarProperty Name="course_no" ColumnName="course_no" />
-                <ScalarProperty Name="section" ColumnName="section" />
-                <ScalarProperty Name="discipline" ColumnName="discipline" />
-                <ScalarProperty Name="emp_name" ColumnName="emp_name" />
-                <ScalarProperty Name="section_no" ColumnName="section_no" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TempCrs">
-            <EntityTypeMapping TypeName="Model.TempCr">
-              <MappingFragment StoreEntitySet="TempCrs">
-                <ScalarProperty Name="Course_no" ColumnName="Course_no" />
-                <ScalarProperty Name="reg_no" ColumnName="reg_no" />
-                <ScalarProperty Name="Credit_hrs" ColumnName="Credit_hrs" />
-                <ScalarProperty Name="Q_points" ColumnName="Q_points" />
-                <ScalarProperty Name="Discipline" ColumnName="Discipline" />
-                <ScalarProperty Name="Section" ColumnName="Section" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TempCrs2">
-            <EntityTypeMapping TypeName="Model.TempCrs2">
-              <MappingFragment StoreEntitySet="TempCrs2">
-                <ScalarProperty Name="Course_no" ColumnName="Course_no" />
-                <ScalarProperty Name="reg_no" ColumnName="reg_no" />
-                <ScalarProperty Name="Credit_hrs" ColumnName="Credit_hrs" />
-                <ScalarProperty Name="Q_points" ColumnName="Q_points" />
-                <ScalarProperty Name="Discipline" ColumnName="Discipline" />
-                <ScalarProperty Name="Section" ColumnName="Section" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TEMPCrsdtls">
-            <EntityTypeMapping TypeName="Model.TEMPCrsdtl">
-              <MappingFragment StoreEntitySet="TEMPCrsdtl">
-                <ScalarProperty Name="Course_no" ColumnName="Course_no" />
-                <ScalarProperty Name="ATTEMPT_NO" ColumnName="ATTEMPT_NO" />
-                <ScalarProperty Name="REG_NO" ColumnName="REG_NO" />
-                <ScalarProperty Name="Emp_no" ColumnName="Emp_no" />
-                <ScalarProperty Name="SEMESTER_NO" ColumnName="SEMESTER_NO" />
-                <ScalarProperty Name="SECTION" ColumnName="SECTION" />
-                <ScalarProperty Name="Final_score" ColumnName="Final_score" />
-                <ScalarProperty Name="Midterm_score" ColumnName="Midterm_score" />
-                <ScalarProperty Name="Assi_score" ColumnName="Assi_score" />
-                <ScalarProperty Name="Prac_score" ColumnName="Prac_score" />
-                <ScalarProperty Name="Grade" ColumnName="Grade" />
-                <ScalarProperty Name="Q_points" ColumnName="Q_points" />
-                <ScalarProperty Name="DISCIPLINE" ColumnName="DISCIPLINE" />
-                <ScalarProperty Name="SOS" ColumnName="SOS" />
-                <ScalarProperty Name="pGrade" ColumnName="pGrade" />
-                <ScalarProperty Name="Mid_att" ColumnName="Mid_att" />
-                <ScalarProperty Name="Fin_att" ColumnName="Fin_att" />
-                <ScalarProperty Name="CrsSemNo" ColumnName="CrsSemNo" />
-                <ScalarProperty Name="DT" ColumnName="DT" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tempFEEs">
-            <EntityTypeMapping TypeName="Model.tempFEE">
-              <MappingFragment StoreEntitySet="tempFEE">
-                <ScalarProperty Name="Reg_no" ColumnName="Reg_no" />
-                <ScalarProperty Name="Semester_no" ColumnName="Semester_no" />
-                <ScalarProperty Name="Receipt_no" ColumnName="Receipt_no" />
-                <ScalarProperty Name="Paid_date" ColumnName="Paid_date" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -14,7 +14,7 @@ namespace API.Controllers
     public class SurveyController : ApiController
     {
 
-        public survey_monkey_databaseEntities1 db = new survey_monkey_databaseEntities1();
+        public survey_monkey_databaseEntities2 db = new survey_monkey_databaseEntities2();
 
 
         [HttpGet]
