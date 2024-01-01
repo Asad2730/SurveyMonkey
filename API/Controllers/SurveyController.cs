@@ -332,18 +332,22 @@ namespace API.Controllers
         public HttpResponseMessage addActiveSurvey(ActiveSurvey a)
         {
             try
-            {   
+            {  
                 var s = db.surveys.FirstOrDefault(i=>i.id == a.id);
-                s.aid = a.sid;
-                s.status = "public";
-                s.approved = 1;
+                if(s != null)
+                {
+
+                    s.aid = a.sid;
+                    s.status = "public";
+                    s.approved = 1;
+                }
                 var q = db.ActiveSurveys.Add(a);
                 db.SaveChanges();
                 return Request.CreateResponse(HttpStatusCode.OK, q);
             }
             catch (Exception ex)
             {
-                return Request.CreateResponse(HttpStatusCode.InternalServerError, ex);
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, ex.ToString());
             }
         }
 

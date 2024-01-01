@@ -4,6 +4,7 @@ import 'package:survey_monkey/Helper/ActiveSurvey.dart';
 import 'package:survey_monkey/Helper/Graph.dart';
 import 'package:survey_monkey/Helper/User.dart';
 import 'package:survey_monkey/screens/adminHome.dart';
+import 'package:survey_monkey/screens/previousSurvey.dart';
 import 'package:survey_monkey/screens/userHome.dart';
 import '../Helper/Answers.dart';
 import '../screens/survey/addQuestionMcqs.dart';
@@ -219,7 +220,7 @@ class Db {
   Future addActiveSurvey({required List<ActiveSurvey> survey}) async {
     try {
       for (var i in survey) {
-        await _dio.post('addActiveSurvey', data: {
+        var q = await _dio.post('addActiveSurvey', data: {
           'sid': User.tempSurveyId,
           'startDate': User.tempStartDate.toString(),
           'endDate': User.tempEndDate.toString(),
@@ -227,7 +228,9 @@ class Db {
           'semester': i.semester.toString(),
           'discipline': User.tempDiscipline.toString()
         });
+        print('Done-->${q.data}');
       }
+      Get.to(() => const PreviousSurvey());
     } catch (ex) {
       print('error:$ex');
     }
