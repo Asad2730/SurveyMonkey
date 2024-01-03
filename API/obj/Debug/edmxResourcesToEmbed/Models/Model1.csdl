@@ -1,28 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-  <EntityType Name="Accgpa">
-    <Key>
-      <PropertyRef Name="REG_NO" />
-      <PropertyRef Name="SEMESTER_NO" />
-      <PropertyRef Name="SECTION" />
-    </Key>
-    <Property Name="REG_NO" Type="String" MaxLength="14" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="SEMESTER_NO" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="CHAR_WORK" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-    <Property Name="SYN_INT" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-    <Property Name="Q_PREV" Type="Decimal" Precision="5" Scale="2" />
-    <Property Name="Q_CURR_SEM" Type="Decimal" Precision="5" Scale="2" />
-    <Property Name="Q_TOTAL" Type="Decimal" Precision="6" Scale="2" />
-    <Property Name="CR_PREV" Type="Decimal" Precision="6" Scale="2" />
-    <Property Name="CR_CURR_SEM" Type="Decimal" Precision="6" Scale="2" />
-    <Property Name="CR_TOTAL" Type="Decimal" Precision="6" Scale="2" />
-    <Property Name="CGPA" Type="Decimal" Precision="6" Scale="2" />
-    <Property Name="USER_ID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-    <Property Name="SECTION" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
-    <Property Name="SEM_STATUS" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
-    <Property Name="SemC" Type="Int32" />
-    <Property Name="dropCount" Type="Int32" />
-  </EntityType>
   <EntityType Name="ActiveSurvey">
     <Key>
       <PropertyRef Name="id" />
@@ -34,24 +11,6 @@
     <Property Name="discipline" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="semester" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="section" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-  </EntityType>
-  <EntityType Name="AggScore">
-    <Key>
-      <PropertyRef Name="COURSE_NO" />
-      <PropertyRef Name="DISCIPLINE" />
-      <PropertyRef Name="SOS" />
-    </Key>
-    <Property Name="COURSE_NO" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="DISCIPLINE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="AGG_MIDTERM" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
-    <Property Name="AGG_ASSI" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
-    <Property Name="AGG_FINAL" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
-    <Property Name="AGG_PRACA" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
-    <Property Name="AGG_PRACB" Type="Decimal" Precision="5" Scale="2" />
-    <Property Name="AGG_PRACC" Type="Decimal" Precision="5" Scale="2" />
-    <Property Name="AGG_PRACD" Type="Decimal" Precision="5" Scale="2" />
-    <Property Name="AGG_PRACE" Type="Decimal" Precision="5" Scale="2" />
-    <Property Name="SOS" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
   </EntityType>
   <EntityType Name="conductsurvey">
     <Key>
@@ -96,37 +55,6 @@
     <Property Name="CrsSemNo" Type="Int32" />
     <Property Name="DT" Type="DateTime" Precision="3" />
   </EntityType>
-  <EntityType Name="crsdtl_enrl">
-    <Key>
-      <PropertyRef Name="reg_no" />
-    </Key>
-    <Property Name="reg_no" Type="String" MaxLength="14" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="Courses" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-  </EntityType>
-  <EntityType Name="CRSMTR">
-    <Key>
-      <PropertyRef Name="Course_no" />
-      <PropertyRef Name="Discipline" />
-      <PropertyRef Name="SOS" />
-    </Key>
-    <Property Name="Course_no" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="Discipline" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="Course_desc" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
-    <Property Name="Credit_hrs" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
-    <Property Name="Course_type" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
-    <Property Name="SOS" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
-    <Property Name="SOS_DESC" Type="String" MaxLength="50" FixedLength="true" Unicode="false" Nullable="false" />
-    <Property Name="ELective_course" Type="Int32" />
-    <Property Name="Old_SOS" Type="String" MaxLength="8" FixedLength="true" Unicode="false" />
-  </EntityType>
-  <EntityType Name="CrsmtrShort">
-    <Key>
-      <PropertyRef Name="Course_No" />
-    </Key>
-    <Property Name="Course_No" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="Course_Desc" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
-    <Property Name="Title" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
-  </EntityType>
   <EntityType Name="Question_Answer">
     <Key>
       <PropertyRef Name="Question_ID" />
@@ -135,15 +63,6 @@
     <Property Name="Question" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Description" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
     <Property Name="sid" Type="Int32" />
-  </EntityType>
-  <EntityType Name="SEMMTR">
-    <Key>
-      <PropertyRef Name="Semester_no" />
-    </Key>
-    <Property Name="Semester_no" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="Semester_desc" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-    <Property Name="Start_date" Type="DateTime" Precision="3" />
-    <Property Name="End_date" Type="DateTime" Precision="3" />
   </EntityType>
   <EntityType Name="survey">
     <Key>
@@ -188,124 +107,6 @@
     <Property Name="userid" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="date" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
-  <EntityType Name="teacher">
-    <Key>
-      <PropertyRef Name="emp_no" />
-    </Key>
-    <Property Name="emp_no" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="emp_firstname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="emp_middle" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-    <Property Name="emp_lastname" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-    <Property Name="email" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-    <Property Name="status" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-    <Property Name="phone_no" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
-    <Property Name="order" Type="Int32" />
-  </EntityType>
-  <EntityType Name="ALLOCATE">
-    <Key>
-      <PropertyRef Name="EMP_NO" />
-      <PropertyRef Name="COURSE_NO" />
-      <PropertyRef Name="SEMESTER_NO" />
-      <PropertyRef Name="SECTION" />
-      <PropertyRef Name="DISCIPLINE" />
-      <PropertyRef Name="SOS" />
-      <PropertyRef Name="SemC" />
-    </Key>
-    <Property Name="EMP_NO" Type="String" MaxLength="7" FixedLength="true" Unicode="false" Nullable="false" />
-    <Property Name="COURSE_NO" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="SEMESTER_NO" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="SECTION" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
-    <Property Name="DISCIPLINE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="SOS" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
-    <Property Name="LEC1_DT" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
-    <Property Name="LEC2_DT" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
-    <Property Name="LEC3_DT" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
-    <Property Name="SemC" Type="Int32" Nullable="false" />
-  </EntityType>
-  <EntityType Name="CrsdtlTemp">
-    <Key>
-      <PropertyRef Name="Course_no" />
-      <PropertyRef Name="ATTEMPT_NO" />
-      <PropertyRef Name="REG_NO" />
-      <PropertyRef Name="Emp_no" />
-      <PropertyRef Name="SEMESTER_NO" />
-      <PropertyRef Name="SECTION" />
-      <PropertyRef Name="DISCIPLINE" />
-      <PropertyRef Name="SOS" />
-    </Key>
-    <Property Name="Course_no" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="ATTEMPT_NO" Type="String" MaxLength="1" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="REG_NO" Type="String" MaxLength="14" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="Emp_no" Type="String" MaxLength="7" FixedLength="true" Unicode="false" Nullable="false" />
-    <Property Name="SEMESTER_NO" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="SECTION" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
-    <Property Name="Final_score" Type="Decimal" Precision="5" Scale="2" />
-    <Property Name="Midterm_score" Type="Decimal" Precision="5" Scale="2" />
-    <Property Name="Assi_score" Type="Decimal" Precision="5" Scale="2" />
-    <Property Name="Prac_score" Type="Decimal" Precision="5" Scale="2" />
-    <Property Name="Grade" Type="String" MaxLength="12" FixedLength="true" Unicode="false" />
-    <Property Name="Q_points" Type="Decimal" Precision="5" Scale="2" />
-    <Property Name="DISCIPLINE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="SOS" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
-    <Property Name="pGrade" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-    <Property Name="Mid_att" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-    <Property Name="Fin_att" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-    <Property Name="CrsSemNo" Type="Int32" />
-    <Property Name="DT" Type="DateTime" Precision="3" />
-  </EntityType>
-  <EntityType Name="CrsEnrF">
-    <Key>
-      <PropertyRef Name="REG_NO" />
-      <PropertyRef Name="DISCIPLINE" />
-      <PropertyRef Name="Course_no" />
-    </Key>
-    <Property Name="REG_NO" Type="String" MaxLength="14" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="DISCIPLINE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="Course_no" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="Course_desc" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
-    <Property Name="emp_no" Type="String" MaxLength="7" FixedLength="true" Unicode="false" />
-    <Property Name="semester_no" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
-    <Property Name="Attempt_no" Type="Int32" />
-    <Property Name="grade" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-  </EntityType>
-  <EntityType Name="CrsEnrp">
-    <Key>
-      <PropertyRef Name="REG_NO" />
-      <PropertyRef Name="DISCIPLINE" />
-      <PropertyRef Name="Course_no" />
-    </Key>
-    <Property Name="REG_NO" Type="String" MaxLength="14" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="DISCIPLINE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="Course_no" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="Course_desc" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
-    <Property Name="emp_no" Type="String" MaxLength="7" FixedLength="true" Unicode="false" />
-    <Property Name="semester_no" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
-    <Property Name="Attempt_no" Type="Int32" />
-    <Property Name="grade" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-  </EntityType>
-  <EntityType Name="CrsFail">
-    <Key>
-      <PropertyRef Name="REG_NO" />
-      <PropertyRef Name="DISCIPLINE" />
-      <PropertyRef Name="Course_no" />
-    </Key>
-    <Property Name="REG_NO" Type="String" MaxLength="14" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="DISCIPLINE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="Course_no" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="Course_desc" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
-    <Property Name="grade" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-  </EntityType>
-  <EntityType Name="CRSPRE">
-    <Key>
-      <PropertyRef Name="COURSE_NO" />
-      <PropertyRef Name="DISCIPLINE" />
-      <PropertyRef Name="SOS" />
-    </Key>
-    <Property Name="COURSE_NO" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="DISCIPLINE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="SOS" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
-    <Property Name="PreCOURSE_NO" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
-  </EntityType>
   <EntityType Name="EMPMTR">
     <Key>
       <PropertyRef Name="Emp_no" />
@@ -322,15 +123,6 @@
     <Property Name="IsWorking" Type="Boolean" />
     <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
     <Property Name="Roles" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
-  </EntityType>
-  <EntityType Name="semReg">
-    <Key>
-      <PropertyRef Name="regenrl" />
-      <PropertyRef Name="discipline" />
-    </Key>
-    <Property Name="regenrl" Type="String" MaxLength="14" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="discipline" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="reaccgpa" Type="String" MaxLength="14" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="STMTR">
     <Key>
@@ -365,31 +157,17 @@
     <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
     <Property Name="Discipline" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
-  <EntityContainer Name="survey_monkey_databaseEntities2" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="Accgpas" EntityType="Self.Accgpa" />
+  <EntityContainer Name="survey_monkey_databaseEntities3" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="ActiveSurveys" EntityType="Self.ActiveSurvey" />
-    <EntitySet Name="AggScores" EntityType="Self.AggScore" />
     <EntitySet Name="conductsurveys" EntityType="Self.conductsurvey" />
     <EntitySet Name="courses" EntityType="Self.course" />
     <EntitySet Name="Crsdtls" EntityType="Self.Crsdtl" />
-    <EntitySet Name="crsdtl_enrl" EntityType="Self.crsdtl_enrl" />
-    <EntitySet Name="CRSMTRs" EntityType="Self.CRSMTR" />
-    <EntitySet Name="CrsmtrShorts" EntityType="Self.CrsmtrShort" />
     <EntitySet Name="Question_Answer" EntityType="Self.Question_Answer" />
-    <EntitySet Name="SEMMTRs" EntityType="Self.SEMMTR" />
     <EntitySet Name="surveys" EntityType="Self.survey" />
     <EntitySet Name="surveyaudiences" EntityType="Self.surveyaudience" />
     <EntitySet Name="surveyquestions" EntityType="Self.surveyquestion" />
     <EntitySet Name="surveyresponses" EntityType="Self.surveyresponse" />
-    <EntitySet Name="teachers" EntityType="Self.teacher" />
-    <EntitySet Name="ALLOCATEs" EntityType="Self.ALLOCATE" />
-    <EntitySet Name="CrsdtlTemps" EntityType="Self.CrsdtlTemp" />
-    <EntitySet Name="CrsEnrFs" EntityType="Self.CrsEnrF" />
-    <EntitySet Name="CrsEnrps" EntityType="Self.CrsEnrp" />
-    <EntitySet Name="CrsFails" EntityType="Self.CrsFail" />
-    <EntitySet Name="CRSPREs" EntityType="Self.CRSPRE" />
     <EntitySet Name="EMPMTRs" EntityType="Self.EMPMTR" />
-    <EntitySet Name="semRegs" EntityType="Self.semReg" />
     <EntitySet Name="STMTRs" EntityType="Self.STMTR" />
   </EntityContainer>
 </Schema>

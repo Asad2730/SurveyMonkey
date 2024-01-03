@@ -1,28 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-  <EntityType Name="Accgpa">
-    <Key>
-      <PropertyRef Name="REG_NO" />
-      <PropertyRef Name="SEMESTER_NO" />
-      <PropertyRef Name="SECTION" />
-    </Key>
-    <Property Name="REG_NO" Type="varchar" MaxLength="14" Nullable="false" />
-    <Property Name="SEMESTER_NO" Type="varchar" MaxLength="12" Nullable="false" />
-    <Property Name="CHAR_WORK" Type="char" MaxLength="1" />
-    <Property Name="SYN_INT" Type="char" MaxLength="1" />
-    <Property Name="Q_PREV" Type="decimal" Precision="5" Scale="2" />
-    <Property Name="Q_CURR_SEM" Type="decimal" Precision="5" Scale="2" />
-    <Property Name="Q_TOTAL" Type="decimal" Precision="6" Scale="2" />
-    <Property Name="CR_PREV" Type="decimal" Precision="6" Scale="2" />
-    <Property Name="CR_CURR_SEM" Type="decimal" Precision="6" Scale="2" />
-    <Property Name="CR_TOTAL" Type="decimal" Precision="6" Scale="2" />
-    <Property Name="CGPA" Type="decimal" Precision="6" Scale="2" />
-    <Property Name="USER_ID" Type="varchar" MaxLength="10" />
-    <Property Name="SECTION" Type="char" MaxLength="1" Nullable="false" />
-    <Property Name="SEM_STATUS" Type="char" MaxLength="10" />
-    <Property Name="SemC" Type="int" />
-    <Property Name="dropCount" Type="int" />
-  </EntityType>
   <EntityType Name="ActiveSurvey">
     <Key>
       <PropertyRef Name="id" />
@@ -34,47 +11,6 @@
     <Property Name="discipline" Type="varchar" MaxLength="50" />
     <Property Name="semester" Type="varchar" MaxLength="50" />
     <Property Name="section" Type="varchar" MaxLength="50" />
-  </EntityType>
-  <EntityType Name="AggScore">
-    <Key>
-      <PropertyRef Name="COURSE_NO" />
-      <PropertyRef Name="DISCIPLINE" />
-      <PropertyRef Name="SOS" />
-    </Key>
-    <Property Name="COURSE_NO" Type="varchar" MaxLength="9" Nullable="false" />
-    <Property Name="DISCIPLINE" Type="varchar" MaxLength="20" Nullable="false" />
-    <Property Name="AGG_MIDTERM" Type="nvarchar" MaxLength="3" />
-    <Property Name="AGG_ASSI" Type="nvarchar" MaxLength="3" />
-    <Property Name="AGG_FINAL" Type="nvarchar" MaxLength="3" />
-    <Property Name="AGG_PRACA" Type="nvarchar" MaxLength="3" />
-    <Property Name="AGG_PRACB" Type="decimal" Precision="5" Scale="2" />
-    <Property Name="AGG_PRACC" Type="decimal" Precision="5" Scale="2" />
-    <Property Name="AGG_PRACD" Type="decimal" Precision="5" Scale="2" />
-    <Property Name="AGG_PRACE" Type="decimal" Precision="5" Scale="2" />
-    <Property Name="SOS" Type="char" MaxLength="8" Nullable="false" />
-  </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'survey monkey database.dbo.ALLOCATE' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-  <EntityType Name="ALLOCATE">
-    <Key>
-      <PropertyRef Name="EMP_NO" />
-      <PropertyRef Name="COURSE_NO" />
-      <PropertyRef Name="SEMESTER_NO" />
-      <PropertyRef Name="SECTION" />
-      <PropertyRef Name="DISCIPLINE" />
-      <PropertyRef Name="SOS" />
-      <PropertyRef Name="SemC" />
-    </Key>
-    <Property Name="EMP_NO" Type="char" MaxLength="7" Nullable="false" />
-    <Property Name="COURSE_NO" Type="varchar" MaxLength="9" Nullable="false" />
-    <Property Name="SEMESTER_NO" Type="varchar" MaxLength="12" Nullable="false" />
-    <Property Name="SECTION" Type="char" MaxLength="1" Nullable="false" />
-    <Property Name="DISCIPLINE" Type="varchar" MaxLength="20" Nullable="false" />
-    <Property Name="SOS" Type="char" MaxLength="8" Nullable="false" />
-    <Property Name="LEC1_DT" Type="char" MaxLength="20" />
-    <Property Name="LEC2_DT" Type="char" MaxLength="20" />
-    <Property Name="LEC3_DT" Type="char" MaxLength="20" />
-    <Property Name="SemC" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="conductsurvey">
     <Key>
@@ -119,138 +55,6 @@ warning 6002: The table/view 'survey monkey database.dbo.ALLOCATE' does not have
     <Property Name="CrsSemNo" Type="int" />
     <Property Name="DT" Type="datetime" />
   </EntityType>
-  <EntityType Name="crsdtl_enrl">
-    <Key>
-      <PropertyRef Name="reg_no" />
-    </Key>
-    <Property Name="reg_no" Type="varchar" MaxLength="14" Nullable="false" />
-    <Property Name="Courses" Type="varchar(max)" />
-  </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'survey monkey database.dbo.CrsdtlTemp' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-  <EntityType Name="CrsdtlTemp">
-    <Key>
-      <PropertyRef Name="Course_no" />
-      <PropertyRef Name="ATTEMPT_NO" />
-      <PropertyRef Name="REG_NO" />
-      <PropertyRef Name="Emp_no" />
-      <PropertyRef Name="SEMESTER_NO" />
-      <PropertyRef Name="SECTION" />
-      <PropertyRef Name="DISCIPLINE" />
-      <PropertyRef Name="SOS" />
-    </Key>
-    <Property Name="Course_no" Type="varchar" MaxLength="9" Nullable="false" />
-    <Property Name="ATTEMPT_NO" Type="nvarchar" MaxLength="1" Nullable="false" />
-    <Property Name="REG_NO" Type="varchar" MaxLength="14" Nullable="false" />
-    <Property Name="Emp_no" Type="char" MaxLength="7" Nullable="false" />
-    <Property Name="SEMESTER_NO" Type="varchar" MaxLength="12" Nullable="false" />
-    <Property Name="SECTION" Type="char" MaxLength="1" Nullable="false" />
-    <Property Name="Final_score" Type="decimal" Precision="5" Scale="2" />
-    <Property Name="Midterm_score" Type="decimal" Precision="5" Scale="2" />
-    <Property Name="Assi_score" Type="decimal" Precision="5" Scale="2" />
-    <Property Name="Prac_score" Type="decimal" Precision="5" Scale="2" />
-    <Property Name="Grade" Type="char" MaxLength="12" />
-    <Property Name="Q_points" Type="decimal" Precision="5" Scale="2" />
-    <Property Name="DISCIPLINE" Type="varchar" MaxLength="20" Nullable="false" />
-    <Property Name="SOS" Type="char" MaxLength="8" Nullable="false" />
-    <Property Name="pGrade" Type="char" MaxLength="1" />
-    <Property Name="Mid_att" Type="char" MaxLength="1" />
-    <Property Name="Fin_att" Type="char" MaxLength="1" />
-    <Property Name="CrsSemNo" Type="int" />
-    <Property Name="DT" Type="datetime" />
-  </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'survey monkey database.dbo.CrsEnrF' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-  <EntityType Name="CrsEnrF">
-    <Key>
-      <PropertyRef Name="REG_NO" />
-      <PropertyRef Name="DISCIPLINE" />
-      <PropertyRef Name="Course_no" />
-    </Key>
-    <Property Name="REG_NO" Type="varchar" MaxLength="14" Nullable="false" />
-    <Property Name="DISCIPLINE" Type="varchar" MaxLength="20" Nullable="false" />
-    <Property Name="Course_no" Type="varchar" MaxLength="9" Nullable="false" />
-    <Property Name="Course_desc" Type="varchar" MaxLength="80" />
-    <Property Name="emp_no" Type="char" MaxLength="7" />
-    <Property Name="semester_no" Type="varchar" MaxLength="12" />
-    <Property Name="Attempt_no" Type="int" />
-    <Property Name="grade" Type="char" MaxLength="1" />
-  </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'survey monkey database.dbo.CrsEnrp' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-  <EntityType Name="CrsEnrp">
-    <Key>
-      <PropertyRef Name="REG_NO" />
-      <PropertyRef Name="DISCIPLINE" />
-      <PropertyRef Name="Course_no" />
-    </Key>
-    <Property Name="REG_NO" Type="varchar" MaxLength="14" Nullable="false" />
-    <Property Name="DISCIPLINE" Type="varchar" MaxLength="20" Nullable="false" />
-    <Property Name="Course_no" Type="varchar" MaxLength="9" Nullable="false" />
-    <Property Name="Course_desc" Type="varchar" MaxLength="80" />
-    <Property Name="emp_no" Type="char" MaxLength="7" />
-    <Property Name="semester_no" Type="varchar" MaxLength="12" />
-    <Property Name="Attempt_no" Type="int" />
-    <Property Name="grade" Type="char" MaxLength="1" />
-  </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'survey monkey database.dbo.CrsFail' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-  <EntityType Name="CrsFail">
-    <Key>
-      <PropertyRef Name="REG_NO" />
-      <PropertyRef Name="DISCIPLINE" />
-      <PropertyRef Name="Course_no" />
-    </Key>
-    <Property Name="REG_NO" Type="varchar" MaxLength="14" Nullable="false" />
-    <Property Name="DISCIPLINE" Type="varchar" MaxLength="20" Nullable="false" />
-    <Property Name="Course_no" Type="varchar" MaxLength="9" Nullable="false" />
-    <Property Name="Course_desc" Type="varchar" MaxLength="80" />
-    <Property Name="grade" Type="char" MaxLength="1" />
-  </EntityType>
-  <EntityType Name="CRSMTR">
-    <Key>
-      <PropertyRef Name="Course_no" />
-      <PropertyRef Name="Discipline" />
-      <PropertyRef Name="SOS" />
-    </Key>
-    <Property Name="Course_no" Type="varchar" MaxLength="9" Nullable="false" />
-    <Property Name="Discipline" Type="varchar" MaxLength="20" Nullable="false" />
-    <Property Name="Course_desc" Type="varchar" MaxLength="80" />
-    <Property Name="Credit_hrs" Type="char" MaxLength="10" />
-    <Property Name="Course_type" Type="char" MaxLength="15" />
-    <Property Name="SOS" Type="char" MaxLength="8" Nullable="false" />
-    <Property Name="SOS_DESC" Type="char" MaxLength="50" Nullable="false" />
-    <Property Name="ELective_course" Type="int" />
-    <Property Name="Old_SOS" Type="char" MaxLength="8" />
-  </EntityType>
-  <EntityType Name="CrsmtrShorts">
-    <Key>
-      <PropertyRef Name="Course_No" />
-    </Key>
-    <Property Name="Course_No" Type="varchar" MaxLength="9" Nullable="false" />
-    <Property Name="Course_Desc" Type="varchar" MaxLength="80" />
-    <Property Name="Title" Type="varchar" MaxLength="4" />
-  </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'survey monkey database.dbo.CRSPRE' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-  <EntityType Name="CRSPRE">
-    <Key>
-      <PropertyRef Name="COURSE_NO" />
-      <PropertyRef Name="DISCIPLINE" />
-      <PropertyRef Name="SOS" />
-    </Key>
-    <Property Name="COURSE_NO" Type="varchar" MaxLength="9" Nullable="false" />
-    <Property Name="DISCIPLINE" Type="varchar" MaxLength="20" Nullable="false" />
-    <Property Name="SOS" Type="char" MaxLength="8" Nullable="false" />
-    <Property Name="PreCOURSE_NO" Type="varchar" MaxLength="9" />
-  </EntityType>
-  <!--Errors Found During Generation:
-warning 6013: The table/view 'survey monkey database.dbo.CrsStuP' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="CrsStuP">
-          <Property Name="reg_no" Type="varchar" MaxLength="14" />
-          <Property Name="course_no" Type="varchar" MaxLength="9" />
-          <Property Name="grade" Type="char" MaxLength="1" />
-        </EntityType>-->
   <!--Errors Found During Generation:
 warning 6002: The table/view 'survey monkey database.dbo.EMPMTR' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="EMPMTR">
@@ -278,33 +82,6 @@ warning 6002: The table/view 'survey monkey database.dbo.EMPMTR' does not have a
     <Property Name="Question" Type="nvarchar(max)" />
     <Property Name="Description" Type="varchar" MaxLength="30" />
     <Property Name="sid" Type="int" />
-  </EntityType>
-  <!--Errors Found During Generation:
-warning 6013: The table/view 'survey monkey database.dbo.section' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="section">
-          <Property Name="reg_no" Type="varchar" MaxLength="20" />
-          <Property Name="course_no" Type="varchar" MaxLength="20" />
-          <Property Name="_section" Type="varchar" MaxLength="10" />
-        </EntityType>-->
-  <EntityType Name="SEMMTR">
-    <Key>
-      <PropertyRef Name="Semester_no" />
-    </Key>
-    <Property Name="Semester_no" Type="varchar" MaxLength="12" Nullable="false" />
-    <Property Name="Semester_desc" Type="varchar" MaxLength="20" />
-    <Property Name="Start_date" Type="datetime" />
-    <Property Name="End_date" Type="datetime" />
-  </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'survey monkey database.dbo.semReg' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-  <EntityType Name="semReg">
-    <Key>
-      <PropertyRef Name="regenrl" />
-      <PropertyRef Name="discipline" />
-    </Key>
-    <Property Name="regenrl" Type="varchar" MaxLength="14" Nullable="false" />
-    <Property Name="discipline" Type="varchar" MaxLength="20" Nullable="false" />
-    <Property Name="reaccgpa" Type="varchar" MaxLength="14" />
   </EntityType>
   <!--Errors Found During Generation:
 warning 6002: The table/view 'survey monkey database.dbo.STMTR' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -384,114 +161,16 @@ warning 6002: The table/view 'survey monkey database.dbo.STMTR' does not have a 
     <Property Name="userid" Type="varchar" MaxLength="50" />
     <Property Name="date" Type="varchar" MaxLength="50" />
   </EntityType>
-  <EntityType Name="teacher">
-    <Key>
-      <PropertyRef Name="emp_no" />
-    </Key>
-    <Property Name="emp_no" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="emp_firstname" Type="varchar" MaxLength="50" />
-    <Property Name="emp_middle" Type="varchar" MaxLength="20" />
-    <Property Name="emp_lastname" Type="varchar" MaxLength="20" />
-    <Property Name="email" Type="varchar" MaxLength="30" />
-    <Property Name="status" Type="varchar" MaxLength="10" />
-    <Property Name="phone_no" Type="varchar" MaxLength="15" />
-    <Property Name="order" Type="int" />
-  </EntityType>
   <EntityContainer Name="ModelStoreContainer">
-    <EntitySet Name="Accgpa" EntityType="Self.Accgpa" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ActiveSurvey" EntityType="Self.ActiveSurvey" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="AggScore" EntityType="Self.AggScore" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="conductsurvey" EntityType="Self.conductsurvey" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="course" EntityType="Self.course" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Crsdtl" EntityType="Self.Crsdtl" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="crsdtl_enrl" EntityType="Self.crsdtl_enrl" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="CRSMTR" EntityType="Self.CRSMTR" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="CrsmtrShorts" EntityType="Self.CrsmtrShorts" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Question_Answer" EntityType="Self.Question_Answer" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="SEMMTR" EntityType="Self.SEMMTR" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="survey" EntityType="Self.survey" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="surveyaudience" EntityType="Self.surveyaudience" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="surveyquestion" EntityType="Self.surveyquestion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="surveyresponse" EntityType="Self.surveyresponse" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="teacher" EntityType="Self.teacher" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="ALLOCATE" EntityType="Self.ALLOCATE" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [ALLOCATE].[EMP_NO] AS [EMP_NO], 
-    [ALLOCATE].[COURSE_NO] AS [COURSE_NO], 
-    [ALLOCATE].[SEMESTER_NO] AS [SEMESTER_NO], 
-    [ALLOCATE].[SECTION] AS [SECTION], 
-    [ALLOCATE].[DISCIPLINE] AS [DISCIPLINE], 
-    [ALLOCATE].[SOS] AS [SOS], 
-    [ALLOCATE].[LEC1_DT] AS [LEC1_DT], 
-    [ALLOCATE].[LEC2_DT] AS [LEC2_DT], 
-    [ALLOCATE].[LEC3_DT] AS [LEC3_DT], 
-    [ALLOCATE].[SemC] AS [SemC]
-    FROM [dbo].[ALLOCATE] AS [ALLOCATE]</DefiningQuery>
-    </EntitySet>
-    <EntitySet Name="CrsdtlTemp" EntityType="Self.CrsdtlTemp" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [CrsdtlTemp].[Course_no] AS [Course_no], 
-    [CrsdtlTemp].[ATTEMPT_NO] AS [ATTEMPT_NO], 
-    [CrsdtlTemp].[REG_NO] AS [REG_NO], 
-    [CrsdtlTemp].[Emp_no] AS [Emp_no], 
-    [CrsdtlTemp].[SEMESTER_NO] AS [SEMESTER_NO], 
-    [CrsdtlTemp].[SECTION] AS [SECTION], 
-    [CrsdtlTemp].[Final_score] AS [Final_score], 
-    [CrsdtlTemp].[Midterm_score] AS [Midterm_score], 
-    [CrsdtlTemp].[Assi_score] AS [Assi_score], 
-    [CrsdtlTemp].[Prac_score] AS [Prac_score], 
-    [CrsdtlTemp].[Grade] AS [Grade], 
-    [CrsdtlTemp].[Q_points] AS [Q_points], 
-    [CrsdtlTemp].[DISCIPLINE] AS [DISCIPLINE], 
-    [CrsdtlTemp].[SOS] AS [SOS], 
-    [CrsdtlTemp].[pGrade] AS [pGrade], 
-    [CrsdtlTemp].[Mid_att] AS [Mid_att], 
-    [CrsdtlTemp].[Fin_att] AS [Fin_att], 
-    [CrsdtlTemp].[CrsSemNo] AS [CrsSemNo], 
-    [CrsdtlTemp].[DT] AS [DT]
-    FROM [dbo].[CrsdtlTemp] AS [CrsdtlTemp]</DefiningQuery>
-    </EntitySet>
-    <EntitySet Name="CrsEnrF" EntityType="Self.CrsEnrF" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [CrsEnrF].[REG_NO] AS [REG_NO], 
-    [CrsEnrF].[DISCIPLINE] AS [DISCIPLINE], 
-    [CrsEnrF].[Course_no] AS [Course_no], 
-    [CrsEnrF].[Course_desc] AS [Course_desc], 
-    [CrsEnrF].[emp_no] AS [emp_no], 
-    [CrsEnrF].[semester_no] AS [semester_no], 
-    [CrsEnrF].[Attempt_no] AS [Attempt_no], 
-    [CrsEnrF].[grade] AS [grade]
-    FROM [dbo].[CrsEnrF] AS [CrsEnrF]</DefiningQuery>
-    </EntitySet>
-    <EntitySet Name="CrsEnrp" EntityType="Self.CrsEnrp" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [CrsEnrp].[REG_NO] AS [REG_NO], 
-    [CrsEnrp].[DISCIPLINE] AS [DISCIPLINE], 
-    [CrsEnrp].[Course_no] AS [Course_no], 
-    [CrsEnrp].[Course_desc] AS [Course_desc], 
-    [CrsEnrp].[emp_no] AS [emp_no], 
-    [CrsEnrp].[semester_no] AS [semester_no], 
-    [CrsEnrp].[Attempt_no] AS [Attempt_no], 
-    [CrsEnrp].[grade] AS [grade]
-    FROM [dbo].[CrsEnrp] AS [CrsEnrp]</DefiningQuery>
-    </EntitySet>
-    <EntitySet Name="CrsFail" EntityType="Self.CrsFail" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [CrsFail].[REG_NO] AS [REG_NO], 
-    [CrsFail].[DISCIPLINE] AS [DISCIPLINE], 
-    [CrsFail].[Course_no] AS [Course_no], 
-    [CrsFail].[Course_desc] AS [Course_desc], 
-    [CrsFail].[grade] AS [grade]
-    FROM [dbo].[CrsFail] AS [CrsFail]</DefiningQuery>
-    </EntitySet>
-    <EntitySet Name="CRSPRE" EntityType="Self.CRSPRE" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [CRSPRE].[COURSE_NO] AS [COURSE_NO], 
-    [CRSPRE].[DISCIPLINE] AS [DISCIPLINE], 
-    [CRSPRE].[SOS] AS [SOS], 
-    [CRSPRE].[PreCOURSE_NO] AS [PreCOURSE_NO]
-    FROM [dbo].[CRSPRE] AS [CRSPRE]</DefiningQuery>
-    </EntitySet>
     <EntitySet Name="EMPMTR" EntityType="Self.EMPMTR" store:Type="Tables" store:Schema="dbo">
       <DefiningQuery>SELECT 
     [EMPMTR].[Emp_no] AS [Emp_no], 
@@ -507,13 +186,6 @@ warning 6002: The table/view 'survey monkey database.dbo.STMTR' does not have a 
     [EMPMTR].[Password] AS [Password], 
     [EMPMTR].[Roles] AS [Roles]
     FROM [dbo].[EMPMTR] AS [EMPMTR]</DefiningQuery>
-    </EntitySet>
-    <EntitySet Name="semReg" EntityType="Self.semReg" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [semReg].[regenrl] AS [regenrl], 
-    [semReg].[discipline] AS [discipline], 
-    [semReg].[reaccgpa] AS [reaccgpa]
-    FROM [dbo].[semReg] AS [semReg]</DefiningQuery>
     </EntitySet>
     <EntitySet Name="STMTR" EntityType="Self.STMTR" store:Type="Tables" store:Schema="dbo">
       <DefiningQuery>SELECT 

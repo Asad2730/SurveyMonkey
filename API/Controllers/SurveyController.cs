@@ -14,7 +14,7 @@ namespace API.Controllers
     public class SurveyController : ApiController
     {
 
-        public survey_monkey_databaseEntities2 db = new survey_monkey_databaseEntities2();
+        public survey_monkey_databaseEntities3 db = new survey_monkey_databaseEntities3();
 
 
         [HttpGet]
@@ -111,7 +111,7 @@ namespace API.Controllers
                     {
                         s,
                         a,
-                    }).Where(w=>w.a.discipline == Discipline && w.a.section == Section && w.a.semester == Semester_no).ToList();
+                    }).Where(w=>w.a.discipline == Discipline && w.a.section == Section && w.a.semester == Semester_no && w.s.approved == 3).ToList();
 
                 rs.ForEach(i =>
                 {
@@ -339,7 +339,7 @@ namespace API.Controllers
 
                     s.aid = a.sid;
                     s.status = "public";
-                    s.approved = 1;
+                    s.approved = 3;
                     db.SaveChanges();
                 }
                 var q = db.ActiveSurveys.Add(a);
