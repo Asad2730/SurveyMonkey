@@ -137,7 +137,7 @@ namespace API.Controllers
         public HttpResponseMessage surveyNotApproved()
         {
             try
-            {
+            {   
                 var q = db.surveys.Where(i => i.approved == 2 && i.status == "public").ToList();          
                 return Request.CreateResponse(HttpStatusCode.OK, q);
 
@@ -333,13 +333,14 @@ namespace API.Controllers
         {
             try
             {  
-                var s = db.surveys.FirstOrDefault(i=>i.id == a.id);
+                var s = db.surveys.FirstOrDefault(i=>i.id == a.sid);
                 if(s != null)
                 {
 
                     s.aid = a.sid;
                     s.status = "public";
                     s.approved = 1;
+                    db.SaveChanges();
                 }
                 var q = db.ActiveSurveys.Add(a);
                 db.SaveChanges();

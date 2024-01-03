@@ -130,6 +130,7 @@ class _PreviousSurveyState extends State<PreviousSurvey> {
                                 onPressed: () {
                                   Navigator.pop(context);
                                   User.tempSurveyId = data['id'];
+                                  print("GANDO --->${data['id']}");
                                   Get.to(const SelectDiscipline());
                                 },
                                 child: const Text("Next"),
