@@ -131,7 +131,7 @@ class _AdminHomeState extends State<AdminHome> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    Get.to(const PendingApproval());
+                    Get.to(() => const PendingApproval());
                   },
                   child: Container(
                     width: Get.width / 2.5,

@@ -12,7 +12,7 @@ import '../screens/survey/addQuestionYesNo.dart';
 
 class Db {
   final _dio = Dio();
-  final _ip = '192.168.0.135';
+  final _ip = '192.168.10.12';
 
   Db() {
     _dio.options.baseUrl = 'http://$_ip/API/api/Survey/';
@@ -48,7 +48,7 @@ class Db {
         'type': type,
         'createdby': User.id,
         'approved': 0,
-        'status': 'public',
+        'status': 'private',
       });
 
       if (type == 'MCQS') {
@@ -73,7 +73,11 @@ class Db {
       });
 
       if (!isMore) {
-        Get.back();
+        if (User.discipline == '') {
+          Get.to(() => const AdminHome());
+        } else {
+          Get.to(() => const UserHome());
+        }
       }
     } catch (ex) {
       print('error:$ex');
@@ -99,20 +103,25 @@ class Db {
       });
 
       if (!isMore) {
-        Get.back();
+        if (User.discipline == '') {
+          Get.to(() => const AdminHome());
+        } else {
+          Get.to(() => const UserHome());
+        }
       }
     } catch (ex) {
       print('error:$ex');
     }
   }
 
-  Future surveyByApproved({required ap}) async {
+  Future surveyByApproved({required ap, required status}) async {
     try {
       var rs = await _dio.get('surveyByApproved', queryParameters: {
         'ap': ap,
         'Discipline': User.discipline,
         'Section': User.section,
         'Semester_no': User.semesterNo,
+        'status': status
       });
       return rs.data as List;
     } catch (ex) {
@@ -233,6 +242,16 @@ class Db {
       Get.to(() => const PreviousSurvey());
     } catch (ex) {
       print('error:$ex');
+    }
+  }
+
+  Future getSurveyHistory() async {
+    try {
+      var res = await _dio.get('getSurveyHistory');
+      return res.data as List;
+    } catch (ex) {
+      print('error:$ex');
+      return [];
     }
   }
 }

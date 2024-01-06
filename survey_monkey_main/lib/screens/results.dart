@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:survey_monkey/Helper/User.dart';
 import 'package:survey_monkey/constants.dart';
 import 'package:survey_monkey/http/db.dart';
 import 'package:survey_monkey/screens/graphs/barChart.dart';
+import 'package:survey_monkey/screens/graphs/history.dart';
 import 'package:survey_monkey/screens/graphs/pieChart.dart';
 
 import '../widgets/appbars.dart';
@@ -16,7 +18,6 @@ class Results extends StatefulWidget {
 }
 
 class _ResultsState extends State<Results> {
-
   late Future _future;
 
   @override
@@ -41,14 +42,13 @@ class _ResultsState extends State<Results> {
             ),
             gap20(),
             Expanded(
-              child:_futureBuild(),
+              child: _futureBuild(),
             ),
           ],
         ),
       ),
     );
   }
-
 
   Widget _futureBuild() {
     return FutureBuilder(
@@ -79,17 +79,25 @@ class _ResultsState extends State<Results> {
                   children: [
                     IconButton(
                       onPressed: () {
-                        Get.to( BarChart(id:data['id'],data:data));
+                        Get.to(() => BarChart(id: data['id'], data: data));
                       },
                       color: ck.x,
                       icon: const Icon(Icons.bar_chart),
                     ),
                     IconButton(
                       onPressed: () {
-                        Get.to(PieChart(id:data['id'],data:data));
+                        Get.to(() => PieChart(id: data['id'], data: data));
                       },
                       color: ck.x,
                       icon: const Icon(Icons.pie_chart),
+                    ),
+                    IconButton(
+                      onPressed: () {
+                        User.tempSurveyId = data['id'];
+                        Get.to(() => const History());
+                      },
+                      color: ck.x,
+                      icon: const Icon(Icons.history),
                     ),
                   ],
                 )
@@ -101,7 +109,4 @@ class _ResultsState extends State<Results> {
       },
     );
   }
-
-
-
 }

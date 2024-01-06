@@ -19,7 +19,11 @@ class _PendingApprovalState extends State<PendingApproval> {
   @override
   void initState() {
     super.initState();
-    _future = Db().surveyByApproved(ap: 0);
+    _fetchData();
+  }
+
+  Future<void> _fetchData() async {
+    _future = Db().surveyByApproved(ap: 0, status: 'private');
   }
 
   @override
@@ -47,60 +51,64 @@ class _PendingApprovalState extends State<PendingApproval> {
   }
 
   Widget _futureBuild() {
-    return Expanded(
-      child: FutureBuilder(
-          future: _future,
-          builder: (context, AsyncSnapshot snapshot) {
-            if (snapshot.hasData) {
-              return _list(snapshot);
-            } else {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            }
-          }),
+    return FutureBuilder(
+      future: _future,
+      builder: (context, AsyncSnapshot snapshot) {
+        if (snapshot.hasData) {
+          return _list(snapshot);
+        } else {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+      },
     );
   }
 
   Widget _list(AsyncSnapshot snapshot) {
     return ListView.builder(
-        shrinkWrap: true,
-        itemCount: snapshot.data.length,
-        itemBuilder: (context, i) {
-          Map data = snapshot.data[i];
-          return Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text("${data['name']}"),
-                  Row(
-                    children: [
-                      IconButton(
-                        onPressed: () async {
-                          await Db()
-                              .acceptRejectSurvey(id: data['id'], approved: 1);
-                          setState(() {});
-                        },
-                        color: ck.x,
-                        icon: const Icon(Icons.check),
-                      ),
-                      IconButton(
-                        onPressed: () async {
-                          await Db()
-                              .acceptRejectSurvey(id: data['id'], approved: 2);
-                          setState(() {});
-                        },
-                        color: Colors.red,
-                        icon: const Icon(Icons.close),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-              gap20(),
-            ],
-          );
-        });
+      shrinkWrap: true,
+      itemCount: snapshot.data.length,
+      itemBuilder: (context, i) {
+        Map data = snapshot.data[i];
+        return Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text("${data['name']}"),
+                Row(
+                  children: [
+                    IconButton(
+                      onPressed: () async {
+                        await Db()
+                            .acceptRejectSurvey(id: data['id'], approved: 1);
+                        setState(() {
+                          _fetchData();
+                        });
+                      },
+                      color: ck.x,
+                      icon: const Icon(Icons.check),
+                    ),
+                    IconButton(
+                      onPressed: () async {
+                        await Db()
+                            .acceptRejectSurvey(id: data['id'], approved: 2);
+                        setState(() {
+                          _fetchData();
+                        });
+                      },
+                      color: Colors.red,
+                      icon: const Icon(Icons.close),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            gap20(),
+          ],
+        );
+      },
+    );
   }
 }

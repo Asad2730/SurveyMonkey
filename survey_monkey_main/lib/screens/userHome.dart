@@ -34,7 +34,7 @@ class _UserHomeState extends State<UserHome> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-             Text(
+            Text(
               "Hello!! ${User.name}",
               style: const TextStyle(fontSize: 20),
             ),
@@ -49,7 +49,7 @@ class _UserHomeState extends State<UserHome> {
               children: [
                 GestureDetector(
                   onTap: () {
-                    Get.to(const AddName());
+                    Get.to(() => const AddName());
                   },
                   child: Container(
                     width: Get.width / 2.5,
@@ -77,8 +77,8 @@ class _UserHomeState extends State<UserHome> {
                   ),
                 ),
                 GestureDetector(
-                  onTap: (){
-                    Get.to(const PreviousSurvey());
+                  onTap: () {
+                    Get.to(() => const PreviousSurvey());
                   },
                   child: Container(
                     width: Get.width / 2.5,
@@ -112,8 +112,8 @@ class _UserHomeState extends State<UserHome> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 GestureDetector(
-                  onTap: (){
-                    Get.to(const Participate());
+                  onTap: () {
+                    Get.to(() => const Participate());
                   },
                   child: Container(
                     width: Get.width / 2.5,
@@ -141,8 +141,8 @@ class _UserHomeState extends State<UserHome> {
                   ),
                 ),
                 GestureDetector(
-                  onTap: (){
-                    Get.to(const Results());
+                  onTap: () {
+                    Get.to(() => const Results());
                   },
                   child: Container(
                     width: Get.width / 2.5,

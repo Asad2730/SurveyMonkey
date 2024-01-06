@@ -17,12 +17,6 @@ class _AddQuestionYesNoState extends State<AddQuestionYesNo> {
   TextEditingController q = TextEditingController();
 
   @override
-  void dispose() {
-    super.dispose();
-    q.text = '';
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: simpleAppBar(),
@@ -53,7 +47,9 @@ class _AddQuestionYesNoState extends State<AddQuestionYesNo> {
                   ElevatedButton(
                     onPressed: () {
                       Db().addQuestion(q: q.text, id: widget.id, isMore: true);
-                      dispose();
+                      setState(() {
+                        q.text = '';
+                      });
                     },
                     child: const Text("Add More"),
                   ),

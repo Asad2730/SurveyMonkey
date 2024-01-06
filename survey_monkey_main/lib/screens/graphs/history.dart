@@ -2,24 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:survey_monkey/constants.dart';
 import 'package:survey_monkey/http/db.dart';
+import 'package:survey_monkey/widgets/appbars.dart';
+import 'package:survey_monkey/widgets/spacers.dart';
 
-import '../widgets/appbars.dart';
-import '../widgets/spacers.dart';
-
-class ApprovedApproval extends StatefulWidget {
-  const ApprovedApproval({super.key});
+class History extends StatefulWidget {
+  const History({super.key});
 
   @override
-  State<ApprovedApproval> createState() => _ApprovedApprovalState();
+  State<History> createState() => _HistoryState();
 }
 
-class _ApprovedApprovalState extends State<ApprovedApproval> {
+class _HistoryState extends State<History> {
   late Future _future;
 
   @override
   void initState() {
     super.initState();
-    _future = Db().surveyByApproved(ap: 1, status: 'public');
+    _future = Db().getSurveyHistory();
   }
 
   @override
@@ -33,7 +32,7 @@ class _ApprovedApprovalState extends State<ApprovedApproval> {
         child: Column(
           children: [
             Text(
-              "Approved Approval",
+              "History",
               style: TextStyle(fontSize: 20, color: ck.x),
             ),
             gap20(),
@@ -66,16 +65,13 @@ class _ApprovedApprovalState extends State<ApprovedApproval> {
       itemCount: snapshot.data.length,
       itemBuilder: (context, i) {
         Map data = snapshot.data[i];
-        return Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text("${data['name']}"),
-              ],
-            ),
-            gap20(),
-          ],
+        return Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8.0),
+          child: ListTile(
+            title: Text("Title:${data['surveyName']}"),
+            subtitle: Text("Type:${data['type']}"),
+            trailing: Text("CreatedBy:${data['createdBy']}"),
+          ),
         );
       },
     );

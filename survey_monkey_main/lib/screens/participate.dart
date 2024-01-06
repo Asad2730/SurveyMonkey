@@ -17,16 +17,13 @@ class Participate extends StatefulWidget {
 }
 
 class _ParticipateState extends State<Participate> {
-
   late Future _future;
-
 
   @override
   void initState() {
     super.initState();
-    _future = Db().surveyByApproved(ap: 1);
+    _future = Db().surveyByApproved(ap: 1, status: 'public');
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +41,7 @@ class _ParticipateState extends State<Participate> {
             ),
             gap20(),
             Expanded(
-              child:_futureBuild(),
+              child: _futureBuild(),
             ),
           ],
         ),
@@ -52,26 +49,25 @@ class _ParticipateState extends State<Participate> {
     );
   }
 
-
-
-  Widget _futureBuild(){
+  Widget _futureBuild() {
     return FutureBuilder(
         future: _future,
-        builder:(context,AsyncSnapshot snapshot) {
-          if(snapshot.hasData){
+        builder: (context, AsyncSnapshot snapshot) {
+          if (snapshot.hasData) {
             return _list(snapshot);
-          }else{
-            return const Center(child: CircularProgressIndicator(),);
+          } else {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
           }
         });
   }
 
-  Widget _list(AsyncSnapshot snapshot){
-
+  Widget _list(AsyncSnapshot snapshot) {
     return ListView.builder(
         shrinkWrap: true,
-        itemCount:snapshot.data.length,
-        itemBuilder: (context,i){
+        itemCount: snapshot.data.length,
+        itemBuilder: (context, i) {
           Map data = snapshot.data[i];
           return Column(
             children: [
@@ -83,12 +79,10 @@ class _ParticipateState extends State<Participate> {
                     onPressed: () {
                       User.tempSurveyId = data['id'];
 
-                      if(data['type'] == 'MCQS'){
-                        Get.to(()=>const ParticipateMCQs());
-                      }else
-                      {
-
-                        Get.to(()=> const ParticipateYesNo());
+                      if (data['type'] == 'MCQS') {
+                        Get.to(() => const ParticipateMCQs());
+                      } else {
+                        Get.to(() => const ParticipateYesNo());
                       }
                     },
                     child: const Text("Attempt"),
@@ -98,8 +92,6 @@ class _ParticipateState extends State<Participate> {
               gap20(),
             ],
           );
-        }) ;
+        });
   }
-
-
 }

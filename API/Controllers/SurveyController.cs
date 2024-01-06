@@ -99,7 +99,7 @@ namespace API.Controllers
 
 
         [HttpGet]
-        public HttpResponseMessage surveyByApproved(int ap,string Discipline,string Section,string Semester_no)
+        public HttpResponseMessage surveyByApproved(int ap,string Discipline,string Section,string Semester_no,string status)
         {
             try
             {
@@ -117,7 +117,7 @@ namespace API.Controllers
                 {
                     list.Add(i.s);
                 });
-                var q = db.surveys.Where(i => i.approved == ap && i.status == "public").ToList();
+                var q = db.surveys.Where(i => i.approved == ap && i.status == status).ToList();
 
                 q.ForEach(i =>
                 {
@@ -138,7 +138,7 @@ namespace API.Controllers
         {
             try
             {   
-                var q = db.surveys.Where(i => i.approved == 2 && i.status == "public").ToList();          
+                var q = db.surveys.Where(i => i.approved == 2 && i.status == "private").ToList();          
                 return Request.CreateResponse(HttpStatusCode.OK, q);
 
             }
@@ -353,6 +353,60 @@ namespace API.Controllers
         }
 
 
+        [HttpGet]
+        public HttpResponseMessage getSurveyHistory()
+        {
+            try
+            {
+                List<History> list = new List<History>();
+                var q1 = db.surveys.Join(db.EMPMTRs, s => s.createdby, e => e.Emp_no,
+                    (s, e) => new
+                    {
+                        s,e
+                    }).ToList();
+
+                var q2 = db.surveys.Join(db.STMTRs, s => s.createdby, e => e.Reg_No,
+                   (s, e) => new
+                   {
+                       s,
+                       e
+                   }).ToList();
+
+                q1.ForEach(i =>
+                {
+                    History h = new History();
+                    h.surveyName = i.s.name;
+                    h.type = i.s.type;
+                    h.createdBy = i.e.Emp_firstname;
+                    list.Add(h);
+                });
+
+
+                q2.ForEach(i =>
+                {
+                    History h = new History();
+                    h.surveyName = i.s.name;
+                    h.type = i.s.type;
+                    h.createdBy = i.e.St_firstname;
+                    list.Add(h);
+                });
+                return Request.CreateResponse(HttpStatusCode.OK, list);
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, ex);
+            }
+        }
+
+
+    }
+
+
+    class History
+    {
+        public string surveyName { get; set;}
+        public string type { get; set;}
+        public string createdBy { get; set;}
     }
 
 }

@@ -21,16 +21,6 @@ class _AddQuestionMcqsState extends State<AddQuestionMcqs> {
   TextEditingController o4 = TextEditingController();
 
   @override
-  void dispose() {
-    super.dispose();
-    q.text = '';
-    o1.text = '';
-    o2.text = '';
-    o3.text = '';
-    o4.text = '';
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: simpleAppBar(),
@@ -90,7 +80,14 @@ class _AddQuestionMcqsState extends State<AddQuestionMcqs> {
                           op3: o3.text,
                           op4: o4.text,
                           isMore: true);
-                      dispose();
+
+                      setState(() {
+                        q.text = '';
+                        o1.text = '';
+                        o2.text = '';
+                        o3.text = '';
+                        o4.text = '';
+                      });
                     },
                     child: const Text("Add More"),
                   ),

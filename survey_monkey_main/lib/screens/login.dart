@@ -14,7 +14,7 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  TextEditingController username = TextEditingController();
+  TextEditingController userId = TextEditingController();
   TextEditingController password = TextEditingController();
 
   @override
@@ -28,7 +28,7 @@ class _LoginState extends State<Login> {
           decoration: BoxDecoration(
               color: ck.x, borderRadius: BorderRadius.circular(10)),
           padding: const EdgeInsets.all(20),
-          margin:const EdgeInsets.symmetric(vertical: 50),
+          margin: const EdgeInsets.symmetric(vertical: 50),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -43,7 +43,7 @@ class _LoginState extends State<Login> {
                 "BIIT SURVEY MONKEY",
                 style: TextStyle(fontSize: 25, color: Colors.white),
               ),
-              textField("Username", username),
+              textField("UserID", userId),
               textField("Password", password),
               gap10(),
               GestureDetector(
@@ -56,8 +56,7 @@ class _LoginState extends State<Login> {
               gap20(),
               ElevatedButton(
                 onPressed: () {
-
-                  Db().login(id: username.text, password: password.text);
+                  Db().login(id: userId.text, password: password.text);
                 },
                 child: const Text("LOGIN"),
               ),
