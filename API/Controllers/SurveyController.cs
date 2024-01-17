@@ -227,8 +227,10 @@ namespace API.Controllers
                         {
                             id = i.id,
                             name = i.name,
+                           
                             responses = responses.Select(r => new
                             {
+                                title = r.title,
                                 op1 = r.option1,
                                 op2 = r.option2,
                                 op3 = r.option3,

@@ -12,7 +12,7 @@ import '../screens/survey/addQuestionYesNo.dart';
 
 class Db {
   final _dio = Dio();
-  final _ip = '192.168.10.12';
+  final _ip = '192.168.10.13';
 
   Db() {
     _dio.options.baseUrl = 'http://$_ip/API/api/Survey/';
@@ -229,7 +229,7 @@ class Db {
   Future addActiveSurvey({required List<ActiveSurvey> survey}) async {
     try {
       for (var i in survey) {
-        var q = await _dio.post('addActiveSurvey', data: {
+        await _dio.post('addActiveSurvey', data: {
           'sid': User.tempSurveyId,
           'startDate': User.tempStartDate.toString(),
           'endDate': User.tempEndDate.toString(),
@@ -237,7 +237,6 @@ class Db {
           'semester': i.semester.toString(),
           'discipline': User.tempDiscipline.toString()
         });
-        print('Done-->${q.data}');
       }
       Get.to(() => const PreviousSurvey());
     } catch (ex) {

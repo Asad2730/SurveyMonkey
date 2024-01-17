@@ -19,6 +19,7 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
+    userId.text = '2020-Arid-0198';
     return Scaffold(
       body: Container(
         width: Get.width,
