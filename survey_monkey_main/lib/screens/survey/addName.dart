@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:survey_monkey/Helper/User.dart';
 import 'package:survey_monkey/constants.dart';
 import 'package:survey_monkey/http/db.dart';
 import 'package:survey_monkey/widgets/spacers.dart';
@@ -39,6 +40,7 @@ class _AddNameState extends State<AddName> {
               style: TextStyle(
                   fontSize: 20, color: ck.x, fontWeight: FontWeight.w800),
             ),
+            gap20(),
             textField("Name", name),
             gap20(),
             const Align(
@@ -74,12 +76,40 @@ class _AddNameState extends State<AddName> {
               ],
             ),
             gap20(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Radio(
+                  value: 'private',
+                  groupValue: User.selectedOption,
+                  onChanged: (value) {
+                    User.selectedOption = value!;
+                    setState(() {});
+                  },
+                ),
+                const Text('private'),
+                Radio(
+                  value: 'public',
+                  groupValue: User.selectedOption,
+                  onChanged: (value) {
+                    User.selectedOption = value!;
+                    setState(() {});
+                  },
+                ),
+                const Text('public'),
+              ],
+            ),
+            gap20(),
             ElevatedButton(
               onPressed: () {
-                if (radioValue == 2) {
-                  Db().createSurvey(name: name.text, type: 'MCQS');
+                if (User.selectedOption != '') {
+                  if (radioValue == 2) {
+                    Db().createSurvey(name: name.text, type: 'MCQS');
+                  } else {
+                    Db().createSurvey(name: name.text, type: 'Yes/No');
+                  }
                 } else {
-                  Db().createSurvey(name: name.text, type: 'Yes/No');
+                  print('<--Select private or public--->');
                 }
               },
               child: const Text("Next"),

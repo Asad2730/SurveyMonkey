@@ -37,7 +37,7 @@ class Db {
         Get.to(() => const AdminHome());
       }
     } catch (ex) {
-      print('error:$ex');
+      print('error loggin in ---> :$ex');
     }
   }
 
@@ -48,7 +48,7 @@ class Db {
         'type': type,
         'createdby': User.id,
         'approved': 0,
-        'status': 'private',
+        'status': User.selectedOption,
       });
 
       if (type == 'MCQS') {
