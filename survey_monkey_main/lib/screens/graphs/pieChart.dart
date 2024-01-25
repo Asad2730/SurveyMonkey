@@ -48,25 +48,40 @@ class _PieChartState extends State<PieChart> {
             text: widget.data['responses'][i]['title'],
           ),
           series: <PieSeries<SalesData, String>>[
-            PieSeries<SalesData, String>(
-              dataSource: <SalesData>[
-                SalesData(widget.data['responses'][i]['op1'], Graph.v1),
-                SalesData(widget.data['responses'][i]['op2'], Graph.v2),
-                SalesData(
-                  widget.data['responses'][i]['op3'] ?? '',
-                  Graph.v3,
-                ),
-                SalesData(
-                  widget.data['responses'][i]['op4'] ?? '',
-                  Graph.v4,
-                ),
-              ],
-              xValueMapper: (SalesData sales, _) => sales.question,
-              yValueMapper: (SalesData sales, _) => sales.ans,
-            ),
+            _createPieSeries(
+                widget.data['responses'][i]['op1'],
+                Graph.v1,
+                widget.data['responses'][i]['op2'],
+                Graph.v2,
+                widget.data['responses'][i]['op3'] ?? '',
+                Graph.v3,
+                widget.data['responses'][i]['op4'] ?? '',
+                Graph.v4),
           ],
         );
       },
+    );
+  }
+
+  PieSeries<SalesData, String> _createPieSeries(
+    String op1,
+    double v1,
+    String op2,
+    double v2,
+    String op3,
+    double v3,
+    String op4,
+    double v4,
+  ) {
+    return PieSeries<SalesData, String>(
+      dataSource: <SalesData>[
+        SalesData(op1, v1),
+        SalesData(op2, v2),
+        SalesData(op3, v3),
+        SalesData(op4, v4),
+      ],
+      xValueMapper: (SalesData sales, _) => sales.question,
+      yValueMapper: (SalesData sales, _) => sales.ans,
     );
   }
 }
