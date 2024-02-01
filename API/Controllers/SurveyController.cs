@@ -14,7 +14,7 @@ namespace API.Controllers
     public class SurveyController : ApiController
     {
 
-        public survey_monkey_databaseEntities3 db = new survey_monkey_databaseEntities3();
+        public survey_monkey_databaseEntities5 db = new survey_monkey_databaseEntities5();
 
 
 
@@ -402,6 +402,115 @@ namespace API.Controllers
         }
 
 
+
+
+        [HttpGet]
+        public HttpResponseMessage getTeachers()
+        {
+            try
+            {
+                var q = db.EMPMTRs.Where(i => i.Roles != "Admin").ToList();
+                return Request.CreateResponse(HttpStatusCode.OK, q);
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, ex);
+            }
+        }
+
+
+        [HttpPost]
+        public HttpResponseMessage createTeacherSurvey(teacherSurvey s)
+        {
+            try
+            {
+                db.teacherSurveys.Add(s);
+                db.SaveChanges();
+                return Request.CreateResponse(HttpStatusCode.OK, s.id);
+
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, ex);
+            }
+        }
+
+
+
+        [HttpGet]
+        public HttpResponseMessage teachersSurveyList(string tid)
+        {
+            try
+            {
+
+                var q = db.teacherSurveys.Where(i => i.tid != tid).ToList();
+                return Request.CreateResponse(HttpStatusCode.OK, q);
+
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, ex);
+            }
+        }
+
+
+
+        [HttpGet]
+        public HttpResponseMessage calculateTeacherGraph(int sid)
+        {
+            try
+            {
+                List<TeacherGraph> list = new List<TeacherGraph>();
+                var questions = db.surveyquestions.Where(i => i.surveyid == sid).ToList();
+
+                questions.ForEach(q =>
+                {
+                    int totalResponses = 0, e = 0, g = 0, b = 0, w = 0;
+
+                    var responses = db.surveyresponses.Where(i => i.surveyid == sid && i.questionid == q.id).ToList();
+                    totalResponses = responses.Count;
+
+                    responses.ForEach(r =>
+                    {
+                        if (q.option1 == r.response)
+                        {
+                            e++;
+                        }
+                        else if (q.option2 == r.response)
+                        {
+                            g++;
+                        }
+                        else if (q.option3 == r.response)
+                        {
+                            b++;
+                        }
+                        else if (q.option4 == r.response) 
+                        {
+                            w++;
+                        }
+                    });
+
+                    TeacherGraph ob = new TeacherGraph();
+
+                    ob.question = q.title;
+
+                    ob.excelent = ((double)e / totalResponses) * 100;
+                    ob.good = ((double)g / totalResponses) * 100;
+                    ob.bad = ((double)b / totalResponses) * 100;
+                    ob.worse = ((double)w / totalResponses) * 100;
+
+                    list.Add(ob);
+                });
+
+                return Request.CreateResponse(HttpStatusCode.OK, list);
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, ex);
+            }
+        }
+
+
     }
 
 
@@ -410,6 +519,13 @@ namespace API.Controllers
         public string surveyName { get; set;}
         public string type { get; set;}
         public string createdBy { get; set;}
+    }
+
+    class TeacherGraph
+    {  
+
+        public string question;
+        public double excelent, good, bad, worse;
     }
 
 }

@@ -2,7 +2,10 @@ import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import 'package:survey_monkey/Helper/ActiveSurvey.dart';
 import 'package:survey_monkey/Helper/Graph.dart';
+import 'package:survey_monkey/Helper/Teacher.dart';
 import 'package:survey_monkey/Helper/User.dart';
+import 'package:survey_monkey/screens/AdminScreen/addQuestion.dart';
+import 'package:survey_monkey/screens/AdminScreen/main.dart';
 import 'package:survey_monkey/screens/adminHome.dart';
 import 'package:survey_monkey/screens/previousSurvey.dart';
 import 'package:survey_monkey/screens/userHome.dart';
@@ -28,6 +31,13 @@ class Db {
         User.semesterNo = res.data['Data']['Semester_no'];
         User.section = res.data['Data']['Section'];
         Get.to(() => const UserHome());
+      } else if (res.data['Data']['Roles'] == 'Admin') {
+        User.id = res.data['Data']['Emp_no'];
+        User.name = res.data['Data']['Emp_firstname'];
+        User.discipline = '';
+        User.semesterNo = '';
+        User.section = '';
+        Get.to(() => const MainHome());
       } else {
         User.id = res.data['Data']['Emp_no'];
         User.name = res.data['Data']['Emp_firstname'];
@@ -252,6 +262,79 @@ class Db {
     } catch (ex) {
       print('error:$ex');
       return [];
+    }
+  }
+
+  Future<List<Teacher>> getTeachers() async {
+    try {
+      var res = await _dio.get('getTeachers');
+
+      List<Map<String, dynamic>> responseData =
+          List<Map<String, dynamic>>.from(res.data);
+
+      List<Teacher> fetchedTeachers = responseData.map((i) {
+        return Teacher(
+          empno: i['Emp_no'].toString(),
+          name: "${i['Emp_firstname']} ${i['Emp_lastname']}",
+        );
+      }).toList();
+
+      return fetchedTeachers;
+    } catch (ex) {
+      print('error: $ex');
+      return [];
+    }
+  }
+
+  Future createTeacherSurvey({required name, required tid}) async {
+    try {
+      var res = await _dio.post('createTeacherSurvey', data: {
+        'name': name,
+        'createdby': User.id,
+        'tid': tid,
+      });
+
+      Get.to(() => AddQuestion(
+            id: res.data,
+          ));
+    } catch (ex) {
+      print('error:$ex');
+    }
+  }
+
+  Future addTeacherQuestion({required title, required id}) async {
+    try {
+      await _dio.post('addQuestion', data: {
+        'title': title,
+        'option1': 'Excellent',
+        'option2': 'Good',
+        'option3': 'Bad',
+        'option4': 'Worse',
+        'surveyid': id,
+      });
+
+      Get.to(() => const MainHome());
+    } catch (ex) {
+      print('error:$ex');
+    }
+  }
+
+  Future teachersSurveyList() async {
+    try {
+      var rs = await _dio
+          .get('teachersSurveyList', queryParameters: {'tid': User.id});
+      return rs.data as List;
+    } catch (ex) {
+      print('error:$ex');
+    }
+  }
+
+  Future calculateTeacherGraph({required sid}) async {
+    try {
+      var rs = await _dio.get('calculateTeacherGraph?sid=$sid');
+      return rs.data as List;
+    } catch (ex) {
+      print('error:$ex');
     }
   }
 }

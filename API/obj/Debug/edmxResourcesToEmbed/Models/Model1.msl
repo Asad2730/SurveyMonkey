@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="survey_monkey_databaseEntities3">
+  <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="survey_monkey_databaseEntities5">
     <EntitySetMapping Name="ActiveSurveys">
       <EntityTypeMapping TypeName="Model.ActiveSurvey">
         <MappingFragment StoreEntitySet="ActiveSurvey">
@@ -112,6 +112,16 @@
           <ScalarProperty Name="response" ColumnName="response" />
           <ScalarProperty Name="userid" ColumnName="userid" />
           <ScalarProperty Name="date" ColumnName="date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="teacherSurveys">
+      <EntityTypeMapping TypeName="Model.teacherSurvey">
+        <MappingFragment StoreEntitySet="teacherSurvey">
+          <ScalarProperty Name="tid" ColumnName="tid" />
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="createdby" ColumnName="createdby" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

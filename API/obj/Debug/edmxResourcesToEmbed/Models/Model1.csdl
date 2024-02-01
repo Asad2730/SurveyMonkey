@@ -107,6 +107,15 @@
     <Property Name="userid" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="date" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
+  <EntityType Name="teacherSurvey">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="createdby" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="tid" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
   <EntityType Name="EMPMTR">
     <Key>
       <PropertyRef Name="Emp_no" />
@@ -157,7 +166,7 @@
     <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
     <Property Name="Discipline" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
-  <EntityContainer Name="survey_monkey_databaseEntities3" annotation:LazyLoadingEnabled="true">
+  <EntityContainer Name="survey_monkey_databaseEntities5" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="ActiveSurveys" EntityType="Self.ActiveSurvey" />
     <EntitySet Name="conductsurveys" EntityType="Self.conductsurvey" />
     <EntitySet Name="courses" EntityType="Self.course" />
@@ -167,6 +176,7 @@
     <EntitySet Name="surveyaudiences" EntityType="Self.surveyaudience" />
     <EntitySet Name="surveyquestions" EntityType="Self.surveyquestion" />
     <EntitySet Name="surveyresponses" EntityType="Self.surveyresponse" />
+    <EntitySet Name="teacherSurveys" EntityType="Self.teacherSurvey" />
     <EntitySet Name="EMPMTRs" EntityType="Self.EMPMTR" />
     <EntitySet Name="STMTRs" EntityType="Self.STMTR" />
   </EntityContainer>

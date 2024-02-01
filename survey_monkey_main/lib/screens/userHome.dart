@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:survey_monkey/Helper/User.dart';
 import 'package:survey_monkey/constants.dart';
+import 'package:survey_monkey/screens/TeacherEvaluation/participateEvaluation.dart';
 import 'package:survey_monkey/screens/participate.dart';
 import 'package:survey_monkey/screens/previousSurvey.dart';
 import 'package:survey_monkey/screens/results.dart';
@@ -170,6 +171,39 @@ class _UserHomeState extends State<UserHome> {
                 ),
               ],
             ),
+            gap20(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    Get.to(() => const ParticipateEV());
+                  },
+                  child: Container(
+                    width: Get.width / 2.5,
+                    height: 125,
+                    padding: const EdgeInsets.all(30),
+                    decoration: BoxDecoration(
+                      color: ck.x,
+                      borderRadius: BorderRadius.circular(20),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 2,
+                          blurRadius: 2,
+                          offset: const Offset(4, 4),
+                        ),
+                      ],
+                    ),
+                    child: const Center(
+                        child: Text(
+                      "Teacher Evaluation Survey",
+                      style: TextStyle(color: Colors.white, fontSize: 16),
+                    )),
+                  ),
+                ),
+              ],
+            )
           ],
         ),
       ),

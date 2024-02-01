@@ -30,7 +30,7 @@ class _AdminHomeState extends State<AdminHome> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const Text(
-              "ADMIN DASHBOARD",
+              "Teacher DASHBOARD",
               style: TextStyle(fontSize: 20),
             ),
             gap20(),
