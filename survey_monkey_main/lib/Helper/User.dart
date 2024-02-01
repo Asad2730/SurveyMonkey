@@ -1,7 +1,10 @@
+// ignore_for_file: file_names
+
 class User {
   static late String id;
   static late String name;
-  static String selectedOption = '';
+  static String selectedOption = 'public';
+  static int approved = 1;
   static late String discipline, section, semesterNo;
   static late int tempSurveyId;
   static late String tempDiscipline;

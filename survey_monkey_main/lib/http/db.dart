@@ -47,10 +47,11 @@ class Db {
         'name': name,
         'type': type,
         'createdby': User.id,
-        'approved': 0,
+        'approved': User.approved,
         'status': User.selectedOption,
       });
 
+      print('Survey Created->${res.data}');
       if (type == 'MCQS') {
         Get.to(() => AddQuestionMcqs(
               id: res.data,
