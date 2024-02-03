@@ -70,6 +70,7 @@ namespace API.Controllers
         {
             try
             {
+               //var dt = DateTime.Now;
                 db.surveys.Add(s);
                 db.SaveChanges();
                 return Request.CreateResponse(HttpStatusCode.OK, s.id);
