@@ -173,6 +173,7 @@ namespace API.Controllers
             {
                 var q = db.surveys.FirstOrDefault(i => i.id == id);
                 q.approved = approved;
+                
                 db.SaveChanges();
 
                 return Request.CreateResponse(HttpStatusCode.OK, q);
