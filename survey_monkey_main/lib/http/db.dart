@@ -15,7 +15,7 @@ import '../screens/survey/addQuestionYesNo.dart';
 
 class Db {
   final _dio = Dio();
-  final _ip = '192.168.10.13';
+  final _ip = '192.168.10.2';
 
   Db() {
     _dio.options.baseUrl = 'http://$_ip/API/api/Survey/';

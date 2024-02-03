@@ -84,7 +84,7 @@ class _AddNameState extends State<AddName> {
                   groupValue: User.selectedOption,
                   onChanged: (value) {
                     User.selectedOption = value!;
-                    User.approved = 2;
+                    User.approved = 1;
                     setState(() {});
                   },
                 ),
@@ -94,7 +94,7 @@ class _AddNameState extends State<AddName> {
                   groupValue: User.selectedOption,
                   onChanged: (value) {
                     User.selectedOption = value!;
-                    User.approved = 1;
+                    User.approved = 0;
                     setState(() {});
                   },
                 ),

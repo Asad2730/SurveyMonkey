@@ -23,7 +23,7 @@ class _PendingApprovalState extends State<PendingApproval> {
   }
 
   Future<void> _fetchData() async {
-    _future = Db().surveyByApproved(ap: 0, status: 'private');
+    _future = Db().surveyByApproved(ap: 1, status: 'private');
   }
 
   @override
