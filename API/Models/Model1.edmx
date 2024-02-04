@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="surveyMonkeyModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="ActiveSurvey">
           <Key>
             <PropertyRef Name="id" />
@@ -16,23 +16,6 @@
           <Property Name="discipline" Type="varchar" MaxLength="50" />
           <Property Name="semester" Type="varchar" MaxLength="50" />
           <Property Name="section" Type="varchar" MaxLength="50" />
-        </EntityType>
-        <EntityType Name="conductsurvey">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="fromdate" Type="nvarchar" MaxLength="50" />
-          <Property Name="todate" Type="nvarchar" MaxLength="50" />
-          <Property Name="surveyid" Type="int" />
-        </EntityType>
-        <EntityType Name="course">
-          <Key>
-            <PropertyRef Name="course_no" />
-          </Key>
-          <Property Name="course_no" Type="varchar" MaxLength="10" Nullable="false" />
-          <Property Name="course_desc" Type="varchar" MaxLength="10" />
-          <Property Name="title" Type="varchar" MaxLength="60" />
         </EntityType>
         <EntityType Name="Crsdtl">
           <Key>
@@ -61,7 +44,7 @@
           <Property Name="DT" Type="datetime" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'survey monkey database.dbo.EMPMTR' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'surveyMonkey.dbo.EMPMTR' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="EMPMTR">
           <Key>
             <PropertyRef Name="Emp_no" />
@@ -78,18 +61,10 @@ warning 6002: The table/view 'survey monkey database.dbo.EMPMTR' does not have a
           <Property Name="IsWorking" Type="bit" />
           <Property Name="Password" Type="varchar" MaxLength="255" />
           <Property Name="Roles" Type="varchar" MaxLength="12" />
-        </EntityType>
-        <EntityType Name="Question_Answer">
-          <Key>
-            <PropertyRef Name="Question_ID" />
-          </Key>
-          <Property Name="Question_ID" Type="int" Nullable="false" />
-          <Property Name="Question" Type="nvarchar(max)" />
-          <Property Name="Description" Type="varchar" MaxLength="30" />
-          <Property Name="sid" Type="int" />
+          <Property Name="sex" Type="varchar" MaxLength="255" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'survey monkey database.dbo.STMTR' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'surveyMonkey.dbo.STMTR' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="STMTR">
           <Key>
             <PropertyRef Name="Reg_No" />
@@ -134,6 +109,8 @@ warning 6002: The table/view 'survey monkey database.dbo.STMTR' does not have a 
           <Property Name="type" Type="varchar" MaxLength="50" />
           <Property Name="status" Type="varchar" MaxLength="20" />
           <Property Name="aid" Type="int" />
+          <Property Name="dTime" Type="varchar" MaxLength="255" />
+          <Property Name="sex" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="surveyaudience">
           <Key>
@@ -171,16 +148,13 @@ warning 6002: The table/view 'survey monkey database.dbo.STMTR' does not have a 
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="name" Type="varchar" MaxLength="50" />
-          <Property Name="createdby" Type="varchar" MaxLength="50" />
-          <Property Name="tid" Type="varchar" MaxLength="50" />
+          <Property Name="name" Type="varchar" MaxLength="255" />
+          <Property Name="createdby" Type="varchar" MaxLength="255" />
+          <Property Name="tid" Type="varchar" MaxLength="255" />
         </EntityType>
-        <EntityContainer Name="ModelStoreContainer">
+        <EntityContainer Name="surveyMonkeyModelStoreContainer">
           <EntitySet Name="ActiveSurvey" EntityType="Self.ActiveSurvey" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="conductsurvey" EntityType="Self.conductsurvey" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="course" EntityType="Self.course" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Crsdtl" EntityType="Self.Crsdtl" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Question_Answer" EntityType="Self.Question_Answer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="survey" EntityType="Self.survey" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="surveyaudience" EntityType="Self.surveyaudience" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="surveyquestion" EntityType="Self.surveyquestion" Schema="dbo" store:Type="Tables" />
@@ -199,7 +173,8 @@ warning 6002: The table/view 'survey monkey database.dbo.STMTR' does not have a 
     [EMPMTR].[Status] AS [Status], 
     [EMPMTR].[IsWorking] AS [IsWorking], 
     [EMPMTR].[Password] AS [Password], 
-    [EMPMTR].[Roles] AS [Roles]
+    [EMPMTR].[Roles] AS [Roles], 
+    [EMPMTR].[sex] AS [sex]
     FROM [dbo].[EMPMTR] AS [EMPMTR]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="STMTR" EntityType="Self.STMTR" store:Type="Tables" store:Schema="dbo">
@@ -236,7 +211,7 @@ warning 6002: The table/view 'survey monkey database.dbo.STMTR' does not have a 
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="surveyMonkeyModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="ActiveSurvey">
           <Key>
             <PropertyRef Name="id" />
@@ -248,23 +223,6 @@ warning 6002: The table/view 'survey monkey database.dbo.STMTR' does not have a 
           <Property Name="discipline" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="semester" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="section" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="conductsurvey">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="fromdate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="todate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="surveyid" Type="Int32" />
-        </EntityType>
-        <EntityType Name="course">
-          <Key>
-            <PropertyRef Name="course_no" />
-          </Key>
-          <Property Name="course_no" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="course_desc" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="title" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Crsdtl">
           <Key>
@@ -292,15 +250,6 @@ warning 6002: The table/view 'survey monkey database.dbo.STMTR' does not have a 
           <Property Name="CrsSemNo" Type="Int32" />
           <Property Name="DT" Type="DateTime" Precision="3" />
         </EntityType>
-        <EntityType Name="Question_Answer">
-          <Key>
-            <PropertyRef Name="Question_ID" />
-          </Key>
-          <Property Name="Question_ID" Type="Int32" Nullable="false" />
-          <Property Name="Question" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Description" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="sid" Type="Int32" />
-        </EntityType>
         <EntityType Name="survey">
           <Key>
             <PropertyRef Name="id" />
@@ -312,6 +261,8 @@ warning 6002: The table/view 'survey monkey database.dbo.STMTR' does not have a 
           <Property Name="type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="aid" Type="Int32" />
+          <Property Name="dTime" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="sex" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="surveyaudience">
           <Key>
@@ -349,9 +300,9 @@ warning 6002: The table/view 'survey monkey database.dbo.STMTR' does not have a 
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="createdby" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="tid" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="createdby" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="tid" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="EMPMTR">
           <Key>
@@ -369,6 +320,7 @@ warning 6002: The table/view 'survey monkey database.dbo.STMTR' does not have a 
           <Property Name="IsWorking" Type="Boolean" />
           <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Roles" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="sex" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="STMTR">
           <Key>
@@ -403,12 +355,9 @@ warning 6002: The table/view 'survey monkey database.dbo.STMTR' does not have a 
           <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Discipline" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityContainer Name="survey_monkey_databaseEntities5" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="surveyMonkeyEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="ActiveSurveys" EntityType="Self.ActiveSurvey" />
-          <EntitySet Name="conductsurveys" EntityType="Self.conductsurvey" />
-          <EntitySet Name="courses" EntityType="Self.course" />
           <EntitySet Name="Crsdtls" EntityType="Self.Crsdtl" />
-          <EntitySet Name="Question_Answer" EntityType="Self.Question_Answer" />
           <EntitySet Name="surveys" EntityType="Self.survey" />
           <EntitySet Name="surveyaudiences" EntityType="Self.surveyaudience" />
           <EntitySet Name="surveyquestions" EntityType="Self.surveyquestion" />
@@ -422,9 +371,9 @@ warning 6002: The table/view 'survey monkey database.dbo.STMTR' does not have a 
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="survey_monkey_databaseEntities5">
+        <EntityContainerMapping StorageEntityContainer="surveyMonkeyModelStoreContainer" CdmEntityContainer="surveyMonkeyEntities1">
           <EntitySetMapping Name="ActiveSurveys">
-            <EntityTypeMapping TypeName="Model.ActiveSurvey">
+            <EntityTypeMapping TypeName="surveyMonkeyModel.ActiveSurvey">
               <MappingFragment StoreEntitySet="ActiveSurvey">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="sid" ColumnName="sid" />
@@ -436,27 +385,8 @@ warning 6002: The table/view 'survey monkey database.dbo.STMTR' does not have a 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="conductsurveys">
-            <EntityTypeMapping TypeName="Model.conductsurvey">
-              <MappingFragment StoreEntitySet="conductsurvey">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="fromdate" ColumnName="fromdate" />
-                <ScalarProperty Name="todate" ColumnName="todate" />
-                <ScalarProperty Name="surveyid" ColumnName="surveyid" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="courses">
-            <EntityTypeMapping TypeName="Model.course">
-              <MappingFragment StoreEntitySet="course">
-                <ScalarProperty Name="course_no" ColumnName="course_no" />
-                <ScalarProperty Name="course_desc" ColumnName="course_desc" />
-                <ScalarProperty Name="title" ColumnName="title" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Crsdtls">
-            <EntityTypeMapping TypeName="Model.Crsdtl">
+            <EntityTypeMapping TypeName="surveyMonkeyModel.Crsdtl">
               <MappingFragment StoreEntitySet="Crsdtl">
                 <ScalarProperty Name="Course_no" ColumnName="Course_no" />
                 <ScalarProperty Name="ATTEMPT_NO" ColumnName="ATTEMPT_NO" />
@@ -480,19 +410,10 @@ warning 6002: The table/view 'survey monkey database.dbo.STMTR' does not have a 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Question_Answer">
-            <EntityTypeMapping TypeName="Model.Question_Answer">
-              <MappingFragment StoreEntitySet="Question_Answer">
-                <ScalarProperty Name="Question_ID" ColumnName="Question_ID" />
-                <ScalarProperty Name="Question" ColumnName="Question" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="sid" ColumnName="sid" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="surveys">
-            <EntityTypeMapping TypeName="Model.survey">
+            <EntityTypeMapping TypeName="surveyMonkeyModel.survey">
               <MappingFragment StoreEntitySet="survey">
+                <ScalarProperty Name="sex" ColumnName="sex" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="createdby" ColumnName="createdby" />
                 <ScalarProperty Name="id" ColumnName="id" />
@@ -500,11 +421,12 @@ warning 6002: The table/view 'survey monkey database.dbo.STMTR' does not have a 
                 <ScalarProperty Name="type" ColumnName="type" />
                 <ScalarProperty Name="status" ColumnName="status" />
                 <ScalarProperty Name="aid" ColumnName="aid" />
+                <ScalarProperty Name="dTime" ColumnName="dTime" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="surveyaudiences">
-            <EntityTypeMapping TypeName="Model.surveyaudience">
+            <EntityTypeMapping TypeName="surveyMonkeyModel.surveyaudience">
               <MappingFragment StoreEntitySet="surveyaudience">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="conductsurveyid" ColumnName="conductsurveyid" />
@@ -513,7 +435,7 @@ warning 6002: The table/view 'survey monkey database.dbo.STMTR' does not have a 
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="surveyquestions">
-            <EntityTypeMapping TypeName="Model.surveyquestion">
+            <EntityTypeMapping TypeName="surveyMonkeyModel.surveyquestion">
               <MappingFragment StoreEntitySet="surveyquestion">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="title" ColumnName="title" />
@@ -526,7 +448,7 @@ warning 6002: The table/view 'survey monkey database.dbo.STMTR' does not have a 
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="surveyresponses">
-            <EntityTypeMapping TypeName="Model.surveyresponse">
+            <EntityTypeMapping TypeName="surveyMonkeyModel.surveyresponse">
               <MappingFragment StoreEntitySet="surveyresponse">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="surveyid" ColumnName="surveyid" />
@@ -538,17 +460,17 @@ warning 6002: The table/view 'survey monkey database.dbo.STMTR' does not have a 
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="teacherSurveys">
-            <EntityTypeMapping TypeName="Model.teacherSurvey">
+            <EntityTypeMapping TypeName="surveyMonkeyModel.teacherSurvey">
               <MappingFragment StoreEntitySet="teacherSurvey">
-                <ScalarProperty Name="tid" ColumnName="tid" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="createdby" ColumnName="createdby" />
+                <ScalarProperty Name="tid" ColumnName="tid" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="EMPMTRs">
-            <EntityTypeMapping TypeName="Model.EMPMTR">
+            <EntityTypeMapping TypeName="surveyMonkeyModel.EMPMTR">
               <MappingFragment StoreEntitySet="EMPMTR">
                 <ScalarProperty Name="Emp_no" ColumnName="Emp_no" />
                 <ScalarProperty Name="Emp_firstname" ColumnName="Emp_firstname" />
@@ -562,11 +484,12 @@ warning 6002: The table/view 'survey monkey database.dbo.STMTR' does not have a 
                 <ScalarProperty Name="IsWorking" ColumnName="IsWorking" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="Roles" ColumnName="Roles" />
+                <ScalarProperty Name="sex" ColumnName="sex" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="STMTRs">
-            <EntityTypeMapping TypeName="Model.STMTR">
+            <EntityTypeMapping TypeName="surveyMonkeyModel.STMTR">
               <MappingFragment StoreEntitySet="STMTR">
                 <ScalarProperty Name="Reg_No" ColumnName="Reg_No" />
                 <ScalarProperty Name="App_no" ColumnName="App_no" />

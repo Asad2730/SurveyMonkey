@@ -14,8 +14,9 @@ namespace API.Controllers
     public class SurveyController : ApiController
     {
 
-        public survey_monkey_databaseEntities5 db = new survey_monkey_databaseEntities5();
+        public surveyMonkeyEntities1 db = new surveyMonkeyEntities1();
 
+      
 
 
         [HttpGet]
@@ -23,9 +24,10 @@ namespace API.Controllers
         {
             try
             {
-                var student = db.STMTRs.FirstOrDefault(i => i.Reg_No == id && i.Password == password);
+                var student = db.STMTRs.FirstOrDefault(i => i.Reg_No == id && i.Password == password  );
                 if (student != null)
                 {
+                   
                     var response = new
                     {
                         Success = true,
@@ -36,9 +38,10 @@ namespace API.Controllers
                     return Request.CreateResponse(HttpStatusCode.OK, response);
                 }
 
-                var employee = db.EMPMTRs.FirstOrDefault(i => i.Emp_no == id && i.Password == password);
+                var employee = db.EMPMTRs.FirstOrDefault(i => i.Emp_no == id && i.Password == password );
                 if (employee != null)
                 {
+                 
                     var response = new
                     {
                         Success = true,
@@ -69,8 +72,8 @@ namespace API.Controllers
         public HttpResponseMessage createSurvey(survey s)
         {
             try
-            {
-               //var dt = DateTime.Now;
+            {   
+                s.dTime = DateTime.Now.ToString("HH:mm:ss tt");
                 db.surveys.Add(s);
                 db.SaveChanges();
                 return Request.CreateResponse(HttpStatusCode.OK, s.id);
@@ -101,7 +104,7 @@ namespace API.Controllers
 
 
         [HttpGet]
-        public HttpResponseMessage surveyByApproved(int ap,string Discipline,string Section,string Semester_no,string status)
+        public HttpResponseMessage surveyByApproved(int ap,string Discipline,string Section,string Semester_no,string status,string sex)
         {
             try
             {
@@ -122,8 +125,15 @@ namespace API.Controllers
                 var q = db.surveys.Where(i => i.approved == ap && i.status == status).ToList();
 
                 q.ForEach(i =>
-                {
-                    list.Add(i);
+                {   if(i.sex == "B")
+                    {
+                        list.Add(i);
+                    }
+                    else if(i.sex == sex)
+                    {
+                        list.Add(i);
+                    }
+                    
                 });
                 return Request.CreateResponse(HttpStatusCode.OK, list);
 
@@ -383,6 +393,7 @@ namespace API.Controllers
                     h.surveyName = i.s.name;
                     h.type = i.s.type;
                     h.createdBy = i.e.Emp_firstname;
+                    h.date = i.s.dTime;
                     list.Add(h);
                 });
 
@@ -393,6 +404,7 @@ namespace API.Controllers
                     h.surveyName = i.s.name;
                     h.type = i.s.type;
                     h.createdBy = i.e.St_firstname;
+                    h.date = i.s.dTime;
                     list.Add(h);
                 });
                 return Request.CreateResponse(HttpStatusCode.OK, list);
@@ -521,6 +533,7 @@ namespace API.Controllers
         public string surveyName { get; set;}
         public string type { get; set;}
         public string createdBy { get; set;}
+        public string date { get; set; }
     }
 
     class TeacherGraph

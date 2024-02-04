@@ -2,7 +2,7 @@
 
 class User {
   static late String id;
-  static late String name;
+  static late String name, sex;
   static String selectedOption = 'public';
   static int approved = 1;
   static late String discipline, section, semesterNo;

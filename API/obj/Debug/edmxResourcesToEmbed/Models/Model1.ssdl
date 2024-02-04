@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+<Schema Namespace="surveyMonkeyModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="ActiveSurvey">
     <Key>
       <PropertyRef Name="id" />
@@ -11,23 +11,6 @@
     <Property Name="discipline" Type="varchar" MaxLength="50" />
     <Property Name="semester" Type="varchar" MaxLength="50" />
     <Property Name="section" Type="varchar" MaxLength="50" />
-  </EntityType>
-  <EntityType Name="conductsurvey">
-    <Key>
-      <PropertyRef Name="id" />
-    </Key>
-    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="fromdate" Type="nvarchar" MaxLength="50" />
-    <Property Name="todate" Type="nvarchar" MaxLength="50" />
-    <Property Name="surveyid" Type="int" />
-  </EntityType>
-  <EntityType Name="course">
-    <Key>
-      <PropertyRef Name="course_no" />
-    </Key>
-    <Property Name="course_no" Type="varchar" MaxLength="10" Nullable="false" />
-    <Property Name="course_desc" Type="varchar" MaxLength="10" />
-    <Property Name="title" Type="varchar" MaxLength="60" />
   </EntityType>
   <EntityType Name="Crsdtl">
     <Key>
@@ -56,7 +39,7 @@
     <Property Name="DT" Type="datetime" />
   </EntityType>
   <!--Errors Found During Generation:
-warning 6002: The table/view 'survey monkey database.dbo.EMPMTR' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'surveyMonkey.dbo.EMPMTR' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="EMPMTR">
     <Key>
       <PropertyRef Name="Emp_no" />
@@ -73,18 +56,10 @@ warning 6002: The table/view 'survey monkey database.dbo.EMPMTR' does not have a
     <Property Name="IsWorking" Type="bit" />
     <Property Name="Password" Type="varchar" MaxLength="255" />
     <Property Name="Roles" Type="varchar" MaxLength="12" />
-  </EntityType>
-  <EntityType Name="Question_Answer">
-    <Key>
-      <PropertyRef Name="Question_ID" />
-    </Key>
-    <Property Name="Question_ID" Type="int" Nullable="false" />
-    <Property Name="Question" Type="nvarchar(max)" />
-    <Property Name="Description" Type="varchar" MaxLength="30" />
-    <Property Name="sid" Type="int" />
+    <Property Name="sex" Type="varchar" MaxLength="255" />
   </EntityType>
   <!--Errors Found During Generation:
-warning 6002: The table/view 'survey monkey database.dbo.STMTR' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'surveyMonkey.dbo.STMTR' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="STMTR">
     <Key>
       <PropertyRef Name="Reg_No" />
@@ -129,6 +104,8 @@ warning 6002: The table/view 'survey monkey database.dbo.STMTR' does not have a 
     <Property Name="type" Type="varchar" MaxLength="50" />
     <Property Name="status" Type="varchar" MaxLength="20" />
     <Property Name="aid" Type="int" />
+    <Property Name="dTime" Type="varchar" MaxLength="255" />
+    <Property Name="sex" Type="varchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="surveyaudience">
     <Key>
@@ -166,16 +143,13 @@ warning 6002: The table/view 'survey monkey database.dbo.STMTR' does not have a 
       <PropertyRef Name="id" />
     </Key>
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="name" Type="varchar" MaxLength="50" />
-    <Property Name="createdby" Type="varchar" MaxLength="50" />
-    <Property Name="tid" Type="varchar" MaxLength="50" />
+    <Property Name="name" Type="varchar" MaxLength="255" />
+    <Property Name="createdby" Type="varchar" MaxLength="255" />
+    <Property Name="tid" Type="varchar" MaxLength="255" />
   </EntityType>
-  <EntityContainer Name="ModelStoreContainer">
+  <EntityContainer Name="surveyMonkeyModelStoreContainer">
     <EntitySet Name="ActiveSurvey" EntityType="Self.ActiveSurvey" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="conductsurvey" EntityType="Self.conductsurvey" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="course" EntityType="Self.course" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Crsdtl" EntityType="Self.Crsdtl" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Question_Answer" EntityType="Self.Question_Answer" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="survey" EntityType="Self.survey" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="surveyaudience" EntityType="Self.surveyaudience" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="surveyquestion" EntityType="Self.surveyquestion" Schema="dbo" store:Type="Tables" />
@@ -194,7 +168,8 @@ warning 6002: The table/view 'survey monkey database.dbo.STMTR' does not have a 
     [EMPMTR].[Status] AS [Status], 
     [EMPMTR].[IsWorking] AS [IsWorking], 
     [EMPMTR].[Password] AS [Password], 
-    [EMPMTR].[Roles] AS [Roles]
+    [EMPMTR].[Roles] AS [Roles], 
+    [EMPMTR].[sex] AS [sex]
     FROM [dbo].[EMPMTR] AS [EMPMTR]</DefiningQuery>
     </EntitySet>
     <EntitySet Name="STMTR" EntityType="Self.STMTR" store:Type="Tables" store:Schema="dbo">

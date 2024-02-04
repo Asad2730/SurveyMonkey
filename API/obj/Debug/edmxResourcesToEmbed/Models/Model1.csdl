@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+<Schema Namespace="surveyMonkeyModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
   <EntityType Name="ActiveSurvey">
     <Key>
       <PropertyRef Name="id" />
@@ -11,23 +11,6 @@
     <Property Name="discipline" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="semester" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="section" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-  </EntityType>
-  <EntityType Name="conductsurvey">
-    <Key>
-      <PropertyRef Name="id" />
-    </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="fromdate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="todate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="surveyid" Type="Int32" />
-  </EntityType>
-  <EntityType Name="course">
-    <Key>
-      <PropertyRef Name="course_no" />
-    </Key>
-    <Property Name="course_no" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="course_desc" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-    <Property Name="title" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="Crsdtl">
     <Key>
@@ -55,15 +38,6 @@
     <Property Name="CrsSemNo" Type="Int32" />
     <Property Name="DT" Type="DateTime" Precision="3" />
   </EntityType>
-  <EntityType Name="Question_Answer">
-    <Key>
-      <PropertyRef Name="Question_ID" />
-    </Key>
-    <Property Name="Question_ID" Type="Int32" Nullable="false" />
-    <Property Name="Question" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Description" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-    <Property Name="sid" Type="Int32" />
-  </EntityType>
   <EntityType Name="survey">
     <Key>
       <PropertyRef Name="id" />
@@ -75,6 +49,8 @@
     <Property Name="type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
     <Property Name="aid" Type="Int32" />
+    <Property Name="dTime" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="sex" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="surveyaudience">
     <Key>
@@ -112,9 +88,9 @@
       <PropertyRef Name="id" />
     </Key>
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="createdby" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="tid" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="createdby" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="tid" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="EMPMTR">
     <Key>
@@ -132,6 +108,7 @@
     <Property Name="IsWorking" Type="Boolean" />
     <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
     <Property Name="Roles" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+    <Property Name="sex" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="STMTR">
     <Key>
@@ -166,12 +143,9 @@
     <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
     <Property Name="Discipline" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
-  <EntityContainer Name="survey_monkey_databaseEntities5" annotation:LazyLoadingEnabled="true">
+  <EntityContainer Name="surveyMonkeyEntities1" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="ActiveSurveys" EntityType="Self.ActiveSurvey" />
-    <EntitySet Name="conductsurveys" EntityType="Self.conductsurvey" />
-    <EntitySet Name="courses" EntityType="Self.course" />
     <EntitySet Name="Crsdtls" EntityType="Self.Crsdtl" />
-    <EntitySet Name="Question_Answer" EntityType="Self.Question_Answer" />
     <EntitySet Name="surveys" EntityType="Self.survey" />
     <EntitySet Name="surveyaudiences" EntityType="Self.surveyaudience" />
     <EntitySet Name="surveyquestions" EntityType="Self.surveyquestion" />

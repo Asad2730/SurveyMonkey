@@ -30,10 +30,12 @@ class Db {
         User.discipline = res.data['Data']['Discipline'];
         User.semesterNo = res.data['Data']['Semester_no'];
         User.section = res.data['Data']['Section'];
+        User.sex = res.data['Data']['Sex'];
         Get.to(() => const UserHome());
       } else if (res.data['Data']['Roles'] == 'Admin') {
         User.id = res.data['Data']['Emp_no'];
         User.name = res.data['Data']['Emp_firstname'];
+        User.sex = res.data['Data']['sex'];
         User.discipline = '';
         User.semesterNo = '';
         User.section = '';
@@ -51,7 +53,7 @@ class Db {
     }
   }
 
-  Future createSurvey({required name, required type}) async {
+  Future createSurvey({required name, required type, required sex}) async {
     try {
       var res = await _dio.post('createSurvey', data: {
         'name': name,
@@ -59,6 +61,7 @@ class Db {
         'createdby': User.id,
         'approved': User.approved,
         'status': User.selectedOption,
+        'sex': sex,
       });
 
       print('Survey Created->${res.data}');
@@ -127,12 +130,14 @@ class Db {
 
   Future surveyByApproved({required ap, required status}) async {
     try {
+      print('Sex is ${User.sex}');
       var rs = await _dio.get('surveyByApproved', queryParameters: {
         'ap': ap,
         'Discipline': User.discipline,
         'Section': User.section,
         'Semester_no': User.semesterNo,
-        'status': status
+        'status': status,
+        'sex': User.sex
       });
       return rs.data as List;
     } catch (ex) {

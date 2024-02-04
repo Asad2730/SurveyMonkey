@@ -68,9 +68,10 @@ class _HistoryState extends State<History> {
         return Padding(
           padding: const EdgeInsets.symmetric(vertical: 8.0),
           child: ListTile(
+            leading: Text("Created on:${data['date']}"),
             title: Text("Title:${data['surveyName']}"),
             subtitle: Text("Type:${data['type']}"),
-            trailing: Text("CreatedBy:${data['createdBy']}"),
+            trailing: Text("Created By:${data['createdBy']}"),
           ),
         );
       },

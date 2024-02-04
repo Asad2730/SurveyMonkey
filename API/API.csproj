@@ -171,12 +171,6 @@
     <Compile Include="Models\ActiveSurvey.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\conductsurvey.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\course.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Crsdtl.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -197,9 +191,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Question_Answer.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\STMTR.cs">
       <DependentUpon>Model1.tt</DependentUpon>

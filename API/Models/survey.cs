@@ -21,5 +21,7 @@ namespace API.Models
         public string type { get; set; }
         public string status { get; set; }
         public Nullable<int> aid { get; set; }
+        public string dTime { get; set; }
+        public string sex { get; set; }
     }
 }

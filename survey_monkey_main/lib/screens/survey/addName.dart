@@ -18,7 +18,7 @@ class AddName extends StatefulWidget {
 class _AddNameState extends State<AddName> {
   TextEditingController name = TextEditingController();
   int radioValue = 2;
-
+  String selectedOption = '';
   handleRadioValueChange(int value) {
     setState(() {
       radioValue = value;
@@ -94,21 +94,57 @@ class _AddNameState extends State<AddName> {
                   groupValue: User.selectedOption,
                   onChanged: (value) {
                     User.selectedOption = value!;
-                    User.approved = 0;
+                    User.approved = 1;
                     setState(() {});
                   },
                 ),
                 const Text('public'),
               ],
             ),
+            Row(
+              children: <Widget>[
+                Radio(
+                  value: 'M',
+                  groupValue: selectedOption,
+                  onChanged: (value) {
+                    setState(() {
+                      selectedOption = value!;
+                    });
+                  },
+                ),
+                const Text('Male'),
+                Radio(
+                  value: 'F',
+                  groupValue: selectedOption,
+                  onChanged: (value) {
+                    setState(() {
+                      selectedOption = value!;
+                    });
+                  },
+                ),
+                const Text('Female'),
+                Radio(
+                  value: 'B',
+                  groupValue: selectedOption,
+                  onChanged: (value) {
+                    setState(() {
+                      selectedOption = value!;
+                    });
+                  },
+                ),
+                const Text('Both'),
+              ],
+            ),
             gap20(),
             ElevatedButton(
               onPressed: () {
-                if (User.selectedOption != '') {
+                if (User.selectedOption != '' && selectedOption != '') {
                   if (radioValue == 2) {
-                    Db().createSurvey(name: name.text, type: 'MCQS');
+                    Db().createSurvey(
+                        name: name.text, type: 'MCQS', sex: selectedOption);
                   } else {
-                    Db().createSurvey(name: name.text, type: 'Yes/No');
+                    Db().createSurvey(
+                        name: name.text, type: 'Yes/No', sex: selectedOption);
                   }
                 } else {
                   print('<--Select private or public--->');

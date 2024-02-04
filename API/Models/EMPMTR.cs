@@ -26,5 +26,6 @@ namespace API.Models
         public Nullable<bool> IsWorking { get; set; }
         public string Password { get; set; }
         public string Roles { get; set; }
+        public string sex { get; set; }
     }
 }

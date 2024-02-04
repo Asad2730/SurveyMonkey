@@ -13,10 +13,10 @@ namespace API.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class survey_monkey_databaseEntities5 : DbContext
+    public partial class surveyMonkeyEntities1 : DbContext
     {
-        public survey_monkey_databaseEntities5()
-            : base("name=survey_monkey_databaseEntities5")
+        public surveyMonkeyEntities1()
+            : base("name=surveyMonkeyEntities1")
         {
         }
     
@@ -26,10 +26,7 @@ namespace API.Models
         }
     
         public virtual DbSet<ActiveSurvey> ActiveSurveys { get; set; }
-        public virtual DbSet<conductsurvey> conductsurveys { get; set; }
-        public virtual DbSet<course> courses { get; set; }
         public virtual DbSet<Crsdtl> Crsdtls { get; set; }
-        public virtual DbSet<Question_Answer> Question_Answer { get; set; }
         public virtual DbSet<survey> surveys { get; set; }
         public virtual DbSet<surveyaudience> surveyaudiences { get; set; }
         public virtual DbSet<surveyquestion> surveyquestions { get; set; }
